@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Prime Global | Connecting the World</title>
+
+  <meta name="description"
+        content="Prime Global — connecting people, ideas, information and opportunities around the world.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #071a3d;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #f5c542;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #f5c542;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #071a3d, #1246a0);
+      color: white;
+      text-align: center;
+      padding: 90px 20px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: #f5c542;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 18px;
+      opacity: 0.95;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 13px 25px;
+      background: #f5c542;
+      color: #071a3d;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+
+    section {
+      padding: 65px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      color: #071a3d;
+    }
+
+    .section-title p {
+      color: #657083;
+      margin-top: 8px;
+    }
+
+    .about {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
+
+    .card h3 {
+      color: #1246a0;
+      margin-bottom: 10px;
+    }
+
+    .news {
+      background: #eef2f8;
+    }
+
+    .contact {
+      text-align: center;
+      background: white;
+    }
+
+    .contact a {
+      color: #1246a0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #071a3d;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 7px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero {
+        padding: 70px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      PRIME <span>GLOBAL</span>
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <h1>Welcome to <span>Prime Global</span></h1>
+
+    <p>
+      Connecting people, ideas, information and opportunities
+      across the world.
+    </p>
+
+    <a class="button" href="#about">
+      Explore Prime Global
+    </a>
+
+  </section>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+
+    <div class="section-title">
+      <h2>About Prime Global</h2>
+      <p>Building connections beyond borders.</p>
+    </div>
+
+    <div class="about">
+
+      <p>
+        Prime Global is a digital platform focused on sharing
+        information, connecting people and highlighting opportunities
+        from around the world.
+      </p>
+
+      <br>
+
+      <p>
+        Our goal is to provide useful, accessible and engaging
+        content while creating a platform where people can discover
+        ideas, opportunities and global trends.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- SERVICES -->
+  <section id="services">
+
+    <div class="section-title">
+      <h2>What We Do</h2>
+      <p>Our areas of focus</p>
+    </div>
+
+    <div class="services">
+
+      <div class="card">
+        <h3>Global Trends</h3>
+        <p>
+          Discover important developments, stories and trends
+          from around the world.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Digital Content</h3>
+        <p>
+          We create and share engaging digital content designed
+          to inform and connect audiences.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Opportunities</h3>
+        <p>
+          Discover useful opportunities, resources and information
+          for personal and professional growth.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Global Community</h3>
+        <p>
+          Connecting people and ideas across different countries
+          and communities.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NEWS -->
+  <section class="news" id="news">
+
+    <div class="section-title">
+      <h2>Prime Global Trends</h2>
+      <p>Stay informed. Stay connected.</p>
+    </div>
+
+    <div class="about">
+
+      <p>
+        Follow Prime Global for updates on international developments,
+        technology, business, opportunities and important global stories.
+      </p>
+
+      <a class="button" href="#">
+        Coming Soon
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you.</p>
+    </div>
+
+    <p>
+      Email:
+      <a href="mailto:kimwetichamon7@gmail.com">
+        kimwetichamon7@gmail.com
+      </a>
+    </p>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      © 2026 Prime Global. All rights reserved.
+    </p>
+
+    <p>
+      Connecting the world through information and opportunity.
+    </p>
+
+  </footer>
+
+</body>
+  </html>
