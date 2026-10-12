@@ -1,347 +1,1522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prime Global | Connecting the World</title>
+<title>Prime Global | Worldwide Online Opportunities</title>
 
-  <meta name="description"
-        content="Prime Global — connecting people, ideas, information and opportunities around the world.">
+<meta name="description"
+content="Prime Global connects people worldwide with remote jobs, AI training, data annotation, voice recording, transcription, translation, proofreading, data entry and other online opportunities.">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta name="keywords"
+content="remote jobs, online jobs, AI training, data annotation, voice recording, transcription, data entry, translation, proofreading, chat support">
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f7fb;
-      color: #172033;
-      line-height: 1.6;
-    }
+<meta name="theme-color" content="#071a3d">
 
-    header {
-      background: #071a3d;
-      color: white;
-      padding: 18px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+<meta property="og:title" content="Prime Global | Worldwide Opportunities">
+<meta property="og:description"
+content="Discover worldwide remote work and online opportunities.">
+<meta property="og:type" content="website">
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+<style>
 
-    .logo span {
-      color: #f5c542;
-    }
+:root{
+--navy:#071a3d;
+--blue:#1246a0;
+--gold:#f5c542;
+--white:#ffffff;
+--light:#f5f7fb;
+--text:#172033;
+--muted:#64748b;
+--border:#e2e8f0;
+--green:#087f5b;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 14px;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-    nav a:hover {
-      color: #f5c542;
-    }
+html{
+scroll-behavior:smooth;
+}
 
-    .hero {
-      background: linear-gradient(135deg, #071a3d, #1246a0);
-      color: white;
-      text-align: center;
-      padding: 90px 20px;
-    }
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:var(--light);
+color:var(--text);
+line-height:1.6;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 18px;
-    }
+a{
+text-decoration:none;
+}
 
-    .hero h1 span {
-      color: #f5c542;
-    }
+.container{
+width:92%;
+max-width:1150px;
+margin:auto;
+}
 
-    .hero p {
-      max-width: 700px;
-      margin: auto;
-      font-size: 18px;
-      opacity: 0.95;
-    }
+/* TOP BAR */
 
-    .button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 13px 25px;
-      background: #f5c542;
-      color: #071a3d;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-    }
+.topbar{
+background:#04112b;
+color:white;
+padding:8px 0;
+font-size:13px;
+text-align:center;
+}
 
-    section {
-      padding: 65px 7%;
-    }
+/* HEADER */
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+header{
+background:var(--navy);
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 3px 15px rgba(0,0,0,.2);
+}
 
-    .section-title h2 {
-      font-size: 32px;
-      color: #071a3d;
-    }
+.nav{
+min-height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+}
 
-    .section-title p {
-      color: #657083;
-      margin-top: 8px;
-    }
+.logo{
+font-size:23px;
+font-weight:900;
+letter-spacing:1px;
+color:white;
+}
 
-    .about {
-      max-width: 850px;
-      margin: auto;
-      text-align: center;
-    }
+.logo span{
+color:var(--gold);
+}
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 22px;
-    }
+nav{
+display:flex;
+gap:20px;
+align-items:center;
+}
 
-    .card {
-      background: white;
-      padding: 28px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-    }
+nav a{
+color:white;
+font-size:14px;
+font-weight:600;
+}
 
-    .card h3 {
-      color: #1246a0;
-      margin-bottom: 10px;
-    }
+nav a:hover{
+color:var(--gold);
+}
 
-    .news {
-      background: #eef2f8;
-    }
+.nav-button{
+background:var(--gold);
+color:var(--navy)!important;
+padding:10px 15px;
+border-radius:8px;
+}
 
-    .contact {
-      text-align: center;
-      background: white;
-    }
+/* HERO */
 
-    .contact a {
-      color: #1246a0;
-      font-weight: bold;
-      text-decoration: none;
-    }
+.hero{
+background:
+radial-gradient(circle at 80% 20%,#2458a8 0,transparent 30%),
+linear-gradient(125deg,#071a3d,#1246a0);
+color:white;
+padding:80px 0;
+}
 
-    footer {
-      background: #071a3d;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      font-size: 14px;
-    }
+.hero-grid{
+display:grid;
+grid-template-columns:1.3fr .7fr;
+gap:45px;
+align-items:center;
+}
 
-    @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        gap: 12px;
-      }
+.badge{
+display:inline-block;
+color:var(--gold);
+font-size:13px;
+font-weight:bold;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:15px;
+}
 
-      nav a {
-        margin: 0 7px;
-      }
+.hero h1{
+font-size:clamp(40px,6vw,68px);
+line-height:1.05;
+margin-bottom:20px;
+}
 
-      .hero h1 {
-        font-size: 36px;
-      }
+.hero h1 span{
+color:var(--gold);
+}
 
-      .hero {
-        padding: 70px 20px;
-      }
-    }
-  </style>
+.hero p{
+font-size:18px;
+color:#e0e9ff;
+max-width:680px;
+}
+
+.buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:28px;
+}
+
+.btn{
+display:inline-block;
+padding:13px 18px;
+border-radius:9px;
+font-weight:bold;
+border:none;
+cursor:pointer;
+}
+
+.gold{
+background:var(--gold);
+color:var(--navy);
+}
+
+.outline{
+border:1px solid rgba(255,255,255,.6);
+color:white;
+}
+
+.hero-card{
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.25);
+border-radius:18px;
+padding:25px;
+}
+
+.hero-card h3{
+margin-bottom:15px;
+}
+
+.hero-card li{
+margin:9px 0;
+margin-left:20px;
+color:#edf3ff;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:-30px;
+position:relative;
+}
+
+.stat{
+background:white;
+padding:22px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 8px 25px rgba(7,26,61,.08);
+}
+
+.stat strong{
+display:block;
+font-size:20px;
+color:var(--navy);
+}
+
+/* SECTIONS */
+
+section{
+padding:70px 0;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:35px;
+}
+
+.section-title small{
+color:var(--blue);
+font-weight:bold;
+text-transform:uppercase;
+letter-spacing:2px;
+}
+
+.section-title h2{
+font-size:35px;
+margin:8px 0;
+}
+
+.section-title p{
+color:var(--muted);
+max-width:700px;
+margin:auto;
+}
+
+/* SEARCH */
+
+.search-box{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 8px 25px rgba(7,26,61,.08);
+margin-bottom:25px;
+}
+
+.search-grid{
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr auto;
+gap:10px;
+}
+
+input,select{
+width:100%;
+padding:13px;
+border:1px solid var(--border);
+border-radius:8px;
+font-size:14px;
+background:white;
+}
+
+.search-button{
+background:var(--blue);
+color:white;
+}
+
+/* CATEGORY BUTTONS */
+
+.categories{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:25px;
+}
+
+.category{
+border:1px solid var(--border);
+background:white;
+padding:8px 13px;
+border-radius:30px;
+cursor:pointer;
+font-size:13px;
+}
+
+.category.active,
+.category:hover{
+background:var(--navy);
+color:white;
+}
+
+/* OPPORTUNITIES */
+
+.opportunity-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.card{
+background:white;
+border:1px solid var(--border);
+border-radius:15px;
+padding:20px;
+display:flex;
+flex-direction:column;
+min-height:300px;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 30px rgba(7,26,61,.1);
+}
+
+.icon{
+font-size:32px;
+}
+
+.card h3{
+margin:13px 0 7px;
+font-size:19px;
+}
+
+.card p{
+font-size:14px;
+color:var(--muted);
+}
+
+.tags{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+margin:13px 0;
+}
+
+.tag{
+background:#edf3ff;
+color:var(--blue);
+font-size:11px;
+padding:5px 7px;
+border-radius:5px;
+}
+
+.card-bottom{
+margin-top:auto;
+display:flex;
+gap:8px;
+}
+
+.card-bottom a,
+.card-bottom button{
+flex:1;
+text-align:center;
+padding:10px;
+border-radius:7px;
+font-size:13px;
+font-weight:bold;
+border:none;
+cursor:pointer;
+}
+
+.apply{
+background:var(--blue);
+color:white;
+}
+
+.share{
+background:#edf2f7;
+color:var(--navy);
+}
+
+.directory-label{
+font-size:11px;
+color:var(--green);
+font-weight:bold;
+text-transform:uppercase;
+}
+
+/* HOW IT WORKS */
+
+.steps{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.step{
+background:white;
+padding:25px;
+border-radius:15px;
+border:1px solid var(--border);
+}
+
+.number{
+width:42px;
+height:42px;
+display:grid;
+place-items:center;
+background:var(--navy);
+color:var(--gold);
+border-radius:10px;
+font-weight:bold;
+}
+
+/* ORIGINAL OPPORTUNITIES */
+
+.original{
+background:linear-gradient(120deg,#071a3d,#1246a0);
+color:white;
+border-radius:20px;
+padding:40px;
+}
+
+.original h2{
+margin-bottom:10px;
+}
+
+.original p{
+color:#dce7ff;
+max-width:750px;
+}
+
+/* ABOUT */
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+}
+
+.about-box{
+background:white;
+padding:25px;
+border-radius:15px;
+border:1px solid var(--border);
+}
+
+.about-box h3{
+margin-bottom:12px;
+}
+
+.about-box p,
+.about-box li{
+color:var(--muted);
+}
+
+.about-box ul{
+padding-left:20px;
+}
+
+/* WARNING */
+
+.warning{
+margin-top:20px;
+padding:15px;
+background:#fff8df;
+border-left:4px solid var(--gold);
+border-radius:7px;
+font-size:14px;
+}
+
+/* CONTACT */
+
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.contact-box{
+background:white;
+padding:25px;
+border-radius:15px;
+border:1px solid var(--border);
+}
+
+.contact-link{
+display:block;
+margin:14px 0;
+color:var(--blue);
+font-weight:bold;
+word-break:break-word;
+}
+
+.whatsapp{
+background:#128c7e;
+color:white;
+display:inline-block;
+padding:11px 16px;
+border-radius:8px;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+background:#04112b;
+color:white;
+padding:35px 0;
+}
+
+.footer{
+display:flex;
+justify-content:space-between;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.footer p{
+color:#b8c5df;
+font-size:13px;
+margin-top:8px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+nav{
+overflow-x:auto;
+width:100%;
+gap:15px;
+}
+
+.nav{
+flex-direction:column;
+padding:15px 0;
+align-items:flex-start;
+}
+
+.nav-button{
+display:none;
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr;
+margin-top:-20px;
+}
+
+.search-grid{
+grid-template-columns:1fr;
+}
+
+.opportunity-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.steps{
+grid-template-columns:1fr 1fr;
+}
+
+.about,
+.contact{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+padding:55px 0;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.opportunity-grid{
+grid-template-columns:1fr;
+}
+
+.steps{
+grid-template-columns:1fr;
+}
+
+section{
+padding:50px 0;
+}
+
+.section-title h2{
+font-size:29px;
+}
+
+.original{
+padding:25px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      PRIME <span>GLOBAL</span>
-    </div>
+<div class="topbar">
+🌍 Prime Global — Worldwide Online Opportunities
+</div>
 
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header>
 
+<div class="container nav">
 
-  <!-- HERO -->
-  <section class="hero" id="home">
+<a href="#home" class="logo">
+PRIME <span>GLOBAL</span>
+</a>
 
-    <h1>Welcome to <span>Prime Global</span></h1>
+<nav>
 
-    <p>
-      Connecting people, ideas, information and opportunities
-      across the world.
-    </p>
+<a href="#home">Home</a>
+<a href="#opportunities">Opportunities</a>
+<a href="#original">Original Jobs</a>
+<a href="#how">How It Works</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
 
-    <a class="button" href="#about">
-      Explore Prime Global
-    </a>
+<a href="#opportunities" class="nav-button">
+Find Opportunities
+</a>
 
-  </section>
+</nav>
 
+</div>
 
-  <!-- ABOUT -->
-  <section id="about">
-
-    <div class="section-title">
-      <h2>About Prime Global</h2>
-      <p>Building connections beyond borders.</p>
-    </div>
-
-    <div class="about">
-
-      <p>
-        Prime Global is a digital platform focused on sharing
-        information, connecting people and highlighting opportunities
-        from around the world.
-      </p>
-
-      <br>
-
-      <p>
-        Our goal is to provide useful, accessible and engaging
-        content while creating a platform where people can discover
-        ideas, opportunities and global trends.
-      </p>
-
-    </div>
-
-  </section>
+</header>
 
 
-  <!-- SERVICES -->
-  <section id="services">
+<!-- HERO -->
 
-    <div class="section-title">
-      <h2>What We Do</h2>
-      <p>Our areas of focus</p>
-    </div>
+<section class="hero" id="home">
 
-    <div class="services">
+<div class="container hero-grid">
 
-      <div class="card">
-        <h3>Global Trends</h3>
-        <p>
-          Discover important developments, stories and trends
-          from around the world.
-        </p>
-      </div>
+<div>
 
-      <div class="card">
-        <h3>Digital Content</h3>
-        <p>
-          We create and share engaging digital content designed
-          to inform and connect audiences.
-        </p>
-      </div>
+<div class="badge">
+Worldwide Opportunities
+</div>
 
-      <div class="card">
-        <h3>Opportunities</h3>
-        <p>
-          Discover useful opportunities, resources and information
-          for personal and professional growth.
-        </p>
-      </div>
+<h1>
+Find Online Work.<br>
+<span>Go Global.</span>
+</h1>
 
-      <div class="card">
-        <h3>Global Community</h3>
-        <p>
-          Connecting people and ideas across different countries
-          and communities.
-        </p>
-      </div>
+<p>
+Prime Global helps people discover remote jobs,
+AI projects, data work, voice recording,
+transcription, translation, proofreading,
+chat support and other online opportunities.
+</p>
 
-    </div>
+<div class="buttons">
 
-  </section>
+<a href="#opportunities" class="btn gold">
+Explore Opportunities
+</a>
+
+<a href="#original" class="btn outline">
+Submit an Opportunity
+</a>
+
+</div>
+
+</div>
 
 
-  <!-- NEWS -->
-  <section class="news" id="news">
+<div class="hero-card">
 
-    <div class="section-title">
-      <h2>Prime Global Trends</h2>
-      <p>Stay informed. Stay connected.</p>
-    </div>
+<h3>Popular Categories</h3>
 
-    <div class="about">
+<ul>
 
-      <p>
-        Follow Prime Global for updates on international developments,
-        technology, business, opportunities and important global stories.
-      </p>
+<li>AI Training</li>
+<li>Voice Recording</li>
+<li>Data Annotation</li>
+<li>Transcription</li>
+<li>Data Entry</li>
+<li>Translation & Proofreading</li>
+<li>Chat Support</li>
+<li>Other Remote Jobs</li>
 
-      <a class="button" href="#">
-        Coming Soon
-      </a>
+</ul>
 
-    </div>
+</div>
 
-  </section>
+</div>
 
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-
-    <div class="section-title">
-      <h2>Contact Us</h2>
-      <p>We would love to hear from you.</p>
-    </div>
-
-    <p>
-      Email:
-      <a href="mailto:primeglobalofficialacc@gmail.com">
-        kimwetichamon7@gmail.com
-      </a>
-    </p>
-
-  </section>
+</section>
 
 
-  <!-- FOOTER -->
-  <footer>
+<!-- STATS -->
 
-    <p>
-      © 2026 Prime Global. All rights reserved.
-    </p>
+<div class="container stats">
 
-    <p>
-      Connecting the world through information and opportunity.
-    </p>
+<div class="stat">
+<strong>🌍 Worldwide</strong>
+<span>Global opportunity discovery</span>
+</div>
 
-  </footer>
+<div class="stat">
+<strong>💼 Remote Work</strong>
+<span>Online jobs and projects</span>
+</div>
+
+<div class="stat">
+<strong>🔗 Direct Links</strong>
+<span>Apply through original providers</span>
+</div>
+
+</div>
+
+
+<!-- OPPORTUNITIES -->
+
+<section id="opportunities">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>Opportunity Directory</small>
+
+<h2>Find Your Next Opportunity</h2>
+
+<p>
+Search opportunities by category, location or keyword.
+Always verify current availability and eligibility
+on the original provider's website.
+</p>
+
+</div>
+
+
+<div class="search-box">
+
+<div class="search-grid">
+
+<input
+type="search"
+id="search"
+placeholder="Search opportunities..."
+>
+
+<select id="category">
+
+<option value="">All Categories</option>
+<option>AI Training</option>
+<option>Voice Recording</option>
+<option>Data Annotation</option>
+<option>Transcription</option>
+<option>Data Entry</option>
+<option>Translation & Proofreading</option>
+<option>Chat Support</option>
+<option>Other Remote Jobs</option>
+
+</select>
+
+<select id="location">
+
+<option value="">All Locations</option>
+<option>Worldwide</option>
+<option>Kenya</option>
+<option>Philippines</option>
+</select>
+
+<button class="btn search-button" onclick="filterJobs()">
+Search
+</button>
+
+</div>
+
+</div>
+
+
+<div class="categories">
+
+<button class="category active" onclick="selectCategory('')">
+All
+</button>
+
+<button class="category" onclick="selectCategory('AI Training')">
+AI Training
+</button>
+
+<button class="category" onclick="selectCategory('Voice Recording')">
+Voice
+</button>
+
+<button class="category" onclick="selectCategory('Data Annotation')">
+Annotation
+</button>
+
+<button class="category" onclick="selectCategory('Transcription')">
+Transcription
+</button>
+
+<button class="category" onclick="selectCategory('Data Entry')">
+Data Entry
+</button>
+
+<button class="category" onclick="selectCategory('Translation & Proofreading')">
+Translation
+</button>
+
+<button class="category" onclick="selectCategory('Chat Support')">
+Chat Support
+</button>
+
+</div>
+
+
+<div id="jobCount"
+style="margin-bottom:15px;color:#64748b;font-size:14px">
+Loading opportunities...
+</div>
+
+
+<div class="opportunity-grid" id="jobs">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ORIGINAL OPPORTUNITIES -->
+
+<section id="original">
+
+<div class="container">
+
+<div class="original">
+
+<h2>
+Prime Global Original Opportunities
+</h2>
+
+<p>
+Prime Global will also publish original opportunities
+submitted directly by employers, project owners,
+clients and verified partners.
+</p>
+
+<p style="margin-top:12px">
+
+Want to submit an opportunity?
+
+</p>
+
+<a
+class="btn gold"
+style="margin-top:20px"
+href="mailto:Kimwetichamon7@gmail.com?subject=Prime Global Opportunity Submission"
+>
+Submit Opportunity
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section id="how">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>Simple Process</small>
+
+<h2>How Prime Global Works</h2>
+
+</div>
+
+
+<div class="steps">
+
+<div class="step">
+
+<div class="number">01</div>
+
+<h3>Discover</h3>
+
+<p>
+Search our directory for opportunities
+that match your skills and location.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">02</div>
+
+<h3>Verify</h3>
+
+<p>
+Check the official provider,
+country eligibility, requirements
+and payment information.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">03</div>
+
+<h3>Apply</h3>
+
+<p>
+Apply directly through the original
+company or opportunity provider.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>About Prime Global</small>
+
+<h2>Connecting People With Opportunities</h2>
+
+</div>
+
+
+<div class="about">
+
+<div class="about-box">
+
+<h3>What We Cover</h3>
+
+<ul>
+
+<li>AI training and AI evaluation</li>
+<li>Voice recording and speech collection</li>
+<li>Data annotation</li>
+<li>Transcription</li>
+<li>Data entry</li>
+<li>Translation</li>
+<li>Proofreading</li>
+<li>Chat support</li>
+<li>Other remote jobs</li>
+
+</ul>
+
+</div>
+
+
+<div class="about-box">
+
+<h3>Our Mission</h3>
+
+<p>
+Prime Global aims to make online opportunity
+discovery easier by bringing useful remote
+work opportunities into one organized platform.
+</p>
+
+<div class="warning">
+
+<strong>Important:</strong>
+
+Prime Global does not guarantee employment,
+income or selection. Always verify opportunities
+through the official provider before applying.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="section-title">
+
+<small>Contact Prime Global</small>
+
+<h2>Let's Connect</h2>
+
+<p>
+Questions, partnerships, opportunity submissions
+or corrections? Contact us.
+</p>
+
+</div>
+
+
+<div class="contact">
+
+<div class="contact-box">
+
+<h3>Email</h3>
+
+<a
+class="contact-link"
+href="mailto:Kimwetichamon7@gmail.com"
+>
+Kimwetichamon7@gmail.com
+</a>
+
+<h3>WhatsApp</h3>
+
+<a
+class="whatsapp"
+href="https://wa.me/639971642057"
+target="_blank"
+>
+Chat on WhatsApp
+</a>
+
+<p style="margin-top:15px;color:#64748b">
+WhatsApp: +63 997 164 2057
+</p>
+
+<p style="color:#64748b">
+Alternate number: 0114769431
+</p>
+
+</div>
+
+
+<div class="contact-box">
+
+<h3>Submit an Opportunity</h3>
+
+<p style="color:#64748b;margin:12px 0">
+
+Employers and project owners can contact
+Prime Global to submit remote opportunities
+for consideration.
+
+</p>
+
+<a
+class="btn"
+style="background:#1246a0;color:white"
+href="mailto:Kimwetichamon7@gmail.com?subject=Prime Global Opportunity Submission"
+>
+Submit by Email
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container footer">
+
+<div>
+
+<a class="logo" href="#home">
+PRIME <span>GLOBAL</span>
+</a>
+
+<p>
+Worldwide online opportunities.
+</p>
+
+<p>
+© <span id="year"></span> Prime Global.
+</p>
+
+</div>
+
+
+<div>
+
+<p>
+Verify every opportunity with the
+official provider before applying.
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/*
+PRIME GLOBAL OPPORTUNITY DIRECTORY
+
+These are provider discovery links.
+They are NOT guarantees that a vacancy
+is currently open.
+
+Always check the provider's website.
+*/
+
+const opportunities = [
+
+{
+title:"AI Training & Evaluation",
+provider:"Outlier",
+category:"AI Training",
+location:"Worldwide",
+icon:"🤖",
+description:
+"Explore AI training, evaluation and specialist freelance projects.",
+url:"https://outlier.ai/"
+},
+
+{
+title:"AI Community Projects",
+provider:"TELUS Digital AI Community",
+category:"AI Training",
+location:"Worldwide",
+icon:"🌐",
+description:
+"Explore AI rating, language and evaluation projects.",
+url:"https://www.telusdigital.com/careers/ai-community"
+},
+
+{
+title:"CrowdGen Projects",
+provider:"CrowdGen by Appen",
+category:"Data Annotation",
+location:"Worldwide",
+icon:"🧩",
+description:
+"Explore data collection, annotation and AI training projects.",
+url:"https://crowdgen.com/"
+},
+
+{
+title:"OneForma Projects",
+provider:"OneForma",
+category:"Data Annotation",
+location:"Worldwide",
+icon:"📊",
+description:
+"Look for data collection, annotation and language projects.",
+url:"https://www.oneforma.com/jobs/"
+},
+
+{
+title:"DataForce Projects",
+provider:"DataForce",
+category:"Voice Recording",
+location:"Worldwide",
+icon:"🎙️",
+description:
+"Explore speech, audio, image and other data collection projects.",
+url:"https://www.transperfect.com/dataforce"
+},
+
+{
+title:"Transcription Jobs",
+provider:"TranscribeMe",
+category:"Transcription",
+location:"Worldwide",
+icon:"🎧",
+description:
+"Explore transcription opportunities and application requirements.",
+url:"https://www.transcribeme.com/jobs/"
+},
+
+{
+title:"Transcription Work",
+provider:"GoTranscript",
+category:"Transcription",
+location:"Worldwide",
+icon:"⌨️",
+description:
+"Explore transcription and subtitling opportunities.",
+url:"https://gotranscript.com/transcription-jobs"
+},
+
+{
+title:"Translation Jobs",
+provider:"ProZ",
+category:"Translation & Proofreading",
+location:"Worldwide",
+icon:"🌍",
+description:
+"Find translation and language-related freelance opportunities.",
+url:"https://www.proz.com/jobs/"
+},
+
+{
+title:"Remote Jobs",
+provider:"Remote OK",
+category:"Other Remote Jobs",
+location:"Worldwide",
+icon:"💻",
+description:
+"Search remote opportunities across many professional categories.",
+url:"https://remoteok.com/"
+},
+
+{
+title:"Remote Jobs",
+provider:"We Work Remotely",
+category:"Other Remote Jobs",
+location:"Worldwide",
+icon:"🏠",
+description:
+"Browse remote jobs from employers around the world.",
+url:"https://weworkremotely.com/"
+},
+
+{
+title:"Freelance Data Entry & Research",
+provider:"Upwork",
+category:"Data Entry",
+location:"Worldwide",
+icon:"📁",
+description:
+"Explore freelance data entry, research and support projects.",
+url:"https://www.upwork.com/nx/search/jobs/"
+},
+
+{
+title:"Customer Support Jobs",
+provider:"Support Driven",
+category:"Chat Support",
+location:"Worldwide",
+icon:"💬",
+description:
+"Explore customer support and remote service roles.",
+url:"https://jobs.supportdriven.com/"
+}
+
+];
+
+
+let currentCategory="";
+
+
+function displayJobs(list){
+
+const container=document.getElementById("jobs");
+
+container.innerHTML="";
+
+document.getElementById("jobCount").textContent=
+"Showing "+list.length+" opportunities";
+
+
+if(list.length===0){
+
+container.innerHTML=`
+
+<div style="
+grid-column:1/-1;
+background:white;
+padding:30px;
+border-radius:12px;
+text-align:center;
+color:#64748b">
+
+No matching opportunities found.
+Try another category or search term.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+list.forEach(job=>{
+
+const card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+<div class="icon">
+${job.icon}
+</div>
+
+<div class="directory-label">
+Opportunity Directory
+</div>
+
+<h3>
+${job.title}
+</h3>
+
+<p>
+<strong>${job.provider}</strong>
+</p>
+
+<p>
+${job.description}
+</p>
+
+<div class="tags">
+
+<span class="tag">
+${job.category}
+</span>
+
+<span class="tag">
+${job.location}
+</span>
+
+</div>
+
+<div class="card-bottom">
+
+<a
+class="apply"
+href="${job.url}"
+target="_blank"
+rel="noopener noreferrer"
+>
+Visit Provider ↗
+</a>
+
+<button
+class="share"
+onclick="shareJob('${job.title.replace(/'/g,"\\'")}','${job.url}')"
+>
+Share
+</button>
+
+</div>
+
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+
+function filterJobs(){
+
+const search=
+document.getElementById("search").value.toLowerCase();
+
+const category=
+document.getElementById("category").value;
+
+const location=
+document.getElementById("location").value;
+
+
+const results=opportunities.filter(job=>{
+
+const text=
+(job.title+
+job.provider+
+job.category+
+job.description+
+job.location).toLowerCase();
+
+const matchesSearch=
+!search || text.includes(search);
+
+const matchesCategory=
+!category || job.category===category;
+
+const matchesLocation=
+!location ||
+job.location==="Worldwide" ||
+job.location===location;
+
+return matchesSearch &&
+matchesCategory &&
+matchesLocation;
+
+});
+
+
+displayJobs(results);
+
+}
+
+
+function selectCategory(category){
+
+currentCategory=category;
+
+document.getElementById("category").value=category;
+
+document.querySelectorAll(".category")
+.forEach(button=>button.classList.remove("active"));
+
+event.target.classList.add("active");
+
+filterJobs();
+
+}
+
+
+function shareJob(title,url){
+
+if(navigator.share){
+
+navigator.share({
+
+title:title,
+
+text:"Check this opportunity on Prime Global",
+
+url:url
+
+});
+
+}
+
+else if(navigator.clipboard){
+
+navigator.clipboard.writeText(url);
+
+alert("Opportunity link copied!");
+
+}
+
+else{
+
+prompt("Copy this link:",url);
+
+}
+
+}
+
+
+document
+.getElementById("search")
+.addEventListener("input",filterJobs);
+
+
+document
+.getElementById("category")
+.addEventListener("change",filterJobs);
+
+
+document
+.getElementById("location")
+.addEventListener("change",filterJobs);
+
+
+document.getElementById("year").textContent=
+new Date().getFullYear();
+
+
+displayJobs(opportunities);
+
+</script>
 
 </body>
   </html>
