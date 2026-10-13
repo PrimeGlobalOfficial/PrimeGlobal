@@ -1,140 +1,615 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1735">
-  <meta name="description" content="Prime Global connects people worldwide with digital work, remote opportunities, AI projects and technology services.">
-  <title>Prime Global | Worldwide Opportunities</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1530">
+  <meta name="description" content="Prime Global connects people worldwide with remote work opportunities, application guidance, and digital skills resources.">
+  <title>Prime Global | Global Remote Opportunities</title>
 
   <style>
     :root {
-      --navy: #0b1735;
-      --blue: #1d4ed8;
-      --gold: #facc15;
-      --light: #f5f7fb;
-      --white: #fff;
+      --navy: #0b1530;
+      --navy-light: #14264b;
+      --blue: #2563eb;
+      --gold: #f5bd4f;
+      --white: #ffffff;
+      --background: #f5f7fb;
       --text: #172033;
       --muted: #64748b;
       --border: #e2e8f0;
       --green: #15803d;
+      --red: #b91c1c;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(11, 21, 48, .08);
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--light);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--background);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
     }
-    a { color: inherit; }
+
+    a { color: inherit; text-decoration: none; }
     button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
     button { cursor: pointer; }
-    .container { width: min(1120px, 92%); margin: auto; }
-    .topbar { background: #071126; color: #e2e8f0; padding: 8px 0; font-size: 13px; }
-    .topbar .container { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    header { background: var(--navy); color:white; position:sticky; top:0; z-index:10; }
-    .nav { min-height:76px; display:flex; justify-content:space-between; align-items:center; gap:16px; }
-    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:800; font-size:19px; }
-    .logo { display:grid; place-items:center; width:43px; height:43px; border-radius:12px; background:var(--gold); color:var(--navy); font-size:24px; }
-    nav { display:flex; gap:19px; align-items:center; flex-wrap:wrap; }
-    nav a { color:#e2e8f0; text-decoration:none; font-size:14px; }
-    nav a:hover { color:var(--gold); }
-    .btn { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:9px; padding:11px 16px; font-weight:700; text-decoration:none; gap:7px; }
-    .btn-primary { background:var(--blue); color:white; }
-    .btn-gold { background:var(--gold); color:var(--navy); }
-    .btn-outline { background:transparent; border:1px solid #94a3b8; color:inherit; }
-    .btn:disabled { opacity:.55; cursor:not-allowed; }
-    .hero { background:linear-gradient(130deg,#0b1735,#173d81); color:white; padding:76px 0 68px; }
-    .hero-grid { display:grid; grid-template-columns:1.3fr .7fr; align-items:center; gap:38px; }
-    .eyebrow { color:var(--gold); text-transform:uppercase; font-size:12px; font-weight:800; letter-spacing:2px; }
-    h1 { font-size:clamp(36px,5.2vw,60px); line-height:1.08; margin:14px 0 18px; }
-    h2 { font-size:clamp(25px,3vw,34px); line-height:1.2; margin:0 0 12px; }
-    h3 { margin:0 0 8px; }
-    .hero p { color:#dbe5f7; max-width:650px; font-size:17px; }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
-    .hero-panel { background:#ffffff12; border:1px solid #ffffff2c; border-radius:18px; padding:24px; }
-    .hero-panel strong { display:block; font-size:22px; margin-bottom:5px; }
-    .hero-panel p { font-size:14px; margin-top:4px; }
-    .section { padding:64px 0; }
-    .section-white { background:white; }
-    .section-head { max-width:700px; margin-bottom:28px; }
-    .section-head p, .muted { color:var(--muted); }
-    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
-    .card { background:white; border:1px solid var(--border); border-radius:15px; padding:22px; box-shadow:0 5px 18px #0b173508; }
-    .card p { color:var(--muted); font-size:14px; }
-    .symbol { width:43px; height:43px; border-radius:12px; display:grid; place-items:center; background:#eaf0ff; color:var(--blue); font-size:22px; margin-bottom:14px; }
-    .tag { display:inline-block; background:#eff6ff; color:#1d4ed8; padding:4px 9px; border-radius:30px; font-size:12px; margin:3px 4px 3px 0; }
-    .steps { counter-reset:step; }
-    .step { position:relative; padding-left:53px; }
-    .step:before { counter-increment:step; content:counter(step); position:absolute; left:0; top:0; width:37px; height:37px; display:grid; place-items:center; background:var(--gold); border-radius:50%; font-weight:800; }
-    .banner { background:var(--navy); color:white; border-radius:18px; padding:32px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
-    .banner p { color:#cbd5e1; margin-bottom:0; }
-    .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-    label { display:block; font-size:14px; font-weight:700; margin-bottom:5px; }
-    input, select, textarea { width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; background:white; color:var(--text); }
-    textarea { resize:vertical; min-height:100px; }
-    .field { margin-bottom:13px; }
-    .full { grid-column:1/-1; }
-    .auth-box { max-width:560px; margin:auto; }
-    .auth-tabs { display:flex; gap:8px; margin-bottom:20px; }
-    .auth-tabs button { flex:1; border:1px solid var(--border); border-radius:8px; padding:10px; background:white; }
-    .auth-tabs button.active { background:var(--navy); color:white; }
-    .notice { display:none; border-radius:9px; padding:12px; margin:12px 0; font-size:14px; overflow-wrap:anywhere; }
-    .notice.show { display:block; }
-    .notice.error { background:#fef2f2; color:#991b1b; }
-    .notice.success { background:#f0fdf4; color:#166534; }
-    .notice.info { background:#eff6ff; color:#1e40af; }
-    .hidden { display:none !important; }
-    .profile-line { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-    .payment-list { padding-left:20px; }
-    footer { background:#071126; color:#e2e8f0; padding:38px 0 18px; }
-    footer a { color:#fff; }
-    .footer-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:25px; }
-    .footer-small { border-top:1px solid #29364c; margin-top:25px; padding-top:16px; color:#94a3b8; font-size:13px; }
-    .status { font-size:13px; color:var(--muted); }
-    @media(max-width:800px) {
-      .hero-grid, .grid, .footer-grid { grid-template-columns:1fr 1fr; }
-      .hero-grid > :first-child { grid-column:1/-1; }
-      nav { gap:10px; }
-      nav a { font-size:12px; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin-inline: auto;
     }
-    @media(max-width:560px) {
-      .nav { align-items:flex-start; padding:13px 0; flex-direction:column; }
-      nav { width:100%; }
-      .hero { padding:52px 0; }
-      .hero-grid, .grid, .footer-grid, .form-grid { grid-template-columns:1fr; }
-      .hero-grid > :first-child, .full { grid-column:auto; }
-      .section { padding:45px 0; }
-      .banner { padding:23px; }
+
+    .topbar {
+      background: #071126;
+      color: #e2e8f0;
+      padding: 8px 0;
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    header {
+      background: rgba(11, 21, 48, .98);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 850;
+      font-size: 1.16rem;
+      letter-spacing: -.4px;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 43px;
+      height: 43px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      background: linear-gradient(135deg, #ffe4a1, var(--gold));
+      font-weight: 950;
+      font-size: 1.05rem;
+      box-shadow: 0 5px 18px rgba(245,189,79,.18);
+    }
+
+    .brand small {
+      display: block;
+      color: #b8c5df;
+      font-size: .68rem;
+      letter-spacing: 1.2px;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+      font-size: .91rem;
+      color: #e2e8f0;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      color: white;
+      border: 1px solid #52617e;
+      border-radius: 9px;
+      padding: 8px 11px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 11px;
+      padding: 12px 18px;
+      font-weight: 750;
+      transition: transform .15s ease, opacity .15s ease;
+      text-align: center;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #14213d;
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,.4);
+    }
+
+    .btn-small { padding: 8px 12px; font-size: .86rem; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(ellipse at 88% 10%, rgba(37,99,235,.35), transparent 38%),
+        radial-gradient(ellipse at 5% 95%, rgba(245,189,79,.12), transparent 35%),
+        linear-gradient(120deg, #0b1530, #12284f);
+      padding: 86px 0 78px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid rgba(245,189,79,.45);
+      background: rgba(245,189,79,.08);
+      color: #ffda8b;
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 5vw, 4.3rem);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 22px 0;
+    }
+
+    .gold-text { color: var(--gold); }
+
+    .hero p {
+      color: #d5deef;
+      max-width: 650px;
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .hero-note {
+      color: #b8c5df;
+      font-size: .87rem !important;
+      margin-top: 20px;
+    }
+
+    .hero-card {
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 24px;
+      padding: 27px;
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 25px 60px rgba(0,0,0,.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-card h2 { margin-top: 0; font-size: 1.3rem; }
+
+    .hero-feature {
+      display: flex;
+      gap: 13px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .hero-feature:last-child { border-bottom: 0; }
+
+    .feature-icon {
+      flex: 0 0 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(245,189,79,.15);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+    }
+
+    .hero-feature strong { display: block; }
+    .hero-feature span { color: #c7d2e6; font-size: .88rem; }
+
+    .trust-strip {
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 21px 0;
+      text-align: center;
+    }
+
+    .trust-items strong { display: block; font-size: .98rem; }
+    .trust-items span { color: var(--muted); font-size: .84rem; }
+
+    section { padding: 76px 0; }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 36px;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      color: #1d4ed8;
+      background: #eaf1ff;
+      border-color: #d4e2ff;
+    }
+
+    .section-heading h2 {
+      color: var(--navy);
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin: 15px 0 12px;
+    }
+
+    .section-heading p { color: var(--muted); margin: 0; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 4px 18px rgba(11,21,48,.025);
+      min-width: 0;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow);
+      border-color: #c9d7f2;
+    }
+
+    .card-icon {
+      width: 49px;
+      height: 49px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #edf3ff;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .card h3 { margin: 0 0 9px; color: var(--navy); font-size: 1.13rem; }
+    .card p { color: var(--muted); margin: 0 0 16px; font-size: .94rem; }
+
+    .tag {
+      display: inline-block;
+      font-size: .76rem;
+      font-weight: 750;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 7px;
+      padding: 4px 8px;
+      margin: 2px 3px 2px 0;
+    }
+
+    .disclaimer {
+      margin-top: 25px;
+      background: #fff8e8;
+      border: 1px solid #f4dfaa;
+      color: #6b4a0b;
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: .91rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold);
+      font-weight: 850;
+      margin-bottom: 16px;
+    }
+
+    .soft-section { background: #edf2f9; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .check-list {
+      padding: 0;
+      margin: 15px 0 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      padding: 9px 0 9px 28px;
+      position: relative;
+      color: #475569;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .account-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .account-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(20px, 5vw, 36px);
+      box-shadow: var(--shadow);
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      background: #eef2f7;
+      padding: 6px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .auth-tab {
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: #475569;
+      padding: 10px 5px;
+      font-weight: 750;
+      font-size: .9rem;
+    }
+
+    .auth-tab.active { background: white; color: var(--navy); box-shadow: 0 2px 8px #0000000c; }
+
+    .form-group { margin-bottom: 15px; }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      background: white;
+      border-radius: 10px;
+      padding: 12px 13px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #2563eb19;
+    }
+
+    .form-help { color: var(--muted); font-size: .82rem; }
+
+    .message {
+      display: none;
+      margin: 15px 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: .91rem;
+      overflow-wrap: anywhere;
+    }
+
+    .message.show { display: block; }
+    .message.info { color: #1e40af; background: #eff6ff; border: 1px solid #bfdbfe; }
+    .message.success { color: #166534; background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .message.error { color: #991b1b; background: #fef2f2; border: 1px solid #fecaca; }
+
+    .hidden { display: none !important; }
+
+    .account-status {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 17px;
+      border-radius: 13px;
+      margin: 18px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-link {
+      display: block;
+      color: var(--blue);
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .payment-note {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background: #071126;
+      color: #c5d0e3;
+      padding: 42px 0 22px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 30px;
+      padding-bottom: 30px;
+    }
+
+    footer h3, footer h4 { color: white; margin-top: 0; }
+    footer a { display: block; margin: 7px 0; color: #c5d0e3; font-size: .91rem; }
+    footer a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid #26334e;
+      padding-top: 18px;
+      font-size: .82rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { max-width: 620px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-links { gap: 12px; }
+    }
+
+    @media (max-width: 680px) {
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 68px;
+        padding: 17px 4%;
+        background: var(--navy);
+        border-top: 1px solid #26334e;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 11px 4px; }
+      .nav-links .btn { margin-top: 8px; }
+      .hero { padding: 57px 0; }
+      h1 { letter-spacing: -1.3px; }
+      section { padding: 56px 0; }
+      .cards, .two-col, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+      .trust-items { grid-template-columns: 1fr; gap: 13px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .card { padding: 21px; }
+      .hero-actions .btn { width: 100%; }
+      .footer-bottom { flex-direction: column; }
     }
   </style>
 </head>
 
 <body>
   <div class="topbar">
-    <div class="container">
-      <span>Worldwide digital opportunities</span>
-      <span>Contact: primeglobalofficialacc@gmail.com</span>
-    </div>
+    Global opportunities • Remote-work guidance • Worldwide access
   </div>
 
   <header>
     <div class="container nav">
-      <a class="brand" href="#home">
-        <span class="logo">🌐</span>
-        <span>PRIME GLOBAL</span>
+      <a class="brand" href="#home" aria-label="Prime Global home">
+        <span class="brand-mark">PG</span>
+        <span>PRIME GLOBAL<small>OPPORTUNITIES WORLDWIDE</small></span>
       </a>
-      <nav aria-label="Main navigation">
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu"
+        aria-expanded="false">☰ Menu</button>
+
+      <nav class="nav-links" id="navLinks">
         <a href="#home">Home</a>
         <a href="#opportunities">Opportunities</a>
-        <a href="#how">How It Works</a>
+        <a href="#how-it-works">How It Works</a>
         <a href="#payments">Payments</a>
         <a href="#contact">Contact</a>
-        <a href="#account" class="btn btn-gold">My Account</a>
+        <a class="btn btn-gold btn-small" href="#account">Join Prime Global</a>
       </nav>
     </div>
   </header>
@@ -143,256 +618,330 @@
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Connecting talent worldwide</div>
-          <h1>Discover digital opportunities. Build your future.</h1>
+          <span class="eyebrow">🌍 Connecting talent with digital work</span>
+          <h1>Discover your next <span class="gold-text">global opportunity.</span></h1>
           <p>
-            Prime Global is a worldwide opportunities platform focused on
-            connecting people with remote work, digital projects and technology
-            services. Explore opportunities, create an account and follow
-            verified application instructions.
+            Explore remote-work categories, learn what employers may require,
+            and prepare for online opportunities in the growing digital economy.
+            Prime Global brings useful guidance together in one place.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-gold" href="#opportunities">Explore Opportunities</a>
-            <a class="btn btn-outline" href="#account">Create an Account</a>
+            <a class="btn btn-gold" href="#opportunities">Explore Opportunities →</a>
+            <a class="btn btn-outline" href="#how-it-works">How It Works</a>
           </div>
+          <p class="hero-note">
+            Worldwide audience. Opportunities depend on each employer's
+            location, eligibility rules, and current vacancies.
+          </p>
         </div>
-        <div class="hero-panel">
-          <strong>🌍 Worldwide reach</strong>
-          <p>Explore opportunities across regions. Availability, eligibility,
-             assessments and payment terms depend on each project provider.</p>
-          <hr style="border-color:#ffffff30">
-          <strong>🔐 Account security</strong>
-          <p>Use your own account to access registration and sign-in features.</p>
-          <strong>💳 Payment transparency</strong>
-          <p>Payment options and transaction confirmation will be provided only
-             through configured, legitimate payment services.</p>
+
+        <div class="hero-card">
+          <h2>Your digital-work starting point</h2>
+          <div class="hero-feature">
+            <div class="feature-icon">🤖</div>
+            <div><strong>AI and data projects</strong><span>Explore evaluation, annotation, and data tasks.</span></div>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-icon">🎙️</div>
+            <div><strong>Voice and language work</strong><span>Discover recording, transcription, and language projects.</span></div>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-icon">💻</div>
+            <div><strong>Remote support roles</strong><span>Prepare for data entry and customer-support work.</span></div>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-icon">🔐</div>
+            <div><strong>Personal account</strong><span>Register securely to access your website account.</span></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-white" id="opportunities">
+    <div class="trust-strip">
+      <div class="container trust-items">
+        <div><strong>🌐 Global focus</strong><span>Explore opportunities from different regions</span></div>
+        <div><strong>📚 Practical guidance</strong><span>Understand common requirements</span></div>
+        <div><strong>🛡️ Safety first</strong><span>Verify platforms before sharing information</span></div>
+      </div>
+    </div>
+
+    <section id="opportunities">
       <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Explore opportunities</div>
-          <h2>Digital work categories</h2>
-          <p>Explore these categories and check each provider's official
-             requirements. Listings below describe categories, not guaranteed
-             vacancies or job offers.</p>
+        <div class="section-heading">
+          <span class="eyebrow">Explore categories</span>
+          <h2>Find a path that fits your skills</h2>
+          <p>Browse common digital-work categories. These are areas to explore, not a guarantee of available jobs or earnings.</p>
         </div>
-        <div class="grid">
+
+        <div class="cards">
           <article class="card">
-            <div class="symbol">🤖</div><h3>AI Training & Evaluation</h3>
-            <p>Help evaluate AI responses, review content quality and complete
-               eligible AI training tasks.</p>
-            <span class="tag">Assessments may apply</span>
+            <div class="card-icon">🤖</div>
+            <h3>AI Training & Evaluation</h3>
+            <p>Help evaluate AI responses, review content, follow project guidelines, and provide quality feedback.</p>
+            <span class="tag">Reasoning</span><span class="tag">Research</span><span class="tag">Quality review</span>
           </article>
+
           <article class="card">
-            <div class="symbol">🎙️</div><h3>Voice Recording</h3>
-            <p>Contribute speech recordings or dialogue samples when projects
-               are recruiting suitable speakers.</p>
-            <span class="tag">Audio equipment may be needed</span>
+            <div class="card-icon">🏷️</div>
+            <h3>Data Annotation</h3>
+            <p>Label text, images, audio, or other data according to the instructions provided by a project.</p>
+            <span class="tag">Attention to detail</span><span class="tag">Guidelines</span>
           </article>
+
           <article class="card">
-            <div class="symbol">🏷️</div><h3>Data Annotation</h3>
-            <p>Label, classify or review text, images, audio and other datasets
-               according to project guidelines.</p>
-            <span class="tag">Training may be required</span>
+            <div class="card-icon">🎙️</div>
+            <h3>Voice Recording</h3>
+            <p>Record speech or scripted conversations with clear audio, suitable equipment, and a quiet environment.</p>
+            <span class="tag">Clear speech</span><span class="tag">Microphone</span>
           </article>
+
           <article class="card">
-            <div class="symbol">⌨️</div><h3>Transcription & Data Entry</h3>
-            <p>Convert recordings into text, organize information and perform
-               accurate data-processing tasks.</p>
-            <span class="tag">Accuracy matters</span>
+            <div class="card-icon">📝</div>
+            <h3>Transcription & Data Entry</h3>
+            <p>Convert recordings into text, enter information accurately, and follow confidentiality rules.</p>
+            <span class="tag">Typing</span><span class="tag">Accuracy</span>
           </article>
+
           <article class="card">
-            <div class="symbol">🌐</div><h3>Translation & Proofreading</h3>
-            <p>Support language projects through translation, proofreading,
-               editing and linguistic quality checks.</p>
-            <span class="tag">Language requirements vary</span>
+            <div class="card-icon">🌍</div>
+            <h3>Translation & Proofreading</h3>
+            <p>Review written content for meaning, grammar, spelling, consistency, and language quality.</p>
+            <span class="tag">Language skills</span><span class="tag">Editing</span>
           </article>
+
           <article class="card">
-            <div class="symbol">💬</div><h3>Chat Support & Other Remote Work</h3>
-            <p>Explore customer support, online assistance and other digital
-               roles subject to provider requirements.</p>
-            <span class="tag">Location rules may apply</span>
+            <div class="card-icon">💬</div>
+            <h3>Chat & Customer Support</h3>
+            <p>Assist customers through approved channels, explain processes, and document issues professionally.</p>
+            <span class="tag">Communication</span><span class="tag">Problem-solving</span>
           </article>
         </div>
-        <p class="status" style="margin-top:18px">
-          Prime Global does not guarantee employment, task availability or income.
-          Always check the original provider before sharing documents or applying.
+
+        <div class="disclaimer">
+          <strong>Important:</strong> Prime Global's category descriptions are informational.
+          Confirm the employer, eligibility requirements, compensation, and application
+          terms on the original hiring platform. Never pay someone who promises a guaranteed job.
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Getting started</span>
+          <h2>A clearer path to online work</h2>
+          <p>Use these steps to prepare before applying to any remote-work platform.</p>
+        </div>
+
+        <div class="steps-grid">
+          <article class="card">
+            <div class="step-number">1</div>
+            <h3>Explore</h3>
+            <p>Choose a work category that matches your skills, interests, and available equipment.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">2</div>
+            <h3>Prepare</h3>
+            <p>Update your CV, practise relevant tasks, and prepare a professional email address.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">3</div>
+            <h3>Apply</h3>
+            <p>Use the employer's official website and complete any required identity checks or assessments.</p>
+          </article>
+          <article class="card">
+            <div class="step-number">4</div>
+            <h3>Verify & Work</h3>
+            <p>Check contract terms, payment methods, and platform policies before accepting tasks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="requirements">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Preparation guide</span>
+          <h2>Common requirements and equipment</h2>
+          <p>Requirements differ by employer, task type, country, and contract.</p>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>What you may need</h3>
+            <ul class="check-list">
+              <li>A reliable email address and internet connection.</li>
+              <li>A professional CV and accurate application details.</li>
+              <li>Language, typing, research, or task-specific skills.</li>
+              <li>Identity verification where required by the platform.</li>
+              <li>Completion of screening tests or project training.</li>
+              <li>A supported payment method for your country.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🖥️</div>
+            <h3>Hardware you may need</h3>
+            <ul class="check-list">
+              <li>Smartphone for mobile-compatible tasks.</li>
+              <li>Laptop or desktop for projects that require one.</li>
+              <li>Headphones and a suitable microphone for audio tasks.</li>
+              <li>A quiet space for recording and calls.</li>
+              <li>Updated browser and secure device settings.</li>
+              <li>Stable internet and power where possible.</li>
+            </ul>
+            <p class="form-help">Check the specific project requirements before buying equipment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section" id="account">
+      <div class="container account-wrap">
+        <div class="section-heading">
+          <span class="eyebrow">Member access</span>
+          <h2>Your Prime Global account</h2>
+          <p>Create an account, sign in, or request a password reset.</p>
+        </div>
+
+        <div class="account-card">
+          <div id="authArea">
+            <div class="auth-tabs" role="tablist" aria-label="Account actions">
+              <button class="auth-tab active" type="button" data-tab="signup">Register</button>
+              <button class="auth-tab" type="button" data-tab="login">Sign In</button>
+              <button class="auth-tab" type="button" data-tab="reset">Reset Password</button>
+            </div>
+
+            <div id="signupPanel">
+              <h3>Create your account</h3>
+              <p class="form-help">Use an email address you can access to complete confirmation.</p>
+              <form id="signupForm">
+                <div class="form-group">
+                  <label for="signupName">Full name</label>
+                  <input id="signupName" name="fullName" type="text" autocomplete="name" maxlength="100" required>
+                </div>
+                <div class="form-group">
+                  <label for="signupEmail">Email address</label>
+                  <input id="signupEmail" name="email" type="email" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="signupPassword">Password</label>
+                  <input id="signupPassword" name="password" type="password" autocomplete="new-password" minlength="8" required>
+                  <span class="form-help">Use at least 8 characters.</span>
+                </div>
+                <button class="btn btn-blue" id="signupButton" type="submit" style="width:100%">Create Account</button>
+              </form>
+            </div>
+
+            <div id="loginPanel" class="hidden">
+              <h3>Welcome back</h3>
+              <form id="loginForm">
+                <div class="form-group">
+                  <label for="loginEmail">Email address</label>
+                  <input id="loginEmail" type="email" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input id="loginPassword" type="password" autocomplete="current-password" required>
+                </div>
+                <button class="btn btn-blue" id="loginButton" type="submit" style="width:100%">Sign In</button>
+              </form>
+            </div>
+
+            <div id="resetPanel" class="hidden">
+              <h3>Reset your password</h3>
+              <p class="form-help">We'll send a password recovery link if the account is eligible.</p>
+              <form id="resetForm">
+                <div class="form-group">
+                  <label for="resetEmail">Email address</label>
+                  <input id="resetEmail" type="email" autocomplete="email" required>
+                </div>
+                <button class="btn btn-blue" id="resetButton" type="submit" style="width:100%">Send Reset Link</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="signedInArea" class="hidden">
+            <h3>Prime Global Account</h3>
+            <div class="account-status">
+              <p><strong>Account:</strong> <span id="accountEmail"></span></p>
+              <p><strong>Status:</strong> <span id="accountRole">Member</span></p>
+              <p id="adminNote" class="hidden">Administrator access is enabled for this account.</p>
+            </div>
+            <div id="adminPanel" class="hidden">
+              <h3>Prime Global Administrator</h3>
+              <p class="form-help">This is a basic administrator-only display area. It does not yet include job-management, user-management, or payment-processing tools.</p>
+            </div>
+            <button class="btn btn-light" id="logoutButton" type="button">Sign Out</button>
+          </div>
+
+          <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+          <div id="recoveryPanel" class="hidden">
+            <h3>Choose a new password</h3>
+            <form id="recoveryForm">
+              <div class="form-group">
+                <label for="newPassword">New password</label>
+                <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required>
+              </div>
+              <button class="btn btn-blue" type="submit">Save New Password</button>
+            </form>
+          </div>
+        </div>
+        <p class="form-help" style="text-align:center;margin-top:15px">
+          Never share your password or email confirmation link with anyone.
         </p>
       </div>
     </section>
 
-    <section class="section" id="how">
+    <section id="payments">
       <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Getting started</div>
-          <h2>How it works</h2>
-          <p>A clear starting point for exploring global digital work.</p>
+        <div class="section-heading">
+          <span class="eyebrow">Payment information</span>
+          <h2>Clear information. No false promises.</h2>
+          <p>Payment arrangements depend on the employer or platform offering the work.</p>
         </div>
-        <div class="grid">
-          <div class="card step">
-            <h3>Create your account</h3>
-            <p>Register with an email address you control and verify it if asked.</p>
-          </div>
-          <div class="card step">
-            <h3>Explore relevant categories</h3>
-            <p>Review the skills, equipment, language and country requirements
-               listed by the original project provider.</p>
-          </div>
-          <div class="card step">
-            <h3>Apply through the provider</h3>
-            <p>Complete any legitimate assessments and check payment terms
-               before accepting work.</p>
+        <div class="payment-note">
+          <h3>How payments work</h3>
+          <p>
+            Prime Global currently provides opportunity information and guidance.
+            This website does not currently collect job application fees, accept
+            deposits, process worker payouts, or transfer money.
+          </p>
+          <ul class="check-list">
+            <li>Check the original platform's payment schedule and minimum withdrawal.</li>
+            <li>Confirm which payment providers support your country.</li>
+            <li>Review currency conversion charges and withdrawal fees.</li>
+            <li>Never share banking passwords, PINs, or one-time security codes.</li>
+          </ul>
+          <div class="disclaimer">
+            No job, acceptance, task volume, or income is guaranteed. Do not send money
+            based on a promise of guaranteed employment.
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section-white" id="account">
+    <section class="soft-section" id="contact">
       <div class="container">
-        <div class="auth-box card">
-          <div class="eyebrow">Member access</div>
-          <h2>Prime Global account</h2>
-          <p class="muted">Register, sign in or request a password recovery email.</p>
-
-          <div id="authNotice" class="notice" role="status"></div>
-
-          <div id="authForms">
-            <div class="auth-tabs">
-              <button type="button" class="active" id="showLogin">Log In</button>
-              <button type="button" id="showRegister">Register</button>
-            </div>
-
-            <form id="loginForm">
-              <div class="field">
-                <label for="loginEmail">Email address</label>
-                <input id="loginEmail" type="email" autocomplete="email" required>
-              </div>
-              <div class="field">
-                <label for="loginPassword">Password</label>
-                <input id="loginPassword" type="password" autocomplete="current-password" required minlength="6">
-              </div>
-              <button class="btn btn-primary" type="submit" id="loginButton">Log In</button>
-              <button class="btn" type="button" id="resetPassword">Forgot password?</button>
-            </form>
-
-            <form id="registerForm" class="hidden">
-              <div class="field">
-                <label for="registerName">Full name</label>
-                <input id="registerName" type="text" autocomplete="name" required maxlength="100">
-              </div>
-              <div class="field">
-                <label for="registerEmail">Email address</label>
-                <input id="registerEmail" type="email" autocomplete="email" required>
-              </div>
-              <div class="field">
-                <label for="registerPassword">Create a password</label>
-                <input id="registerPassword" type="password" autocomplete="new-password" minlength="8" required>
-              </div>
-              <button class="btn btn-primary" type="submit" id="registerButton">Create Account</button>
-              <p class="status">Use a unique password. Email confirmation may be required.</p>
-            </form>
-          </div>
-
-          <div id="signedIn" class="hidden">
-            <div class="profile-line">
-              <div>
-                <h3 id="welcomeName">Welcome</h3>
-                <p id="welcomeEmail" class="muted"></p>
-                <span id="accountRole" class="tag">Member</span>
-              </div>
-              <button class="btn btn-outline" id="logoutButton" type="button">Log Out</button>
-            </div>
-            <div id="adminArea" class="hidden" style="margin-top:22px">
-              <hr style="border:0;border-top:1px solid var(--border)">
-              <h3>Administrator area</h3>
-              <p>Administrator access is controlled by the database role.
-                 This area is not a substitute for server-side authorization.</p>
-              <p class="status">Use the Supabase dashboard to manage users and
-                 approved content until an authorized management backend is configured.</p>
-            </div>
-          </div>
+        <div class="section-heading">
+          <span class="eyebrow">Get in touch</span>
+          <h2>Contact Prime Global</h2>
+          <p>For general questions about the website and its opportunity information, use the official contact channels below.</p>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="payments">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Payments & billing</div>
-          <h2>Clear, secure payment handling</h2>
-          <p>Prime Global is designed to support payments for legitimate services.
-             A real payment provider must be connected before the site can accept money.</p>
-        </div>
-        <div class="grid">
+        <div class="contact-grid">
           <div class="card">
-            <div class="symbol">🔒</div>
-            <h3>Secure checkout</h3>
-            <p>Checkout should be handled by a supported payment provider.
-               This website does not collect or store card numbers or PINs.</p>
-          </div>
-          <div class="card">
-            <div class="symbol">🌍</div>
-            <h3>Global payment options</h3>
-            <p>Supported methods depend on the selected provider, customer
-               country, currency and business eligibility.</p>
-          </div>
-          <div class="card">
-            <div class="symbol">🧾</div>
-            <h3>Transaction records</h3>
-            <p>Payment status should be confirmed server-side by the provider
-               before an order is marked paid.</p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:20px">
-          <h3>Ask about a service or payment</h3>
-          <p>Contact Prime Global to discuss service details, invoices and available
-             payment methods. No payment is processed by this enquiry form.</p>
-          <a class="btn btn-primary"
-             href="mailto:primeglobalofficialacc@gmail.com?subject=Prime%20Global%20Service%20and%20Payment%20Enquiry">
-            Email Prime Global
-          </a>
-        </div>
-        <p class="status" style="margin-top:14px">
-          Payment processing is not yet activated. Do not advertise M-Pesa,
-          GCash, PayPal or card checkout as available until the relevant provider
-          account, server-side verification and production configuration are complete.
-        </p>
-      </div>
-    </section>
-
-    <section class="section section-white" id="contact">
-      <div class="container">
-        <div class="banner">
-          <div>
-            <div class="eyebrow">Get in touch</div>
-            <h2>Connect with Prime Global</h2>
-            <p>Worldwide digital opportunities and service enquiries.</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-gold"
-               href="mailto:primeglobalofficialacc@gmail.com">Send an Email</a>
-            <a class="btn btn-outline"
-               href="https://wa.me/639971642057" target="_blank" rel="noopener noreferrer">
-              WhatsApp Us
-            </a>
-          </div>
-        </div>
-        <div class="grid" style="margin-top:20px">
-          <div class="card">
+            <div class="card-icon">✉️</div>
             <h3>Email</h3>
-            <p><a href="mailto:primeglobalofficialacc@gmail.com">primeglobalofficialacc@gmail.com</a></p>
+            <p>Send a message to the Prime Global contact address.</p>
+            <a class="contact-link" href="mailto:primeglobalofficialacc@gmail.com">primeglobalofficialacc@gmail.com</a>
           </div>
           <div class="card">
+            <div class="card-icon">💬</div>
             <h3>WhatsApp</h3>
-            <p><a href="https://wa.me/639971642057" target="_blank" rel="noopener noreferrer">+63 997 164 2057</a></p>
-          </div>
-          <div class="card">
-            <h3>Service coverage</h3>
-            <p>Global / Worldwide. Specific opportunities may have location restrictions.</p>
+            <p>Contact Prime Global through WhatsApp.</p>
+            <a class="contact-link" href="https://wa.me/639971642057" target="_blank" rel="noopener noreferrer">+63 997 164 2057</a>
           </div>
         </div>
       </div>
@@ -403,238 +952,396 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="#home"><span class="logo">🌐</span><span>PRIME GLOBAL</span></a>
-          <p class="muted">Connecting people with digital opportunities around the world.</p>
+          <a class="brand" href="#home">
+            <span class="brand-mark">PG</span>
+            <span>PRIME GLOBAL<small>OPPORTUNITIES WORLDWIDE</small></span>
+          </a>
+          <p>Connecting people with information about digital work and global remote opportunities.</p>
         </div>
         <div>
-          <h3>Explore</h3>
-          <p><a href="#opportunities">Opportunities</a></p>
-          <p><a href="#how">How It Works</a></p>
-          <p><a href="#payments">Payments</a></p>
+          <h4>Explore</h4>
+          <a href="#opportunities">Opportunities</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#requirements">Requirements</a>
+          <a href="#payments">Payments</a>
         </div>
         <div>
-          <h3>Contact</h3>
-          <p><a href="mailto:primeglobalofficialacc@gmail.com">primeglobalofficialacc@gmail.com</a></p>
-          <p><a href="https://wa.me/639971642057" target="_blank" rel="noopener noreferrer">WhatsApp: +63 997 164 2057</a></p>
+          <h4>Contact</h4>
+          <a href="mailto:primeglobalofficialacc@gmail.com">primeglobalofficialacc@gmail.com</a>
+          <a href="https://wa.me/639971642057" target="_blank" rel="noopener noreferrer">WhatsApp: +63 997 164 2057</a>
+          <a href="#account">Member Account</a>
         </div>
       </div>
-      <div class="footer-small">
-        © <span id="year"></span> Prime Global. All rights reserved.
-        Opportunities and earnings are not guaranteed.
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Prime Global. All rights reserved.</span>
+        <span><span class="status-dot"></span>Global opportunity information</span>
       </div>
     </div>
   </footer>
 
+  <!-- Supabase browser client. Never put a service-role key in this file. -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
-    // Supabase project configuration.
+    "use strict";
+
+    // Public browser configuration for the existing Prime Global Supabase project.
+    // The publishable key is intended for browser use; protect data with RLS.
     const SUPABASE_URL = "https://aehmswdhykcdpkqzbjgl.supabase.co";
     const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6SsI9";
+    const SITE_URL = "https://amonkimwetich.github.io/PrimeGlobal/";
 
-    const authNotice = document.getElementById("authNotice");
-    let supabaseClient = null;
+    const $ = (id) => document.getElementById(id);
+    $("year").textContent = new Date().getFullYear();
 
-    function showNotice(message, type = "info") {
-      authNotice.textContent = message;
-      authNotice.className = "notice show " + type;
+    // Mobile navigation
+    $("menuToggle").addEventListener("click", () => {
+      const open = $("navLinks").classList.toggle("open");
+      $("menuToggle").setAttribute("aria-expanded", String(open));
+    });
+
+    document.querySelectorAll("#navLinks a").forEach((link) => {
+      link.addEventListener("click", () => {
+        $("navLinks").classList.remove("open");
+        $("menuToggle").setAttribute("aria-expanded", "false");
+      });
+    });
+
+    let client = null;
+    let recoveryMode = false;
+    let authReady = false;
+
+    function showMessage(message, type = "info") {
+      const el = $("authMessage");
+      el.textContent = message;
+      el.className = "message show " + type;
     }
 
-    function clearNotice() {
-      authNotice.textContent = "";
-      authNotice.className = "notice";
+    function clearMessage() {
+      const el = $("authMessage");
+      el.textContent = "";
+      el.className = "message";
     }
 
-    function setBusy(button, busy, label) {
-      button.disabled = busy;
+    function setBusy(buttonId, busy, busyText) {
+      const button = $(buttonId);
+      if (!button) return;
       if (busy) {
-        button.dataset.oldLabel = button.textContent;
-        button.textContent = label || "Please wait...";
-      } else if (button.dataset.oldLabel) {
-        button.textContent = button.dataset.oldLabel;
+        button.dataset.originalText = button.textContent;
+        button.textContent = busyText || "Please wait...";
+        button.disabled = true;
+      } else {
+        button.textContent = button.dataset.originalText || button.textContent;
+        button.disabled = false;
       }
     }
 
-    function friendlyError(error) {
-      const message = error && error.message ? error.message : "Something went wrong.";
-      return message.length > 240 ? message.slice(0, 240) : message;
+    function switchTab(tab) {
+      ["signup", "login", "reset"].forEach((name) => {
+        $(name + "Panel").classList.toggle("hidden", name !== tab);
+      });
+      document.querySelectorAll(".auth-tab").forEach((button) => {
+        const active = button.dataset.tab === tab;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", String(active));
+      });
+      clearMessage();
     }
 
-    function switchForm(mode) {
-      clearNotice();
-      const login = mode === "login";
-      document.getElementById("loginForm").classList.toggle("hidden", !login);
-      document.getElementById("registerForm").classList.toggle("hidden", login);
-      document.getElementById("showLogin").classList.toggle("active", login);
-      document.getElementById("showRegister").classList.toggle("active", !login);
-    }
-
-    document.getElementById("showLogin").addEventListener("click", () => switchForm("login"));
-    document.getElementById("showRegister").addEventListener("click", () => switchForm("register"));
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.querySelectorAll(".auth-tab").forEach((button) => {
+      button.addEventListener("click", () => switchTab(button.dataset.tab));
+    });
 
     function showSignedOut() {
-      document.getElementById("authForms").classList.remove("hidden");
-      document.getElementById("signedIn").classList.add("hidden");
-      document.getElementById("adminArea").classList.add("hidden");
+      $("authArea").classList.remove("hidden");
+      $("signedInArea").classList.add("hidden");
     }
 
-    async function showSignedIn(user) {
-      document.getElementById("authForms").classList.add("hidden");
-      document.getElementById("signedIn").classList.remove("hidden");
-      document.getElementById("welcomeEmail").textContent = user.email || "";
-      document.getElementById("welcomeName").textContent =
-        user.user_metadata?.full_name || "Welcome to Prime Global";
-      document.getElementById("accountRole").textContent = "Member";
-      document.getElementById("adminArea").classList.add("hidden");
+    async function showSignedIn(session) {
+      if (!session || !session.user) {
+        showSignedOut();
+        return;
+      }
 
-      // Role is read from the protected profiles table. Users cannot promote
-      // themselves through this page; admin promotion must be done securely
-      // by the project owner in Supabase.
+      $("authArea").classList.add("hidden");
+      $("signedInArea").classList.remove("hidden");
+      $("accountEmail").textContent = session.user.email || "Signed-in account";
+      $("accountRole").textContent = "Member";
+      $("adminNote").classList.add("hidden");
+      $("adminPanel").classList.add("hidden");
+      clearMessage();
+
+      // Role is read from the protected profiles table, not from user-editable metadata.
       try {
-        const { data, error } = await supabaseClient
+        const { data, error } = await client
           .from("profiles")
-          .select("full_name, role")
-          .eq("id", user.id)
+          .select("role")
+          .eq("id", session.user.id)
           .maybeSingle();
 
-        if (error) throw error;
-
-        if (data?.full_name) {
-          document.getElementById("welcomeName").textContent = "Welcome, " + data.full_name;
-        }
-        if (data?.role === "admin") {
-          document.getElementById("accountRole").textContent = "Administrator";
-          document.getElementById("adminArea").classList.remove("hidden");
+        if (!error && data && data.role === "admin") {
+          $("accountRole").textContent = "Administrator";
+          $("adminNote").classList.remove("hidden");
+          $("adminPanel").classList.remove("hidden");
         }
       } catch (error) {
-        console.error("Could not load profile role:", error);
+        console.error("Could not load profile role.", error);
       }
     }
 
-    async function init() {
+    async function initializeAuth() {
       if (!window.supabase || !window.supabase.createClient) {
-        showNotice("The authentication library could not load. Check your internet connection and reload.", "error");
+        showMessage(
+          "The account service could not load. Check your internet connection and refresh the page.",
+          "error"
+        );
         return;
       }
-
-      if (!SUPABASE_URL.startsWith("https://") ||
-          !SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")) {
-        showNotice("Supabase configuration needs checking.", "error");
-        return;
-      }
-
-      supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY,
-        {
-          auth: {
-            persistSession: true,
-            autoRefreshToken: true,
-            detectSessionInUrl: true
-          }
-        }
-      );
-
-      const { data: { session } } = await supabaseClient.auth.getSession();
-      if (session?.user) await showSignedIn(session.user);
-      else showSignedOut();
-
-      supabaseClient.auth.onAuthStateChange((event, session) => {
-        setTimeout(() => {
-          if (session?.user) showSignedIn(session.user);
-          else showSignedOut();
-        }, 0);
-      });
-    }
-
-    document.getElementById("registerForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      clearNotice();
-      if (!supabaseClient) return showNotice("Supabase is not ready yet. Reload and try again.", "error");
-
-      const button = document.getElementById("registerButton");
-      const fullName = document.getElementById("registerName").value.trim();
-      const email = document.getElementById("registerEmail").value.trim();
-      const password = document.getElementById("registerPassword").value;
-
-      if (!fullName) return showNotice("Enter your full name.", "error");
-      setBusy(button, true, "Creating account...");
 
       try {
-        const { data, error } = await supabaseClient.auth.signUp({
+        client = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLISHABLE_KEY,
+          {
+            auth: {
+              persistSession: true,
+              autoRefreshToken: true,
+              detectSessionInUrl: true
+            }
+          }
+        );
+
+        // Process the confirmation or recovery URL when Supabase returns to this page.
+        const { data: sessionData, error: sessionError } =
+          await client.auth.getSession();
+
+        if (sessionError) {
+          showMessage(
+            "We could not read your sign-in session. Try signing in again. Details: " +
+              sessionError.message,
+            "error"
+          );
+        }
+
+        if (sessionData && sessionData.session) {
+          await showSignedIn(sessionData.session);
+        } else {
+          showSignedOut();
+        }
+
+        // Listen for confirmation, sign-in, sign-out, and password recovery events.
+        client.auth.onAuthStateChange((event, session) => {
+          if (event === "PASSWORD_RECOVERY") {
+            recoveryMode = true;
+            $("recoveryPanel").classList.remove("hidden");
+            showMessage("Choose a new password for your account.", "info");
+          }
+
+          if (event === "SIGNED_OUT") {
+            recoveryMode = false;
+            $("recoveryPanel").classList.add("hidden");
+            showSignedOut();
+            showMessage("You have signed out.", "success");
+          }
+
+          if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" ||
+              event === "USER_UPDATED") {
+            if (session) {
+              showSignedIn(session);
+            }
+          }
+
+          if (event === "INITIAL_SESSION" && session) {
+            showSignedIn(session);
+          }
+        });
+
+        authReady = true;
+
+        // If a recovery token is present in the URL, offer the new-password form.
+        if (window.location.hash.includes("type=recovery")) {
+          recoveryMode = true;
+          $("recoveryPanel").classList.remove("hidden");
+          showMessage("Enter a new password below.", "info");
+        }
+      } catch (error) {
+        showMessage(
+          "The account service could not be initialized. Refresh the page and try again.",
+          "error"
+        );
+        console.error("Supabase initialization error:", error);
+      }
+    }
+
+    $("signupForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
+
+      if (!client || !authReady) {
+        showMessage("The account service is still loading. Please try again.", "error");
+        return;
+      }
+
+      const fullName = $("signupName").value.trim();
+      const email = $("signupEmail").value.trim();
+      const password = $("signupPassword").value;
+
+      if (!fullName) {
+        showMessage("Enter your name to create your account.", "error");
+        return;
+      }
+
+      setBusy("signupButton", true, "Creating account...");
+
+      try {
+        const { data, error } = await client.auth.signUp({
           email,
           password,
-          options: { data: { full_name: fullName } }
+          options: {
+            emailRedirectTo: SITE_URL,
+            data: {
+              full_name: fullName
+            }
+          }
         });
+
         if (error) throw error;
 
-        if (data.session && data.user) {
-          await showSignedIn(data.user);
-          showNotice("Your account has been created.", "success");
+        if (data.session) {
+          await showSignedIn(data.session);
+          showMessage("Your account has been created and you are signed in.", "success");
         } else {
-          showNotice("Registration submitted. Check your email for a confirmation link before signing in.", "success");
-          switchForm("login");
+          showMessage(
+            "Registration submitted. Check your inbox and tap the Prime Global confirmation link. After confirmation, return to this website and sign in. If the email is missing, check Spam or Junk.",
+            "success"
+          );
+          $("signupForm").reset();
         }
       } catch (error) {
-        showNotice(friendlyError(error), "error");
+        showMessage(
+          "Registration failed: " + (error.message || "Please try again."),
+          "error"
+        );
       } finally {
-        setBusy(button, false);
+        setBusy("signupButton", false);
       }
     });
 
-    document.getElementById("loginForm").addEventListener("submit", async (event) => {
+    $("loginForm").addEventListener("submit", async (event) => {
       event.preventDefault();
-      clearNotice();
-      if (!supabaseClient) return showNotice("Supabase is not ready yet. Reload and try again.", "error");
+      clearMessage();
 
-      const button = document.getElementById("loginButton");
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-      setBusy(button, true, "Signing in...");
+      if (!client || !authReady) {
+        showMessage("The account service is still loading. Please try again.", "error");
+        return;
+      }
+
+      const email = $("loginEmail").value.trim();
+      const password = $("loginPassword").value;
+      setBusy("loginButton", true, "Signing in...");
 
       try {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
+
         if (error) throw error;
-        await showSignedIn(data.user);
-        showNotice("You are signed in.", "success");
+
+        await showSignedIn(data.session);
+        showMessage("You are signed in to Prime Global.", "success");
       } catch (error) {
-        showNotice(friendlyError(error), "error");
+        let message = error.message || "Please try again.";
+        if (/email not confirmed/i.test(message)) {
+          message = "Your email is not confirmed yet. Open the latest confirmation email and tap its link.";
+        }
+        showMessage("Sign-in failed: " + message, "error");
       } finally {
-        setBusy(button, false);
+        setBusy("loginButton", false);
       }
     });
 
-    document.getElementById("resetPassword").addEventListener("click", async () => {
-      clearNotice();
-      if (!supabaseClient) return showNotice("Supabase is not ready yet. Reload and try again.", "error");
+    $("resetForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
 
-      const email = document.getElementById("loginEmail").value.trim();
-      if (!email) return showNotice("Enter your email address in the login form first.", "error");
+      if (!client || !authReady) {
+        showMessage("The account service is still loading. Please try again.", "error");
+        return;
+      }
+
+      const email = $("resetEmail").value.trim();
+      setBusy("resetButton", true, "Sending link...");
 
       try {
-        const redirectTo = window.location.origin + window.location.pathname;
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+        const { error } = await client.auth.resetPasswordForEmail(email, {
+          redirectTo: SITE_URL
+        });
+
         if (error) throw error;
-        showNotice("If the account exists, password recovery instructions will be sent by email.", "success");
+
+        showMessage(
+          "If an account can receive a recovery email at that address, a password-reset link will be sent. Check your inbox and Spam folder.",
+          "success"
+        );
+        $("resetForm").reset();
       } catch (error) {
-        showNotice(friendlyError(error), "error");
+        showMessage(
+          "We could not request a reset link: " + (error.message || "Please try again."),
+          "error"
+        );
+      } finally {
+        setBusy("resetButton", false);
       }
     });
 
-    document.getElementById("logoutButton").addEventListener("click", async () => {
-      clearNotice();
+    $("recoveryForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
+
+      if (!client || !authReady) {
+        showMessage("The account service is still loading. Please try again.", "error");
+        return;
+      }
+
+      const password = $("newPassword").value;
+      if (password.length < 8) {
+        showMessage("Use a password with at least 8 characters.", "error");
+        return;
+      }
+
       try {
-        const { error } = await supabaseClient.auth.signOut();
+        const { error } = await client.auth.updateUser({ password });
         if (error) throw error;
-        showSignedOut();
-        switchForm("login");
-        showNotice("You have been logged out.", "success");
+
+        recoveryMode = false;
+        $("recoveryPanel").classList.add("hidden");
+        $("recoveryForm").reset();
+        showMessage("Your password has been updated.", "success");
       } catch (error) {
-        showNotice(friendlyError(error), "error");
+        showMessage(
+          "Password update failed: " + (error.message || "Request a new recovery link and try again."),
+          "error"
+        );
       }
     });
 
-    init();
+    $("logoutButton").addEventListener("click", async () => {
+      if (!client) return;
+
+      $("logoutButton").disabled = true;
+      try {
+        const { error } = await client.auth.signOut();
+        if (error) throw error;
+      } catch (error) {
+        showMessage("Sign-out failed: " + (error.message || "Please try again."), "error");
+      } finally {
+        $("logoutButton").disabled = false;
+      }
+    });
+
+    // Show the recovery form for a recovery link, but keep account state managed by Supabase.
+    initializeAuth();
   </script>
 </body>
 </html>
