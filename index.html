@@ -16,10 +16,10 @@
   <style>
     :root {
       --navy: #0b1735;
-      --navy-dark: #060d20;
-      --navy-light: #132653;
+      --navy2: #132653;
+      --dark: #060d20;
       --gold: #d4af37;
-      --gold-light: #f2d675;
+      --gold2: #f2d675;
       --white: #ffffff;
       --light: #f5f7fb;
       --text: #172033;
@@ -28,7 +28,7 @@
       --blue: #1d4ed8;
       --green: #10b981;
       --red: #dc2626;
-      --shadow: 0 10px 30px rgba(11, 23, 53, 0.10);
+      --shadow: 0 8px 25px rgba(11,23,53,.10);
       --radius: 16px;
     }
 
@@ -40,6 +40,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 80px;
     }
 
     body {
@@ -50,9 +51,13 @@
       overflow-x: hidden;
     }
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
     a {
-      color: inherit;
       text-decoration: none;
+      color: inherit;
     }
 
     button,
@@ -61,14 +66,13 @@
       font: inherit;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
+    button {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* =========================
+    /* ==============================
        HEADER
-    ========================== */
+    ============================== */
 
     header {
       position: sticky;
@@ -76,26 +80,26 @@
       z-index: 1000;
       background: var(--navy);
       border-bottom: 2px solid var(--gold);
-      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 15px rgba(0,0,0,.18);
     }
 
     .nav-container {
       width: min(1200px, 94%);
+      min-height: 70px;
       margin: auto;
-      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 15px;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: var(--white);
-      font-size: 1.35rem;
+      gap: 9px;
+      color: white;
       font-weight: 800;
+      font-size: 1.3rem;
       white-space: nowrap;
     }
 
@@ -109,7 +113,6 @@
       justify-content: center;
       color: var(--gold);
       font-weight: 900;
-      font-size: 1.1rem;
     }
 
     .logo span {
@@ -119,59 +122,65 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .nav-links a {
-      color: var(--white);
-      padding: 10px 13px;
+      color: white;
+      padding: 9px 11px;
       border-radius: 8px;
       font-weight: 600;
-      transition: 0.2s ease;
+      transition: .2s;
     }
 
-    .nav-links a:hover {
-      background: rgba(212, 175, 55, 0.15);
-      color: var(--gold-light);
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background: rgba(212,175,55,.16);
+      color: var(--gold2);
     }
 
     .nav-auth {
       display: flex;
-      gap: 8px;
-      align-items: center;
+      gap: 7px;
     }
 
     .menu-btn {
       display: none;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
       width: 42px;
       height: 42px;
+      border: 1px solid rgba(255,255,255,.5);
       border-radius: 8px;
+      background: transparent;
+      color: white;
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 22px;
     }
 
-    /* =========================
+    /* ==============================
        BUTTONS
-    ========================== */
+    ============================== */
 
     .btn {
       border: none;
-      cursor: pointer;
       border-radius: 9px;
-      padding: 11px 17px;
+      padding: 11px 16px;
+      cursor: pointer;
       font-weight: 700;
-      transition: 0.2s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 7px;
+      transition: .2s;
+      min-height: 44px;
+      -webkit-appearance: none;
     }
 
     .btn:hover {
       transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: scale(.98);
     }
 
     .btn-primary {
@@ -180,18 +189,18 @@
     }
 
     .btn-primary:hover {
-      background: var(--gold-light);
+      background: var(--gold2);
     }
 
     .btn-secondary {
       background: var(--navy);
-      color: var(--white);
+      color: white;
     }
 
     .btn-outline {
       background: transparent;
-      border: 1px solid var(--gold);
       color: var(--gold);
+      border: 1px solid var(--gold);
     }
 
     .btn-danger {
@@ -199,16 +208,19 @@
       color: white;
     }
 
-    /* =========================
+    /* ==============================
        HERO
-    ========================== */
+    ============================== */
 
     .hero {
-      background:
-        linear-gradient(135deg, rgba(11,23,53,.98), rgba(19,38,83,.94));
+      background: linear-gradient(
+        135deg,
+        var(--navy),
+        var(--navy2)
+      );
       color: white;
-      padding: 85px 20px;
       text-align: center;
+      padding: 85px 20px;
     }
 
     .hero-inner {
@@ -217,7 +229,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.1rem, 5vw, 4rem);
+      font-size: clamp(2.1rem, 6vw, 4rem);
       line-height: 1.1;
       margin-bottom: 20px;
     }
@@ -229,8 +241,8 @@
     .hero p {
       max-width: 760px;
       margin: auto;
-      font-size: clamp(1rem, 2vw, 1.2rem);
       color: #e5e9f2;
+      font-size: clamp(1rem, 2vw, 1.2rem);
     }
 
     .hero-actions {
@@ -241,9 +253,9 @@
       gap: 12px;
     }
 
-    /* =========================
-       GENERAL SECTIONS
-    ========================== */
+    /* ==============================
+       SECTIONS
+    ============================== */
 
     section {
       padding: 70px 20px;
@@ -256,24 +268,24 @@
 
     .section-heading {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 38px;
     }
 
     .section-heading h2 {
       color: var(--navy);
       font-size: clamp(1.7rem, 4vw, 2.5rem);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .section-heading p {
-      color: var(--muted);
-      max-width: 700px;
+      max-width: 720px;
       margin: auto;
+      color: var(--muted);
     }
 
-    /* =========================
+    /* ==============================
        STATS
-    ========================== */
+    ============================== */
 
     .stats {
       background: white;
@@ -282,31 +294,32 @@
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
     .stat {
-      text-align: center;
-      padding: 25px 15px;
+      background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: white;
       box-shadow: var(--shadow);
+      text-align: center;
+      padding: 24px 12px;
     }
 
     .stat strong {
       display: block;
       color: var(--navy);
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
     }
 
     .stat span {
       color: var(--muted);
     }
 
-    /* =========================
+    /* ==============================
        OPPORTUNITIES
-    ========================== */
+    ============================== */
 
     #opportunities {
       background: var(--light);
@@ -314,22 +327,20 @@
 
     .filters {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
       justify-content: center;
-      margin-bottom: 30px;
+      margin-bottom: 18px;
     }
 
     .search-box {
-      width: min(450px, 100%);
-      position: relative;
+      width: min(600px, 100%);
     }
 
     .search-box input {
       width: 100%;
-      padding: 13px 16px;
+      min-height: 48px;
       border: 1px solid var(--border);
       border-radius: 10px;
+      padding: 12px 15px;
       outline: none;
       background: white;
     }
@@ -342,18 +353,20 @@
     .filter-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
       justify-content: center;
+      gap: 8px;
+      margin-bottom: 30px;
     }
 
     .filter-btn {
-      padding: 9px 13px;
+      min-height: 42px;
+      padding: 8px 13px;
       border-radius: 8px;
       border: 1px solid var(--border);
       background: white;
+      color: var(--navy);
       cursor: pointer;
       font-weight: 600;
-      color: var(--navy);
     }
 
     .filter-btn.active,
@@ -366,65 +379,64 @@
     .opportunity-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-      align-items: stretch;
+      gap: 20px;
     }
 
     .opportunity-card {
+      min-width: 0;
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 25px;
+      padding: 24px;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
       height: 100%;
-      transition: 0.2s ease;
+      transition: .2s;
     }
 
     .opportunity-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       border-color: var(--gold);
     }
 
     .opportunity-icon {
       width: 50px;
       height: 50px;
-      border-radius: 12px;
       background: var(--navy);
       color: var(--gold);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: 17px;
+      font-weight: 800;
+      margin-bottom: 15px;
     }
 
     .opportunity-card h3 {
       color: var(--navy);
       margin-bottom: 9px;
-      font-size: 1.2rem;
     }
 
     .opportunity-card p {
       color: var(--muted);
-      margin-bottom: 18px;
+      margin-bottom: 15px;
       flex: 1;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 18px;
+      gap: 5px;
+      margin-bottom: 17px;
     }
 
     .tag {
       background: #eef2ff;
       color: var(--navy);
-      padding: 5px 8px;
       border-radius: 20px;
-      font-size: .78rem;
+      padding: 4px 8px;
+      font-size: .76rem;
       font-weight: 700;
     }
 
@@ -434,15 +446,15 @@
 
     .no-results {
       display: none;
-      text-align: center;
-      color: var(--muted);
-      padding: 30px;
       grid-column: 1 / -1;
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
     }
 
-    /* =========================
-       HOW IT WORKS
-    ========================== */
+    /* ==============================
+       WORK
+    ============================== */
 
     #work {
       background: white;
@@ -451,25 +463,26 @@
     .work-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 22px;
+      gap: 20px;
     }
 
     .work-card {
-      padding: 25px;
+      background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: white;
       box-shadow: var(--shadow);
       text-align: center;
+      padding: 25px 20px;
+      min-width: 0;
     }
 
     .step-number {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 17px;
-      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 15px;
       background: var(--navy);
       color: var(--gold);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -484,12 +497,11 @@
 
     .work-card p {
       color: var(--muted);
-      font-size: .95rem;
     }
 
-    /* =========================
+    /* ==============================
        REQUIREMENTS
-    ========================== */
+    ============================== */
 
     #requirements {
       background: var(--light);
@@ -498,20 +510,20 @@
     .requirements-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      gap: 20px;
     }
 
     .requirement-card {
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px;
       box-shadow: var(--shadow);
+      padding: 25px;
     }
 
     .requirement-card h3 {
       color: var(--navy);
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .requirement-card ul {
@@ -520,31 +532,31 @@
     }
 
     .requirement-card li {
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
-    /* =========================
-       MEMBER AREA
-    ========================== */
+    /* ==============================
+       MEMBERS
+    ============================== */
 
     #members {
       background: white;
     }
 
     .auth-panel {
-      max-width: 520px;
+      width: min(520px, 100%);
       margin: auto;
       background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 30px;
       box-shadow: var(--shadow);
+      padding: 28px;
     }
 
     .auth-panel h3 {
       color: var(--navy);
-      margin-bottom: 20px;
       text-align: center;
+      margin-bottom: 20px;
     }
 
     .form-group {
@@ -553,31 +565,28 @@
 
     .form-group label {
       display: block;
-      margin-bottom: 6px;
-      font-weight: 700;
       color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
-    .form-group input,
-    .form-group select {
+    .form-group input {
       width: 100%;
-      padding: 12px 13px;
+      min-height: 46px;
+      padding: 11px 13px;
       border: 1px solid var(--border);
       border-radius: 9px;
       outline: none;
-      background: white;
     }
 
-    .form-group input:focus,
-    .form-group select:focus {
+    .form-group input:focus {
       border-color: var(--gold);
     }
 
     .auth-actions {
       display: flex;
+      gap: 9px;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
     }
 
     .auth-actions .btn {
@@ -585,10 +594,10 @@
     }
 
     .auth-message {
-      margin-top: 15px;
-      padding: 10px 12px;
-      border-radius: 8px;
       display: none;
+      margin-top: 15px;
+      padding: 11px;
+      border-radius: 8px;
       font-size: .9rem;
     }
 
@@ -613,15 +622,15 @@
     }
 
     .member-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 25px;
-      padding: 20px;
       background: var(--navy);
       color: white;
       border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .member-header h3 {
@@ -632,12 +641,11 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 25px;
-      background: white;
     }
 
     .admin-panel {
       display: none;
-      margin-top: 25px;
+      margin-top: 20px;
       border: 2px solid var(--gold);
       border-radius: var(--radius);
       padding: 25px;
@@ -648,9 +656,9 @@
       display: block;
     }
 
-    /* =========================
+    /* ==============================
        CONTACT
-    ========================== */
+    ============================== */
 
     #contact {
       background: var(--navy);
@@ -668,54 +676,54 @@
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 18px;
     }
 
     .contact-card {
+      min-width: 0;
       text-align: center;
-      padding: 25px 18px;
+      padding: 25px 15px;
       border: 1px solid rgba(212,175,55,.35);
       border-radius: var(--radius);
       background: rgba(255,255,255,.04);
     }
 
     .contact-icon {
-      font-size: 1.7rem;
       color: var(--gold);
-      margin-bottom: 10px;
+      font-size: 1.7rem;
+      margin-bottom: 8px;
     }
 
     .contact-card h3 {
       color: var(--gold);
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
-    .contact-card p,
-    .contact-card a {
+    .contact-card a,
+    .contact-card p {
       color: #e6eaf2;
-      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .contact-card a:hover {
-      color: var(--gold-light);
+      color: var(--gold2);
     }
 
-    /* =========================
+    /* ==============================
        FOOTER
-    ========================== */
+    ============================== */
 
     footer {
-      background: var(--navy-dark);
+      background: var(--dark);
       color: #cfd6e4;
-      padding: 35px 20px;
       text-align: center;
+      padding: 35px 20px;
     }
 
     .footer-brand {
       color: var(--gold);
       font-size: 1.3rem;
       font-weight: 800;
-      margin-bottom: 8px;
     }
 
     .footer-links {
@@ -730,692 +738,10 @@
       color: var(--gold);
     }
 
-    .footer-social {
-      margin: 15px 0;
-    }
-
     .footer-social a {
       color: var(--gold);
       font-weight: 700;
     }
 
-    /* =========================
-       MODAL
-    ========================== */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 2000;
-    }
-
-    .modal.visible {
-      display: flex;
-    }
-
-    .modal-content {
-      width: min(520px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: var(--radius);
-      padding: 28px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      right: 15px;
-      top: 12px;
-      background: none;
-      border: none;
-      font-size: 1.6rem;
-      cursor: pointer;
-      color: var(--navy);
-    }
-
-    .modal h2 {
-      color: var(--navy);
-      margin-bottom: 20px;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1000px) {
-      .opportunity-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .work-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 850px) {
-      .nav-container {
-        min-height: 64px;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-
-      .nav-links {
-        display: none;
-        position: absolute;
-        left: 3%;
-        right: 3%;
-        top: 68px;
-        background: var(--navy);
-        border: 1px solid rgba(212,175,55,.35);
-        border-radius: 12px;
-        padding: 10px;
-        flex-direction: column;
-        align-items: stretch;
-        box-shadow: 0 15px 35px rgba(0,0,0,.25);
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links a {
-        width: 100%;
-      }
-
-      .nav-auth {
-        display: none;
-      }
-
-      .hero {
-        padding: 65px 18px;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .requirements-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 620px) {
-      section {
-        padding: 50px 15px;
-      }
-
-      .hero {
-        padding: 55px 15px;
-      }
-
-      .hero h1 {
-        font-size: 2.15rem;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .stat {
-        padding: 18px 10px;
-      }
-
-      .stat strong {
-        font-size: 1.5rem;
-      }
-
-      .opportunity-grid,
-      .work-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      .opportunity-card,
-      .work-card {
-        padding: 20px;
-      }
-
-      .filters {
-        align-items: stretch;
-      }
-
-      .search-box {
-        width: 100%;
-      }
-
-      .filter-buttons {
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .filter-btn {
-        width: 100%;
-      }
-
-      .member-header {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-
-      .auth-panel {
-        padding: 20px 16px;
-      }
-
-      .auth-actions {
-        flex-direction: column;
-      }
-
-      .auth-actions .btn {
-        width: 100%;
-      }
-
-      .contact-card {
-        padding: 22px 15px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .logo {
-        font-size: 1.05rem;
-      }
-
-      .logo-mark {
-        width: 36px;
-        height: 36px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-buttons {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- =========================
-       HEADER
-  ========================== -->
-
-  <header>
-    <div class="nav-container">
-
-      <a href="#home" class="logo">
-        <div class="logo-mark">PG</div>
-        <div>Prime <span>Global</span></div>
-      </a>
-
-      <nav class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#opportunities">Opportunities</a>
-        <a href="#work">How It Works</a>
-        <a href="#requirements">Requirements</a>
-        <a href="#members">Members</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="nav-auth">
-        <button class="btn btn-primary" id="loginNavButton">
-          Login
-        </button>
-
-        <button class="btn btn-outline" id="registerNavButton">
-          Register
-        </button>
-      </div>
-
-      <button
-        class="menu-btn"
-        id="menuButton"
-        aria-label="Open menu"
-      >
-        ☰
-      </button>
-
-    </div>
-  </header>
-
-
-  <!-- =========================
-       HERO
-  ========================== -->
-
-  <main>
-
-    <section class="hero" id="home">
-
-      <div class="hero-inner">
-
-        <h1>
-          Discover
-          <span>Worldwide</span>
-          Online Opportunities
-        </h1>
-
-        <p>
-          Prime Global connects people with legitimate digital,
-          remote and online work opportunities from around the world.
-        </p>
-
-        <div class="hero-actions">
-
-          <a
-            href="#opportunities"
-            class="btn btn-primary"
-          >
-            Explore Opportunities
-          </a>
-
-          <button
-            class="btn btn-outline"
-            id="heroRegisterButton"
-          >
-            Create Account
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         STATS
-    ========================== -->
-
-    <section class="stats">
-
-      <div class="section-container">
-
-        <div class="stats-grid">
-
-          <div class="stat">
-            <strong>Worldwide</strong>
-            <span>Global Reach</span>
-          </div>
-
-          <div class="stat">
-            <strong>Remote</strong>
-            <span>Work Opportunities</span>
-          </div>
-
-          <div class="stat">
-            <strong>Digital</strong>
-            <span>Online Skills</span>
-          </div>
-
-          <div class="stat">
-            <strong>Free</strong>
-            <span>Opportunity Discovery</span>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         OPPORTUNITIES
-    ========================== -->
-
-    <section id="opportunities">
-
-      <div class="section-container">
-
-        <div class="section-heading">
-
-          <h2>Online Opportunities</h2>
-
-          <p>
-            Explore different categories of remote and digital
-            work opportunities available globally.
-          </p>
-
-        </div>
-
-
-        <div class="filters">
-
-          <div class="search-box">
-
-            <input
-              type="search"
-              id="opportunitySearch"
-              placeholder="Search opportunities..."
-              aria-label="Search opportunities"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="filter-buttons"
-          id="filterButtons"
-        >
-
-          <button
-            class="filter-btn active"
-            data-filter="all"
-          >
-            All
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="ai"
-          >
-            AI Training
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="annotation"
-          >
-            Data Annotation
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="voice"
-          >
-            Voice Recording
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="transcription"
-          >
-            Transcription
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="translation"
-          >
-            Translation
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="chat"
-          >
-            Chat Support
-          </button>
-
-          <button
-            class="filter-btn"
-            data-filter="other"
-          >
-            Other Jobs
-          </button>
-
-        </div>
-
-
-        <br>
-
-
-        <div
-          class="opportunity-grid"
-          id="opportunityGrid"
-        >
-
-          <article
-            class="opportunity-card"
-            data-category="ai"
-            data-search="AI training AI evaluator artificial intelligence remote"
-          >
-
-            <div class="opportunity-icon">AI</div>
-
-            <h3>AI Training & Evaluation</h3>
-
-            <p>
-              Help improve artificial intelligence systems by
-              evaluating responses, reviewing content and completing
-              AI-related tasks.
-            </p>
-
-            <div class="tags">
-              <span class="tag">AI</span>
-              <span class="tag">Remote</span>
-              <span class="tag">Evaluation</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="AI Training & Evaluation"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="annotation"
-            data-search="data annotation labeling image text AI remote data"
-          >
-
-            <div class="opportunity-icon">DA</div>
-
-            <h3>Data Annotation</h3>
-
-            <p>
-              Label, classify and review datasets used to train
-              machine-learning and artificial-intelligence systems.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Data</span>
-              <span class="tag">AI</span>
-              <span class="tag">Annotation</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Data Annotation"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="voice"
-            data-search="voice recording audio recording speech voice remote"
-          >
-
-            <div class="opportunity-icon">VR</div>
-
-            <h3>Voice Recording</h3>
-
-            <p>
-              Participate in voice and speech-data projects that
-              help develop and improve modern AI voice technologies.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Voice</span>
-              <span class="tag">Audio</span>
-              <span class="tag">AI</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Voice Recording"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="transcription"
-            data-search="transcription data entry typing remote online"
-          >
-
-            <div class="opportunity-icon">TE</div>
-
-            <h3>Transcription & Data Entry</h3>
-
-            <p>
-              Convert audio and information into accurate text,
-              organize digital records and complete data-entry tasks.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Typing</span>
-              <span class="tag">Data Entry</span>
-              <span class="tag">Remote</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Transcription & Data Entry"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="translation"
-            data-search="translation proofreading languages writing remote"
-          >
-
-            <div class="opportunity-icon">TP</div>
-
-            <h3>Translation & Proofreading</h3>
-
-            <p>
-              Use language skills to translate, review and improve
-              written content for digital projects.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Languages</span>
-              <span class="tag">Writing</span>
-              <span class="tag">Editing</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Translation & Proofreading"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="chat"
-            data-search="chat support customer support online assistant remote"
-          >
-
-            <div class="opportunity-icon">CS</div>
-
-            <h3>Chat Support</h3>
-
-            <p>
-              Provide customer assistance through online chat,
-              messaging and digital support channels.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Support</span>
-              <span class="tag">Chat</span>
-              <span class="tag">Remote</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Chat Support"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <article
-            class="opportunity-card"
-            data-category="other"
-            data-search="online jobs freelance remote digital other opportunities"
-          >
-
-            <div class="opportunity-icon">OG</div>
-
-            <h3>Other Remote Jobs</h3>
-
-            <p>
-              Discover additional online and remote opportunities
-              including freelance, research and digital tasks.
-            </p>
-
-            <div class="tags">
-              <span class="tag">Freelance</span>
-              <span class="tag">Online</span>
-              <span class="tag">Global</span>
-            </div>
-
-            <button
-              class="btn btn-secondary opportunity-details"
-              data-title="Other Remote Jobs"
-            >
-              View Details
-            </button>
-
-          </article>
-
-
-          <div
-            class="no-results"
-            id="noResults"
-          >
-            No opportunities match your search.
-          </div>
-
-  </div>
+    /* ==============================
+      
