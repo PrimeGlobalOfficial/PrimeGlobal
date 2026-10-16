@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AI Training & Evaluation | Prime Global</title>
+  <meta name="description" content="Explore AI training and evaluation opportunities through Prime Global. Learn about requirements, assessments, equipment and application steps.">
+
+  <style>
+    :root {
+      --navy: #071a3d;
+      --navy2: #102a56;
+      --blue: #1d4ed8;
+      --gold: #f5c542;
+      --gold-light: #fff8d8;
+      --white: #ffffff;
+      --light: #f8fafc;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(7, 26, 61, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--navy);
+      color: var(--white);
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .header-inner {
+      max-width: 1150px;
+      margin: auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .brand span {
+      display: block;
+      font-size: 12px;
+      color: #dbeafe;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: white;
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .hero .label {
+      display: inline-block;
+      background: rgba(245, 197, 66, 0.15);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: auto;
+      color: #dbeafe;
+      font-size: 17px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      padding: 45px 20px;
+    }
+
+    .section {
+      background: white;
+      padding: 28px;
+      margin-bottom: 25px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      color: var(--navy);
+      margin-bottom: 15px;
+      font-size: 25px;
+    }
+
+    h3 {
+      color: var(--navy2);
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .notice {
+      background: var(--gold-light);
+      border-left: 5px solid var(--gold);
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+      border: 2px solid transparent;
+    }
+
+    .primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .primary:hover {
+      background: var(--navy2);
+    }
+
+    .secondary {
+      background: white;
+      color: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .secondary:hover {
+      background: var(--navy);
+      color: white;
+    }
+
+    .official {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    footer {
+      background: var(--navy);
+      color: #dbeafe;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 20px;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        display: none;
+      }
+
+      .header-inner {
+        padding: 14px 16px;
+      }
+
+      .hero {
+        padding: 55px 18px;
+      }
+
+      .container {
+        padding: 30px 15px;
+      }
+
+      .section {
+        padding: 22px 18px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .button {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a class="brand" href="index.html">
+      <div class="logo">PG</div>
+      <div>
+        <strong>PRIME GLOBAL</strong>
+        <span>Opportunities Worldwide</span>
+      </div>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="index.html#opportunities">Opportunities</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="label">PRIME GLOBAL OPPORTUNITY LIBRARY</div>
+
+  <h1>AI Training &amp; Evaluation</h1>
+
+  <p>
+    Explore opportunities involving the evaluation, improvement and training
+    of artificial intelligence systems.
+  </p>
+</section>
+
+<main class="container">
+
+  <section class="section">
+    <h2>What Is AI Training &amp; Evaluation?</h2>
+
+    <p>
+      AI training and evaluation work involves helping improve artificial
+      intelligence systems by reviewing, rating, comparing or creating data
+      that can be used to make AI systems more accurate and useful.
+    </p>
+
+    <p>
+      Depending on the project, workers may evaluate AI-generated answers,
+      review text or images, compare responses, check search results,
+      classify information or provide human feedback.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>What You May Need</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Language Skills</h3>
+        <p>
+          Strong reading and writing ability in the required language.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Attention to Detail</h3>
+        <p>
+          Ability to follow instructions carefully and identify differences
+          or errors.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Internet Connection</h3>
+        <p>
+          A reliable internet connection is normally required for online
+          projects.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Device</h3>
+        <p>
+          Many projects require a computer, although some opportunities may
+          support mobile devices.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Typical Assessment Process</h2>
+
+    <ol>
+      <li>Create an account with the relevant
