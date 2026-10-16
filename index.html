@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Prime Global | Opportunities Worldwide</title>
-  <meta name="description" content="Prime Global connects people with information about digital work and global remote opportunities.">
+
+  <meta
+    name="description"
+    content="Prime Global connects people with information about digital work and global remote opportunities worldwide."
+  >
 
   <style>
     :root {
       --navy: #071a3d;
-      --navy-light: #102a56;
+      --navy-2: #102a56;
       --blue: #1d4ed8;
       --gold: #f5c542;
+      --gold-light: #fff8d8;
       --white: #ffffff;
-      --light: #f8fafc;
+      --light: #f7f9fc;
       --text: #172033;
       --muted: #64748b;
       --border: #e2e8f0;
-      --green: #10b981;
-      --red: #dc2626;
-      --shadow: 0 8px 25px rgba(7, 26, 61, 0.10);
-      --radius: 16px;
+      --shadow: 0 8px 25px rgba(7, 26, 61, 0.08);
     }
 
     * {
@@ -42,18 +44,8 @@
     }
 
     a {
-      color: inherit;
       text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
+      color: inherit;
     }
 
     .container {
@@ -61,18 +53,18 @@
       margin: auto;
     }
 
-    /* ================= HEADER ================= */
+    /* HEADER */
 
     header {
+      background: var(--navy);
+      color: white;
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: var(--navy);
-      color: var(--white);
-      box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 15px rgba(0,0,0,.15);
     }
 
-    .nav-container {
+    .header-inner {
       min-height: 72px;
       display: flex;
       align-items: center;
@@ -84,35 +76,28 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
     }
 
     .logo {
-      width: 44px;
-      height: 44px;
+      width: 45px;
+      height: 45px;
       border: 2px solid var(--gold);
       border-radius: 10px;
       display: grid;
       place-items: center;
       color: var(--gold);
       font-weight: 900;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .brand-text {
-      line-height: 1.15;
+      font-size: 19px;
     }
 
     .brand-name {
-      font-size: 19px;
       font-weight: 800;
+      font-size: 19px;
     }
 
     .brand-tagline {
-      color: #dbe4f2;
+      color: #d8e1ef;
       font-size: 11px;
-      margin-top: 3px;
     }
 
     .desktop-nav {
@@ -125,93 +110,68 @@
       padding: 9px 10px;
       border-radius: 8px;
       font-size: 14px;
-      transition: 0.2s;
     }
 
     .desktop-nav a:hover {
-      background: rgba(245,197,66,0.14);
       color: var(--gold);
+      background: rgba(245,197,66,.12);
     }
 
-    .nav-buttons {
-      display: flex;
-      gap: 8px;
-      margin-left: 8px;
-    }
-
-    .btn-small {
-      border: 1px solid var(--gold);
-      background: var(--gold);
-      color: var(--navy);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    .btn-small.secondary {
-      background: transparent;
-      color: var(--white);
-    }
-
-    .menu-btn {
+    .mobile-button {
       display: none;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: transparent;
-      color: white;
       width: 44px;
       height: 44px;
-      border-radius: 9px;
+      border: 1px solid rgba(255,255,255,.3);
+      background: transparent;
+      color: white;
+      border-radius: 8px;
       font-size: 23px;
     }
 
-    .mobile-menu {
+    .mobile-nav {
       display: none;
-      background: var(--navy-light);
-      border-top: 1px solid rgba(255,255,255,0.12);
       padding: 10px 4%;
+      background: var(--navy-2);
     }
 
-    .mobile-menu.open {
+    .mobile-nav.open {
       display: block;
     }
 
-    .mobile-menu a,
-    .mobile-menu button {
-      width: 100%;
+    .mobile-nav a {
       display: block;
-      text-align: left;
-      padding: 12px;
       color: white;
-      background: transparent;
-      border: none;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 7px;
     }
 
-    .mobile-menu a:hover,
-    .mobile-menu button:hover {
-      background: rgba(245,197,66,0.12);
+    .mobile-nav a:hover {
       color: var(--gold);
+      background: rgba(245,197,66,.1);
     }
 
-    /* ================= HERO ================= */
+    /* HERO */
 
     .hero {
       background:
-        linear-gradient(135deg, rgba(7,26,61,0.97), rgba(16,42,86,0.94));
+        linear-gradient(
+          135deg,
+          rgba(7,26,61,.98),
+          rgba(16,42,86,.95)
+        );
       color: white;
-      padding: 85px 0 75px;
+      padding: 90px 0 80px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
+      grid-template-columns: 1.25fr .75fr;
       gap: 45px;
       align-items: center;
     }
 
     .hero h1 {
-      font-size: clamp(35px, 6vw, 62px);
+      font-size: clamp(38px, 6vw, 62px);
       line-height: 1.05;
       margin-bottom: 20px;
     }
@@ -233,39 +193,33 @@
       gap: 12px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 11px 18px;
-      border-radius: 10px;
-      border: 1px solid transparent;
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 9px;
       font-weight: 700;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: .2s;
     }
 
-    .btn:hover {
+    .button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 7px 18px rgba(0,0,0,0.12);
     }
 
-    .btn-primary {
+    .button-gold {
       background: var(--gold);
       color: var(--navy);
     }
 
-    .btn-outline {
-      background: transparent;
-      border-color: rgba(255,255,255,0.5);
+    .button-outline {
+      border: 1px solid rgba(255,255,255,.55);
       color: white;
     }
 
     .hero-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
       padding: 28px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.07);
+      border-radius: 18px;
     }
 
     .hero-card h3 {
@@ -275,69 +229,36 @@
 
     .hero-card li {
       list-style: none;
-      margin: 12px 0;
-      color: #e4ebf5;
+      margin: 11px 0;
+      color: #e3eaf4;
     }
 
     .hero-card li::before {
       content: "✓";
       color: var(--gold);
+      margin-right: 9px;
       font-weight: bold;
-      margin-right: 10px;
     }
 
-    /* ================= STATS ================= */
-
-    .stats {
-      margin-top: -28px;
-      position: relative;
-      z-index: 5;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-
-    .stat {
-      background: white;
-      border-radius: 14px;
-      padding: 22px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--navy);
-      font-size: 26px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* ================= SECTIONS ================= */
+    /* SECTIONS */
 
     section {
-      padding: 80px 0;
+      padding: 78px 0;
     }
 
-    .section-heading {
+    .heading {
       text-align: center;
       max-width: 720px;
-      margin: 0 auto 40px;
+      margin: 0 auto 42px;
     }
 
-    .section-heading h2 {
+    .heading h2 {
       color: var(--navy);
-      font-size: clamp(27px, 4vw, 38px);
+      font-size: clamp(28px, 4vw, 39px);
       margin-bottom: 10px;
     }
 
-    .section-heading p {
+    .heading p {
       color: var(--muted);
     }
 
@@ -345,30 +266,1001 @@
       width: 55px;
       height: 4px;
       background: var(--gold);
-      border-radius: 10px;
       margin: 12px auto;
+      border-radius: 10px;
     }
 
-    /* ================= ABOUT ================= */
+    /* ABOUT */
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 25px;
+      gap: 22px;
     }
 
-    .info-card {
+    .card {
       background: white;
-      padding: 28px;
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 16px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
 
-    .info-card h3 {
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    /* OPPORTUNITIES */
+
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .opportunity {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .opportunity-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--gold-light);
+      color: var(--navy);
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .opportunity h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .opportunity p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .learn {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .step {
+      text-align: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--gold);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* REQUIREMENTS */
+
+    .requirements {
+      background: white;
+    }
+
+    .requirement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .requirement {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .requirement h3 {
       color: var(--navy);
       margin-bottom: 12px;
     }
 
-    .info-card p {
-      color: var
+    .requirement li {
+      color: var(--muted);
+      margin-left: 20px;
+      margin-bottom: 6px;
+    }
+
+    /* PAYMENTS */
+
+    .payment-box {
+      background: var(--navy);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .payment-box h2 {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .payment-box p {
+      color: #dbe4f2;
+      max-width: 760px;
+      margin: auto;
+    }
+
+    /* MEMBER */
+
+    .member-section {
+      background: #eef3fa;
+    }
+
+    .member-box {
+      max-width: 750px;
+      margin: auto;
+      text-align: center;
+      background: white;
+      border-radius: 18px;
+      padding: 38px;
+      box-shadow: var(--shadow);
+    }
+
+    .member-box h2 {
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .member-box p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* CONTACT */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      word-break: break-word;
+    }
+
+    .contact-card a {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--navy);
+      color: white;
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner p {
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #dbe4f2;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px) {
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-button {
+        display: block;
+      }
+
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .opportunity-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .requirement-grid,
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .brand-tagline {
+        display: none;
+      }
+
+      .hero {
+        padding: 62px 0;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .opportunity-grid,
+      .steps,
+      .requirement-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .payment-box {
+        padding: 28px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="container header-inner">
+
+      <a href="index.html" class="brand">
+        <div class="logo">PG</div>
+
+        <div>
+          <div class="brand-name">PRIME GLOBAL</div>
+          <div class="brand-tagline">
+            Opportunities Worldwide
+          </div>
+        </div>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="#opportunities">Opportunities</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#payments">Payments</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button
+        class="mobile-button"
+        id="mobileButton"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav">
+
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#opportunities">Opportunities</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#payments">Payments</a>
+      <a href="#contact">Contact</a>
+
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="container hero-grid">
+
+        <div>
+
+          <h1>
+            Connecting People to
+            <span>Global Opportunities</span>
+          </h1>
+
+          <p>
+            Prime Global connects people with information about
+            digital work and global remote opportunities.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a
+              href="#opportunities"
+              class="button button-gold"
+            >
+              Explore Opportunities
+            </a>
+
+            <a
+              href="about.html"
+              class="button button-outline"
+            >
+              Learn About Us
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="hero-card">
+
+          <h3>Explore Digital Work</h3>
+
+          <ul>
+            <li>AI Training & Evaluation</li>
+            <li>Data Annotation</li>
+            <li>Voice Recording</li>
+            <li>Transcription & Data Entry</li>
+            <li>Translation & Proofreading</li>
+            <li>Chat Support</li>
+            <li>Other Remote Jobs</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section id="about-preview">
+
+      <div class="container">
+
+        <div class="heading">
+
+          <h2>About Prime Global</h2>
+
+          <div class="gold-line"></div>
+
+          <p>
+            A platform focused on connecting people with
+            information about global digital work.
+          </p>
+
+        </div>
+
+        <div class="about-grid">
+
+          <div class="card">
+
+            <h3>Our Purpose</h3>
+
+            <p>
+              Prime Global provides information about digital
+              work and remote opportunities worldwide, helping
+              people understand available opportunities and
+              their general requirements.
+            </p>
+
+          </div>
+
+          <div class="card">
+
+            <h3>Our Focus</h3>
+
+            <p>
+              We focus on AI-related work, data annotation,
+              voice recording, transcription, translation,
+              proofreading, chat support and other remote
+              digital opportunities.
+            </p>
+
+            <br>
+
+            <a
+              href="about.html"
+              class="learn"
+            >
+              Read More About Prime Global →
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- OPPORTUNITIES -->
+
+    <section id="opportunities">
+
+      <div class="container">
+
+        <div class="heading">
+
+          <h2>Opportunities</h2>
+
+          <div class="gold-line"></div>
+
+          <p>
+            Explore the types of digital and remote work
+            covered by Prime Global.
+          </p>
+
+        </div>
+
+        <div class="opportunity-grid">
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">AI</div>
+
+            <h3>AI Training & Evaluation</h3>
+
+            <p>
+              Opportunities involving AI response evaluation,
+              content review, testing and structured feedback.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">DA</div>
+
+            <h3>Data Annotation</h3>
+
+            <p>
+              Labeling, classifying and reviewing data used
+              for machine-learning systems.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">VR</div>
+
+            <h3>Voice Recording</h3>
+
+            <p>
+              Audio recording projects for language,
+              speech and AI-related applications.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">TD</div>
+
+            <h3>Transcription & Data Entry</h3>
+
+            <p>
+              Converting audio and information into accurate
+              digital records.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">LP</div>
+
+            <h3>Translation & Proofreading</h3>
+
+            <p>
+              Translation, language review, proofreading and
+              content-quality tasks.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">CS</div>
+
+            <h3>Chat Support</h3>
+
+            <p>
+              Online communication and customer-support
+              opportunities.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+
+          <div class="opportunity">
+
+            <div class="opportunity-icon">RM</div>
+
+            <h3>Other Remote Jobs</h3>
+
+            <p>
+              Other flexible digital and remote work
+              opportunities.
+            </p>
+
+            <a href="#contact" class="learn">
+              Learn More →
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section id="how-it-works">
+
+      <div class="container">
+
+        <div class="heading">
+
+          <h2>How It Works</h2>
+
+          <div class="gold-line"></div>
+
+          <p>
+            A simple process for discovering digital
+            opportunities.
+          </p>
+
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Explore</h3>
+
+            <p>
+              Browse the opportunity categories available
+              through Prime Global.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Review</h3>
+
+            <p>
+              Check requirements, assessments and equipment
+              needed for the opportunity.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Assess</h3>
+
+            <p>
+              Complete any assessment required by the
+              opportunity provider.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">4</div>
+
+            <h3>Apply</h3>
+
+            <p>
+              Follow the official application process of
+              the relevant company or platform.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REQUIREMENTS -->
+
+    <section
+      class="requirements"
+      id="requirements"
+    >
+
+      <div class="container">
+
+        <div class="heading">
+
+          <h2>General Requirements</h2>
+
+          <div class="gold-line"></div>
+
+          <p>
+            Requirements vary depending on the specific
+            company or project.
+          </p>
+
+        </div>
+
+        <div class="requirement-grid">
+
+          <div class="requirement">
+
+            <h3>Device & Internet</h3>
+
+            <ul>
+              <li>Smartphone or computer</li>
+              <li>Stable internet connection</li>
+              <li>Updated browser</li>
+            </ul>
+
+          </div>
+
+
+          <div class="requirement">
+
+            <h3>Skills</h3>
+
+            <ul>
+              <li>Good communication</li>
+              <li>Attention to detail</li>
+              <li>Ability to follow instructions</li>
+            </ul>
+
+          </div>
+
+
+          <div class="requirement">
+
+            <h3>Application</h3>
+
+            <ul>
+              <li>Valid email address</li>
+              <li>Accurate information</li>
+              <li>Required assessments</li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PAYMENTS -->
+
+    <section id="payments">
+
+      <div class="container">
+
+        <div class="payment-box">
+
+          <h2>Payments</h2>
+
+          <p>
+            Payment methods, rates and schedules depend on
+            the individual company or project. Always verify
+            payment information directly with the official
+            opportunity provider before completing work.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MEMBER ACCOUNT -->
+
+    <section class="member-section">
+
+      <div class="container">
+
+        <div class="member-box">
+
+          <h2>Member Account</h2>
+
+          <p>
+            Prime Global will provide member account features
+            for users who want to access the platform's
+            account services.
+          </p>
+
+          <p>
+            Secure registration and login will be connected
+            to the member system during the next development
+            stage.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="heading">
+
+          <h2>Contact Prime Global</h2>
+
+          <div class="gold-line"></div>
+
+          <p>
+            Contact Prime Global for general information.
+          </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="contact-card">
+
+            <h3>Email</h3>
+
+            <p>
+              <a href="mailto:primeglobalofficialacc@gmail.com">
+                primeglobalofficialacc@gmail.com
+              </a>
+            </p>
+
+          </div>
+
+
+          <div class="contact-card">
+
+            <h3>WhatsApp</h3>
+
+            <p>
+              <a
+                href="https://wa.me/639971642057"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                +63 997 164 2057
+              </a>
+            </p>
+
+          </div>
+
+
+          <div class="contact-card">
+
+            <h3>Worldwide</h3>
+
+            <p>
+              Prime Global provides information about
+              digital and remote opportunities for a
+              worldwide audience.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <p>
+        © 2026 Prime Global. All rights reserved.
+      </p>
+
+      <div class="footer-links">
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="privacy.html">
+          Privacy
+        </a>
+
+        <a href="terms.html">
+          Terms
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- SMALL MOBILE MENU SCRIPT ONLY -->
+
+  <script>
+    const mobileButton = document.getElementById("mobileButton");
+    const mobileNav = document.getElementById("mobileNav");
+
+    if (mobileButton && mobileNav) {
+
+      mobileButton.addEventListener("click", function () {
+
+        mobileNav.classList.toggle("open");
+
+        if (mobileNav.classList.contains("open")) {
+          mobileButton.textContent = "×";
+        } else {
+          mobileButton.textContent = "☰";
+        }
+
+      });
+
+      const mobileLinks =
+        mobileNav.querySelectorAll("a");
+
+      mobileLinks.forEach(function(link) {
+
+        link.addEventListener("click", function() {
+
+          mobileNav.classList.remove("open");
+          mobileButton.textContent = "☰";
+
+        });
+
+      });
+
+    }
+  </script>
+
+</body>
+            </html>
