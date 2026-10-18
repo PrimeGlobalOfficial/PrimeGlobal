@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Entry | Prime Global</title>
+
+  <style>
+    :root {
+      --navy:#071a3d;
+      --navy2:#102a56;
+      --gold:#f5c542;
+      --blue:#1d4ed8;
+      --white:#fff;
+      --light:#f8fafc;
+      --text:#172033;
+      --border:#e2e8f0;
+    }
+
+    * {
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body {
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--light);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    header {
+      background:var(--navy);
+      padding:16px 5%;
+    }
+
+    .nav {
+      max-width:1100px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:white;
+      text-decoration:none;
+    }
+
+    .logo {
+      width:42px;
+      height:42px;
+      background:var(--gold);
+      color:var(--navy);
+      border-radius:9px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    .brand strong {
+      display:block;
+    }
+
+    .brand span {
+      font-size:12px;
+      color:#dbe5f5;
+    }
+
+    .back {
+      color:white;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.3);
+      padding:9px 14px;
+      border-radius:8px;
+      font-size:14px;
+    }
+
+    .hero {
+      background:linear-gradient(135deg,var(--navy),var(--navy2));
+      color:white;
+      padding:65px 5%;
+    }
+
+    .hero-inner {
+      max-width:1050px;
+      margin:auto;
+    }
+
+    .label {
+      color:var(--gold);
+      font-weight:bold;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    h1 {
+      font-size:clamp(34px,6vw,54px);
+      line-height:1.1;
+      margin-bottom:18px;
+    }
+
+    .hero p {
+      max-width:760px;
+      color:#dbe5f5;
+      font-size:18px;
+    }
+
+    main {
+      max-width:1050px;
+      margin:45px auto;
+      padding:0 5%;
+    }
+
+    section {
+      background:white;
+      padding:30px;
+      margin-bottom:25px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 5px 20px rgba(7,26,61,.05);
+    }
+
+    h2 {
+      color:var(--navy);
+      margin-bottom:15px;
+      font-size:25px;
+    }
+
+    h3 {
+      color:var(--navy2);
+      margin:20px 0 8px;
+    }
+
+    p {
+      margin-bottom:12px;
+    }
+
+    ul {
+      padding-left:22px;
+      margin-bottom:12px;
+    }
+
+    li {
+      margin-bottom:8px;
+    }
+
+    .steps {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+    }
+
+    .step {
+      border:1px solid var(--border);
+      padding:20px;
+      border-radius:10px;
+    }
+
+    .number {
+      width:34px;
+      height:34px;
+      background:var(--gold);
+      color:var(--navy);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      margin-bottom:12px;
+    }
+
+    .notice {
+      background:#fff8dc;
+      border-left:5px solid var(--gold);
+      padding:18px;
+      border-radius:8px;
+    }
+
+    .official {
+      background:#eef4ff;
+      border-left:5px solid var(--blue);
+      padding:18px;
+      border-radius:8px;
+    }
+
+    .bottom {
+      text-align:center;
+      margin:35px 0;
+    }
+
+    .home-btn {
+      display:inline-block;
+      background:var(--navy);
+      color:white;
+      text-decoration:none;
+      padding:12px 22px;
+      border-radius:8px;
+      font-weight:bold;
+    }
+
+    footer {
+      background:var(--navy);
+      color:#dbe5f5;
+      text-align:center;
+      padding:30px 5%;
+    }
+
+    footer a {
+      color:white;
+      text-decoration:none;
+      margin:0 8px;
+    }
+
+    footer a:hover {
+      color:var(--gold);
+    }
+
+    @media(max-width:800px) {
+      .steps {
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:550px) {
+      .brand span {
+        display:none;
+      }
+
+      .back {
+        padding:8px 10px;
+        font-size:13px;
+      }
+
+      .hero {
+        padding:50px 5%;
+      }
+
+      section {
+        padding:22px;
+      }
+
+      .steps {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a class="brand" href="index.html">
+      <div class="logo">PG</div>
+
+      <div>
+        <strong>PRIME GLOBAL</strong>
+        <span>Opportunities Worldwide</span>
+      </div>
+    </a>
+
+    <a class="back" href="index.html">
+      ← Back to Opportunities
+    </a>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="label">Prime Global Opportunity Guide</div>
+
+    <h1>Data Entry</h1>
+
+    <p>
+      Learn what online data entry work involves, common tasks,
+      requirements, application processes, equipment needs and payment
+      considerations.
+    </p>
+
+  </div>
+</section>
+
+<main>
+
+<section>
+  <h2>What is Data Entry?</h2>
+
+  <p>
+    Data entry involves entering, updating, organizing or transferring
+    information into digital systems, spreadsheets, databases or other
+    software.
+  </p>
+
+  <p>
+    Online data-entry work can range from simple information entry to
+    more detailed administrative and data-processing tasks.
+  </p>
+</section>
+
+<section>
+  <h2>Common Data Entry Tasks</h2>
+
+  <ul>
+    <li>Entering information into spreadsheets.</li>
+    <li>Updating databases and records.</li>
+    <li>Copying information between systems.</li>
+    <li>Checking records for missing information.</li>
+    <li>Formatting and organizing documents.</li>
+    <li>Product or inventory data entry.</li>
+    <li>Online research and information collection.</li>
+    <li>Document conversion and data processing.</li>
+    <li>Basic administrative support.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Who Can Apply?</h2>
+
+  <p>Typical requirements may include:</p>
+
+  <ul>
+    <li>Good typing accuracy.</li>
+    <li>Attention to detail.</li>
+    <li>Basic computer skills.</li>
+    <li>Ability to use spreadsheets.</li>
+    <li>Good written communication.</li>
+    <li>Ability to follow instructions.</li>
+    <li>Reliable internet connection.</li>
+    <li>Ability to meet deadlines.</li>
+  </ul>
+
+  <div class="notice">
+    Some entry-level tasks may not require previous professional
+    experience, while more advanced positions can require spreadsheet,
+    administrative or industry-specific experience.
+  </div>
+</section>
+
+<section>
+  <h2>Application &amp; Assessment Process</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="number">1</div>
+      <h3>Find a Project</h3>
+      <p>
+        Locate a legitimate data-entry position that accepts applicants
+        from your country.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">2</div>
+      <h3>Apply</h3>
+      <p>
+        Submit your profile, CV or application through the official
+        platform.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">3</div>
+      <h3>Assessment</h3>
+      <p>
+        Some employers may require typing, accuracy, spreadsheet or
+        practical tests.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">4</div>
+      <h3>Start Work</h3>
+      <p>
+        Successful applicants receive instructions and access to the
+        relevant work system.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Hardware &amp; Software</h2>
+
+  <ul>
+    <li>Computer or laptop for most professional data-entry jobs.</li>
+    <li>Reliable internet connection.</li>
+    <li>Modern web browser.</li>
+    <li>Email account.</li>
+    <li>Spreadsheet software such as Microsoft Excel or Google Sheets.</li>
+    <li>Word-processing software for document-based work.</li>
+  </ul>
+
+  <div class="notice">
+    <strong>Phone-only applicants:</strong>
+    Basic data-entry tasks may sometimes be possible on a smartphone,
+    but most serious remote data-entry jobs are easier and more practical
+    with a computer or laptop. Always check the employer's requirements.
+  </div>
+</section>
+
+<section>
+  <h2>Skills That Can Help</h2>
+
+  <ul>
+    <li>Fast and accurate typing.</li>
+    <li>Microsoft Excel.</li>
+    <li>Google Sheets.</li>
+    <li>Data organization.</li>
+    <li>Online research.</li>
+    <li>Document formatting.</li>
+    <li>Basic spreadsheet formulas.</li>
+    <li>Attention to detail.</li>
+    <li>Time management.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Payments</h2>
+
+  <p>
+    Payment depends on the employer, project, contract, country and
+    payment arrangement.
+  </p>
+
+  <p>Possible payment methods can include:</p>
+
+  <ul>
+    <li>PayPal</li>
+    <li>Payoneer</li>
+    <li>Airtm</li>
+    <li>Bank transfer</li>
+    <li>Other payment providers specified by the employer</li>
+  </ul>
+
+  <p>
+    Confirm the payment method, currency, payment schedule and withdrawal
+    requirements before accepting work.
+  </p>
+</section>
+
+<section>
+  <h2>Country Availability</h2>
+
+  <p>
+    Remote data-entry positions can have geographic restrictions.
+    Some employers accept applicants worldwide, while others recruit
+    only from specific countries.
+  </p>
+
+  <div class="notice">
+    <strong>For Kenya:</strong>
+    Check the job description carefully for Kenya eligibility before
+    applying.
+  </div>
+</section>
+
+<section>
+  <h2>How to Avoid Data-Entry Scams</h2>
+
+  <ul>
+    <li>Do not pay a registration fee to obtain a job.</li>
+    <li>Be suspicious of guaranteed high earnings for very little work.</li>
+    <li>Verify the company's official website.</li>
+    <li>Do not send passwords or security codes to recruiters.</li>
+    <li>Check the company's contact details independently.</li>
+    <li>Read the contract or project terms before starting.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Official Application</h2>
+
+  <div class="official">
+
+    <p>
+      Prime Global provides information about digital work opportunities.
+      Application links should always be verified against the company's
+      official website.
+    </p>
+
+    <p>
+      <strong>Official application link:</strong>
+      Verify the current employer or platform application page before
+      applying.
+    </p>
+
+  </div>
+</section>
+
+<section>
+  <h2>Prime Global Disclaimer</h2>
+
+  <p>
+    Prime Global is an information and opportunity directory. We do not
+    employ applicants for the opportunities described on this page and
+    do not guarantee acceptance, employment, task availability, earnings,
+    payment amounts or continued access to any project.
+  </p>
+
+  <p>
+    Requirements, locations, assessments, payment methods, rates and
+    availability may change. Confirm current information directly with
+    the relevant employer or platform.
+  </p>
+</section>
+
+<div class="bottom">
+  <a class="home-btn" href="index.html">
+    ← Return to Prime Global Opportunities
+  </a>
+</div>
+
+</main>
+
+<footer>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+
+  <p style="margin-top:15px;">
+    Email: primeglobalofficialacc@gmail.com |
+    WhatsApp: +63 997 164 2057
+  </p>
+
+  <p style="margin-top:12px;">
+    © 2026 Prime Global. Connecting people with information about
+    digital work and global remote opportunities.
+  </p>
+
+</footer>
+
+</body>
+  </html>
