@@ -1,42 +1,560 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About Prime Global</title>
-  <meta name="description" content="Learn about Prime Global, a platform helping people discover remote work and online opportunities.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Training & Evaluation | Prime Global</title>
+
   <style>
-    body{font-family:Arial,sans-serif;max-width:850px;margin:auto;padding:24px;line-height:1.7;color:#172033;background:#f8fafc}
-    h1,h2{color:#12316b}a{color:#174ea6} .card{background:white;padding:24px;border-radius:14px}
+    :root {
+      --navy: #071a3d;
+      --navy2: #102a56;
+      --gold: #f5c542;
+      --blue: #1d4ed8;
+      --white: #ffffff;
+      --light: #f8fafc;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1150px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      background: var(--gold);
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      color: #dbe5f5;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.3);
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: white;
+      padding: 70px 5%;
+    }
+
+    .hero-inner {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .label {
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: #dbe5f5;
+      font-size: 18px;
+    }
+
+    main {
+      max-width: 1050px;
+      margin: 45px auto;
+      padding: 0 5%;
+    }
+
+    section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 25px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 20px rgba(7,26,61,.05);
+    }
+
+    h2 {
+      color: var(--navy);
+      margin-bottom: 15px;
+      font-size: 25px;
+    }
+
+    h3 {
+      color: var(--navy2);
+      margin: 20px 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 22px;
+      margin-bottom: 12px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .step {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .number {
+      width: 34px;
+      height: 34px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .notice {
+      background: #fff8dc;
+      border-left: 5px solid var(--gold);
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .official {
+      background: #eef4ff;
+      border-left: 5px solid var(--blue);
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .official a {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .official a:hover {
+      opacity: .9;
+    }
+
+    .bottom {
+      text-align: center;
+      margin: 35px 0;
+    }
+
+    .home-btn {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #dbe5f5;
+      text-align: center;
+      padding: 30px 5%;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      color: var(--gold);
+    }
+
+    .contact {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .steps {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      header {
+        padding: 12px 4%;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .back {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 50px 5%;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
-<body>
-  <p><a href="./">← Back to Prime Global</a></p>
-  <main class="card">
-    <h1>About Prime Global</h1>
-    <p>Prime Global is an online platform designed to help people discover remote-work opportunities, learn about digital careers, and find resources for applying to online jobs.</p>
 
-    <h2>What we cover</h2>
+<body>
+
+<header>
+  <div class="nav">
+
+    <a class="brand" href="index.html">
+      <div class="logo">PG</div>
+      <div class="brand-text">
+        <strong>PRIME GLOBAL</strong>
+        <span>Opportunities Worldwide</span>
+      </div>
+    </a>
+
+    <a class="back" href="index.html">← Back to Opportunities</a>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="label">Prime Global Opportunity Guide</div>
+
+    <h1>AI Training &amp; Evaluation</h1>
+
+    <p>
+      Learn what AI training and evaluation work involves, what applicants
+      may need, how assessments usually work, and what to check before
+      applying.
+    </p>
+  </div>
+</section>
+
+<main>
+
+  <section>
+    <h2>What is AI Training &amp; Evaluation?</h2>
+
+    <p>
+      AI training and evaluation work involves helping improve artificial
+      intelligence systems by reviewing, rating, comparing, correcting,
+      or creating data used to train and evaluate AI models.
+    </p>
+
+    <p>
+      Depending on the project, tasks may include evaluating AI-generated
+      answers, checking whether information is relevant, rating search
+      results, reviewing text, comparing responses, following detailed
+      guidelines, or providing language and cultural feedback.
+    </p>
+  </section>
+
+  <section>
+    <h2>Who Can Apply?</h2>
+
+    <p>Requirements vary by company and project, but applicants may commonly need:</p>
+
     <ul>
-      <li>AI training and evaluation</li>
-      <li>Data annotation and data-related tasks</li>
-      <li>Voice recording and transcription</li>
-      <li>Translation and proofreading</li>
-      <li>Online customer and chat support</li>
-      <li>Other remote-work opportunities and career resources</li>
+      <li>Good written and spoken English.</li>
+      <li>Strong reading and comprehension skills.</li>
+      <li>Ability to follow detailed instructions.</li>
+      <li>Good attention to detail.</li>
+      <li>Reliable internet access.</li>
+      <li>A suitable computer for projects that require desktop work.</li>
+      <li>Relevant academic, professional, technical, or language knowledge for specialized projects.</li>
+      <li>Residence in a country supported by the particular project.</li>
     </ul>
 
-    <h2>Our purpose</h2>
-    <p>Our aim is to make information about online work easier to discover and understand. We encourage visitors to read each opportunity's requirements carefully and confirm important details directly with the hiring organisation.</p>
+    <p>
+      Some projects accept beginners, while others require previous
+      professional or subject-matter experience.
+    </p>
+  </section>
 
-    <h2>Important information</h2>
-    <p>Prime Global is an opportunity-information platform, not a guarantee of employment. We do not guarantee that a visitor will be hired, earn money, or qualify for a particular opportunity. Unless explicitly stated, we are not the employer offering a listed job.</p>
+  <section>
+    <h2>Typical Application &amp; Assessment Process</h2>
 
-    <h2>Contact us</h2>
-    <p>Email: <a href="mailto:primeglobalofficialacc@gmail.com">primeglobalofficialacc@gmail.com</a></p>
-    <p>WhatsApp: <a href="https://wa.me/639971642057">+63 997 164 2057</a></p>
-  </main>
-  <p>© 2026 Prime Global. All rights reserved.</p>
+    <div class="steps">
+
+      <div class="step">
+        <div class="number">1</div>
+        <h3>Apply</h3>
+        <p>
+          Create an account or submit an application through the official
+          platform.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <h3>Screening</h3>
+        <p>
+          Your location, language, experience, profile, or qualifications
+          may be reviewed.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <h3>Assessment</h3>
+        <p>
+          You may be required to complete qualification tests or sample
+          evaluation tasks.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="number">4</div>
+        <h3>Project</h3>
+        <p>
+          Successful applicants may receive access to available tasks or
+          projects.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Hardware &amp; Software</h2>
+
+    <h3>Possible requirements</h3>
+
+    <ul>
+      <li>Computer or laptop for many evaluation projects.</li>
+      <li>Stable internet connection.</li>
+      <li>Modern web browser.</li>
+      <li>Email account.</li>
+      <li>Headphones for audio-related projects.</li>
+      <li>Specific software or browser extensions when required by the project.</li>
+    </ul>
+
+    <div class="notice">
+      <strong>Phone-only applicants:</strong>
+      Some AI-related tasks can be performed on a smartphone, but many
+      professional AI evaluation and annotation projects require a
+      computer. Always check the equipment requirements of the specific
+      project before applying.
+    </div>
+  </section>
+
+  <section>
+    <h2>Payments</h2>
+
+    <p>
+      Payment methods and rates depend on the company, project, country,
+      task type, and worker agreement.
+    </p>
+
+    <p>Possible payment methods may include:</p>
+
+    <ul>
+      <li>PayPal</li>
+      <li>Bank transfer</li>
+      <li>Payoneer</li>
+      <li>Airtm</li>
+      <li>Other payment providers specified by the platform</li>
+    </ul>
+
+    <p>
+      Always confirm the current payment method, minimum withdrawal
+      requirements, currency, and eligibility directly with the official
+      platform before starting work.
+    </p>
+  </section>
+
+  <section>
+    <h2>Country Availability</h2>
+
+    <p>
+      AI training projects are often restricted by country, language,
+      client requirements, or project availability.
+    </p>
+
+    <p>
+      Being able to create an account does not necessarily mean that a
+      project is currently available in your country. Check the specific
+      project requirements before applying.
+    </p>
+
+    <div class="notice">
+      <strong>For applicants in Kenya:</strong>
+      Look specifically for projects that list Kenya or worldwide
+      eligibility. Availability can change as projects open and close.
+    </div>
+  </section>
+
+  <section>
+    <h2>Important Safety Checks</h2>
+
+    <ul>
+      <li>Use the company's official website or application portal.</li>
+      <li>Never pay someone simply to obtain a job or guaranteed project.</li>
+      <li>Do not give anyone your password.</li>
+      <li>Be careful with requests for unusual payments or cryptocurrency.</li>
+      <li>Verify the domain before submitting personal information.</li>
+      <li>Read the project terms and payment conditions carefully.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Official Application</h2>
+
+    <div class="official">
+      <p>
+        Prime Global provides opportunity information and guides. Before
+        adding an external application link, verify that it is the
+        company's current official recruitment or project page.
+      </p>
+
+      <p>
+        <strong>Official application link:</strong> Verify the current
+        project and application page before applying.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Prime Global Disclaimer</h2>
+
+    <p>
+      Prime Global is an information and opportunity directory. We do not
+      employ applicants for the opportunities described on this page and
+      do not guarantee acceptance, task availability, income, payment
+      amount, or continued project access.
+    </p>
+
+    <p>
+      Requirements, countries, assessments, payment methods, rates, and
+      project availability may change. Always confirm current information
+      with the relevant company before applying or providing personal
+      information.
+    </p>
+  </section>
+
+  <div class="bottom">
+    <a class="home-btn" href="index.html">
+      ← Return to Prime Global Opportunities
+    </a>
+  </div>
+
+</main>
+
+<footer>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+
+  <div class="contact">
+    Email: primeglobalofficialacc@gmail.com |
+    WhatsApp: +63 997 164 2057
+  </div>
+
+  <p style="margin-top:15px;">
+    © 2026 Prime Global. Connecting people with information about
+    digital work and global remote opportunities.
+  </p>
+
+</footer>
+
 </body>
-</html>
+      </html>
