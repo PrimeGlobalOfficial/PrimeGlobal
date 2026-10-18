@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Recording | Prime Global</title>
+
+  <style>
+    :root {
+      --navy:#071a3d;
+      --navy2:#102a56;
+      --gold:#f5c542;
+      --blue:#1d4ed8;
+      --white:#fff;
+      --light:#f8fafc;
+      --text:#172033;
+      --border:#e2e8f0;
+    }
+
+    * {
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body {
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--light);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    header {
+      background:var(--navy);
+      padding:16px 5%;
+    }
+
+    .nav {
+      max-width:1100px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:white;
+      text-decoration:none;
+    }
+
+    .logo {
+      width:42px;
+      height:42px;
+      background:var(--gold);
+      color:var(--navy);
+      border-radius:9px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    .brand strong {
+      display:block;
+    }
+
+    .brand span {
+      font-size:12px;
+      color:#dbe5f5;
+    }
+
+    .back {
+      color:white;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.3);
+      padding:9px 14px;
+      border-radius:8px;
+      font-size:14px;
+    }
+
+    .hero {
+      background:linear-gradient(135deg,var(--navy),var(--navy2));
+      color:white;
+      padding:65px 5%;
+    }
+
+    .hero-inner {
+      max-width:1050px;
+      margin:auto;
+    }
+
+    .label {
+      color:var(--gold);
+      font-weight:bold;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    h1 {
+      font-size:clamp(34px,6vw,54px);
+      line-height:1.1;
+      margin-bottom:18px;
+    }
+
+    .hero p {
+      max-width:760px;
+      color:#dbe5f5;
+      font-size:18px;
+    }
+
+    main {
+      max-width:1050px;
+      margin:45px auto;
+      padding:0 5%;
+    }
+
+    section {
+      background:white;
+      padding:30px;
+      margin-bottom:25px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 5px 20px rgba(7,26,61,.05);
+    }
+
+    h2 {
+      color:var(--navy);
+      margin-bottom:15px;
+      font-size:25px;
+    }
+
+    h3 {
+      color:var(--navy2);
+      margin:20px 0 8px;
+    }
+
+    p {
+      margin-bottom:12px;
+    }
+
+    ul {
+      padding-left:22px;
+      margin-bottom:12px;
+    }
+
+    li {
+      margin-bottom:8px;
+    }
+
+    .steps {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+    }
+
+    .step {
+      border:1px solid var(--border);
+      padding:20px;
+      border-radius:10px;
+    }
+
+    .number {
+      width:34px;
+      height:34px;
+      background:var(--gold);
+      color:var(--navy);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      margin-bottom:12px;
+    }
+
+    .notice {
+      background:#fff8dc;
+      border-left:5px solid var(--gold);
+      padding:18px;
+      border-radius:8px;
+    }
+
+    .official {
+      background:#eef4ff;
+      border-left:5px solid var(--blue);
+      padding:18px;
+      border-radius:8px;
+    }
+
+    .bottom {
+      text-align:center;
+      margin:35px 0;
+    }
+
+    .home-btn {
+      display:inline-block;
+      background:var(--navy);
+      color:white;
+      text-decoration:none;
+      padding:12px 22px;
+      border-radius:8px;
+      font-weight:bold;
+    }
+
+    footer {
+      background:var(--navy);
+      color:#dbe5f5;
+      text-align:center;
+      padding:30px 5%;
+    }
+
+    footer a {
+      color:white;
+      text-decoration:none;
+      margin:0 8px;
+    }
+
+    footer a:hover {
+      color:var(--gold);
+    }
+
+    @media(max-width:800px) {
+      .steps {
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:550px) {
+      .brand span {
+        display:none;
+      }
+
+      .back {
+        padding:8px 10px;
+        font-size:13px;
+      }
+
+      .hero {
+        padding:50px 5%;
+      }
+
+      section {
+        padding:22px;
+      }
+
+      .steps {
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a class="brand" href="index.html">
+      <div class="logo">PG</div>
+
+      <div>
+        <strong>PRIME GLOBAL</strong>
+        <span>Opportunities Worldwide</span>
+      </div>
+    </a>
+
+    <a class="back" href="index.html">
+      ← Back to Opportunities
+    </a>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="label">Prime Global Opportunity Guide</div>
+
+    <h1>Voice Recording</h1>
+
+    <p>
+      Learn about remote voice-recording opportunities, common recording
+      tasks, equipment requirements, application processes and payment
+      considerations.
+    </p>
+
+  </div>
+</section>
+
+<main>
+
+<section>
+  <h2>What is Voice Recording Work?</h2>
+
+  <p>
+    Voice-recording projects involve recording spoken audio according to
+    instructions supplied by a company or research project.
+  </p>
+
+  <p>
+    Recordings may be used for speech-recognition systems, artificial
+    intelligence training, language research, conversational systems,
+    audiobooks, advertising or other audio applications.
+  </p>
+
+  <p>
+    Projects may require individual sentences, scripted conversations,
+    spontaneous speech, narration or other specified recordings.
+  </p>
+</section>
+
+<section>
+  <h2>Common Voice Tasks</h2>
+
+  <ul>
+    <li>Reading prepared sentences.</li>
+    <li>Recording short phrases or commands.</li>
+    <li>Recording natural conversations.</li>
+    <li>Recording two-person dialogue.</li>
+    <li>Narrating prepared text.</li>
+    <li>Recording pronunciation samples.</li>
+    <li>Recording local-language or bilingual speech.</li>
+    <li>Providing speech samples for AI training.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Who Can Apply?</h2>
+
+  <p>Requirements vary by project but may include:</p>
+
+  <ul>
+    <li>Fluent or native-level knowledge of the required language.</li>
+    <li>Clear and understandable speech.</li>
+    <li>Ability to follow recording instructions.</li>
+    <li>Quiet recording environment.</li>
+    <li>Suitable microphone or smartphone.</li>
+    <li>Reliable internet connection for uploading recordings.</li>
+    <li>Ability to complete recordings within the project deadline.</li>
+  </ul>
+
+  <div class="notice">
+    Some projects specifically recruit speakers of particular languages,
+    accents, dialects, countries or demographic groups.
+  </div>
+</section>
+
+<section>
+  <h2>Typical Application Process</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="number">1</div>
+      <h3>Find a Project</h3>
+      <p>
+        Find a legitimate voice-recording project matching your language
+        and location.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">2</div>
+      <h3>Apply</h3>
+      <p>
+        Submit the required profile information and project application.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">3</div>
+      <h3>Sample</h3>
+      <p>
+        Some projects require a voice sample, qualification recording or
+        test.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="number">4</div>
+      <h3>Record</h3>
+      <p>
+        Approved contributors complete and upload the required recordings.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Recording Environment</h2>
+
+  <p>
+    Audio quality is important. A suitable recording environment should
+    be as quiet as possible and free from unnecessary background noise.
+  </p>
+
+  <ul>
+    <li>Choose a quiet room.</li>
+    <li>Close windows and doors when possible.</li>
+    <li>Turn off unnecessary fans, televisions and other noise sources.</li>
+    <li>Avoid echo-heavy rooms.</li>
+    <li>Keep the microphone at a consistent distance.</li>
+    <li>Follow the project's exact recording instructions.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Equipment &amp; Software</h2>
+
+  <ul>
+    <li>Smartphone with a good microphone for projects that permit phones.</li>
+    <li>Computer and external microphone for projects requiring professional recording.</li>
+    <li>Headphones when required for monitoring.</li>
+    <li>Audio-recording software or the project's recording application.</li>
+    <li>Stable internet for uploading files.</li>
+  </ul>
+
+  <div class="notice">
+    <strong>Phone-only applicants:</strong>
+    Some voice-recording projects are specifically designed for
+    smartphones. Others require a computer or dedicated microphone.
+    Always check the project's equipment requirements.
+  </div>
+</section>
+
+<section>
+  <h2>Audio File Requirements</h2>
+
+  <p>
+    File specifications depend on the project. Instructions may specify:
+  </p>
+
+  <ul>
+    <li>WAV or another audio format.</li>
+    <li>Specific sample rate.</li>
+    <li>Specific bit depth.</li>
+    <li>Mono or stereo recording.</li>
+    <li>Maximum or minimum recording duration.</li>
+    <li>File naming conventions.</li>
+  </ul>
+
+  <p>
+    Never change the required format without checking the project's
+    instructions.
+  </p>
+</section>
+
+<section>
+  <h2>Payments</h2>
+
+  <p>
+    Voice-recording projects may pay per recording, per task, per hour,
+    per project or according to another compensation model.
+  </p>
+
+  <p>Possible payment methods may include:</p>
+
+  <ul>
+    <li>PayPal</li>
+    <li>Payoneer</li>
+    <li>Airtm</li>
+    <li>Bank transfer</li>
+    <li>Other payment providers specified by the project</li>
+  </ul>
+
+  <p>
+    Confirm the payment rate, currency, payment schedule and withdrawal
+    requirements before beginning work.
+  </p>
+</section>
+
+<section>
+  <h2>Country &amp; Language Availability</h2>
+
+  <p>
+    Voice projects are often highly specific about language, accent,
+    dialect and country.
+  </p>
+
+  <p>
+    A project may recruit only speakers from selected countries or
+    regions. Availability can also change as recording targets are
+    completed.
+  </p>
+
+  <div class="notice">
+    <strong>For Kenya:</strong>
+    Look for projects requesting English, Swahili or other languages
+    you can genuinely speak at the required level.
+  </div>
+</section>
+
+<section>
+  <h2>Safety Checks</h2>
+
+  <ul>
+    <li>Apply through the official company or project website.</li>
+    <li>Do not pay a recruiter for guaranteed acceptance.</li>
+    <li>Do not provide account passwords or security codes.</li>
+    <li>Check the website domain before uploading personal information.</li>
+    <li>Read the project's consent and data-use terms carefully.</li>
+    <li>Understand how your recordings will be used before agreeing.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Official Application</h2>
+
+  <div class="official">
+
+    <p>
+      Prime Global provides information about voice-recording
+      opportunities. Application links should be verified against the
+      company's current official website.
+    </p>
+
+    <p>
+      <strong>Official application link:</strong>
+      Verify the current project application page before applying.
+    </p>
+
+  </div>
+</section>
+
+<section>
+  <h2>Prime Global Disclaimer</h2>
+
+  <p>
+    Prime Global is an information and opportunity directory. We do not
+    employ applicants for the opportunities described on this page and
+    do not guarantee acceptance, project availability, earnings,
+    payment amounts or continued access to any project.
+  </p>
+
+  <p>
+    Requirements, recording specifications, countries, rates, payment
+    methods and project availability may change. Confirm current
+    information directly with the relevant company or project.
+  </p>
+</section>
+
+<div class="bottom">
+  <a class="home-btn" href="index.html">
+    ← Return to Prime Global Opportunities
+  </a>
+</div>
+
+</main>
+
+<footer>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+
+  <p style="margin-top:15px;">
+    Email: primeglobalofficialacc@gmail.com |
+    WhatsApp: +63 997 164 2057
+  </p>
+
+  <p style="margin-top:12px;">
+    © 2026 Prime Global. Connecting people with information about
+    digital work and global remote opportunities.
+  </p>
+
+</footer>
+
+</body>
+</html>
