@@ -2219,6 +2219,15 @@ class="small">
   <button type="button" class="submit" id="refreshAdminTaskReview" style="margin-top:12px;">Refresh submissions</button>
 </div>
 
+<!-- ADMIN WITHDRAWAL REVIEW: privileged actions are performed by a server-verified Edge Function -->
+<div class="info" id="adminWithdrawalReviewPanel" style="display:none;margin-top:18px;border:2px solid #b7791f;background:#fffaf0;">
+  <h3 style="margin-top:0;color:#071a3d;">Administrator · Withdrawal Review</h3>
+  <p class="small">Review requests and pay manually through the selected provider. Mark a request as paid only after the transfer succeeds, and record the provider transaction/reference ID. This panel does not send money automatically.</p>
+  <div id="adminWithdrawalReviewMessage" class="small" role="status" aria-live="polite">Loading withdrawal queue…</div>
+  <div id="adminWithdrawalReviewList"></div>
+  <button type="button" class="submit" id="refreshAdminWithdrawalReview" style="margin-top:12px;">Refresh withdrawals</button>
+</div>
+
 <!-- REFERRALS AND REWARDS -->
 <div class="info reward-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Referrals &amp; Rewards</h3>
@@ -2918,6 +2927,7 @@ interests.length
 
 await loadReferralDashboard(user);
 await loadAdminTaskReview(user);
+await loadAdminWithdrawalReview(user);
 
 document
 .querySelector("#member")
@@ -2927,6 +2937,179 @@ behavior:"smooth"
 
 }
 
+
+/* ADMIN WITHDRAWAL REVIEW */
+async function loadAdminWithdrawalReview(user){
+  const panel = $("adminWithdrawalReviewPanel");
+  if(!panel) return;
+  const isAdmin = (user?.email || "").toLowerCase() === PRIME_GLOBAL_ADMIN_EMAIL;
+  panel.style.display = isAdmin ? "block" : "none";
+  if(!isAdmin) return;
+
+  const message = $("adminWithdrawalReviewMessage");
+  const list = $("adminWithdrawalReviewList");
+  message.textContent = "Loading withdrawal requests…";
+  list.replaceChildren();
+
+  const {data: sessionData} = await client.auth.getSession();
+  const accessToken = sessionData?.session?.access_token;
+  if(!accessToken){
+    message.textContent = "Please sign in again to review withdrawals.";
+    return;
+  }
+
+  let response, payload;
+  try {
+    response = await fetch(SUPABASE_URL + "/functions/v1/prime-global-withdrawal-review", {
+      method: "GET",
+      headers: { "Authorization": "Bearer " + accessToken, "apikey": SUPABASE_KEY }
+    });
+    payload = await response.json();
+  } catch(error) {
+    message.textContent = "Could not connect to the secure withdrawal review service. Refresh and try again.";
+    console.error("Admin withdrawal review request error:", error);
+    return;
+  }
+  if(!response.ok){
+    message.textContent = payload?.error || "Could not load withdrawals. Check administrator access.";
+    return;
+  }
+
+  const rows = payload.withdrawals || [];
+  const pendingCount = rows.filter(item => item.status === "pending").length;
+  message.textContent = rows.length
+    ? rows.length + " withdrawal request(s) shown · " + pendingCount + " pending review."
+    : "No withdrawal requests have been received yet.";
+
+  rows.forEach(item => {
+    const card = document.createElement("div");
+    card.style.cssText = "padding:14px 0;border-bottom:1px solid #ead9b9;display:grid;gap:8px;";
+    const heading = document.createElement("strong");
+    heading.textContent = money(item.amount_usd) + " · " + item.payout_method + " · " + item.status.toUpperCase();
+    card.appendChild(heading);
+
+    const details = document.createElement("div");
+    details.className = "small";
+    details.textContent = "Requested: " + (item.created_at ? new Date(item.created_at).toLocaleString() : "—")
+      + " · Member ID: " + item.user_id;
+    card.appendChild(details);
+
+    const account = document.createElement("p");
+    account.className = "small";
+    account.style.overflowWrap = "anywhere";
+    account.textContent = "Payout account: " + item.payout_account;
+    card.appendChild(account);
+
+    if(item.admin_note){
+      const priorNote = document.createElement("p");
+      priorNote.className = "small";
+      priorNote.textContent = "Admin note: " + item.admin_note;
+      card.appendChild(priorNote);
+    }
+    if(item.payout_reference){
+      const priorReference = document.createElement("p");
+      priorReference.className = "small";
+      priorReference.textContent = "Payment reference: " + item.payout_reference;
+      card.appendChild(priorReference);
+    }
+
+    if(["pending","approved","processing"].includes(item.status)){
+      const noteInput = document.createElement("textarea");
+      noteInput.rows = 2;
+      noteInput.maxLength = 1000;
+      noteInput.placeholder = item.status === "pending" ? "Review note (required for rejection)" : "Optional admin note";
+      noteInput.setAttribute("aria-label","Admin note for withdrawal " + item.id);
+      noteInput.style.cssText = "width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;";
+      card.appendChild(noteInput);
+
+      let referenceInput = null;
+      if(item.status === "processing"){
+        referenceInput = document.createElement("input");
+        referenceInput.type = "text";
+        referenceInput.maxLength = 250;
+        referenceInput.placeholder = "Payment transaction/reference ID (required to mark paid)";
+        referenceInput.setAttribute("aria-label","Payment reference for withdrawal " + item.id);
+        referenceInput.style.cssText = "width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;";
+        card.appendChild(referenceInput);
+      }
+
+      const actions = document.createElement("div");
+      actions.style.cssText = "display:flex;gap:10px;flex-wrap:wrap;";
+      const choices = item.status === "pending"
+        ? [["approved","Approve request"],["rejected","Reject request"]]
+        : item.status === "approved"
+          ? [["processing","Mark processing"]]
+          : [["paid","Mark paid"]];
+      choices.forEach(([nextStatus,label]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "submit";
+        button.textContent = label;
+        button.addEventListener("click", async () => {
+          const note = noteInput.value.trim();
+          const reference = referenceInput ? referenceInput.value.trim() : "";
+          if(nextStatus === "rejected" && !note){
+            message.textContent = "Add a reason before rejecting a withdrawal request.";
+            noteInput.focus();
+            return;
+          }
+          if(nextStatus === "paid" && !reference){
+            message.textContent = "Enter the provider transaction/reference ID before marking this request paid.";
+            referenceInput?.focus();
+            return;
+          }
+          const confirmText = nextStatus === "paid"
+            ? "Confirm that the transfer has already succeeded before marking this request paid."
+            : nextStatus === "rejected"
+              ? "Reject this withdrawal request?"
+              : nextStatus === "approved"
+                ? "Approve this withdrawal request for manual payment?"
+                : "Mark this approved request as processing?";
+          if(!window.confirm(confirmText)) return;
+
+          button.disabled = true;
+          button.textContent = "Saving…";
+          const {data: latestSession} = await client.auth.getSession();
+          const token = latestSession?.session?.access_token;
+          try {
+            const saveResponse = await fetch(SUPABASE_URL + "/functions/v1/prime-global-withdrawal-review", {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer " + token,
+                "apikey": SUPABASE_KEY,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                id: item.id,
+                status: nextStatus,
+                expected_status: item.status,
+                admin_note: note || null,
+                payout_reference: reference || null
+              })
+            });
+            const savePayload = await saveResponse.json();
+            if(!saveResponse.ok) throw new Error(savePayload?.error || "Could not save withdrawal status.");
+            message.textContent = "Withdrawal status updated.";
+            const {data: currentUser} = await client.auth.getUser();
+            if(currentUser?.user) await loadAdminWithdrawalReview(currentUser.user);
+          } catch(error) {
+            message.textContent = error.message || "Could not save withdrawal status.";
+            button.disabled = false;
+            button.textContent = label;
+          }
+        });
+        actions.appendChild(button);
+      });
+      card.appendChild(actions);
+    }
+    list.appendChild(card);
+  });
+}
+
+$("refreshAdminWithdrawalReview")?.addEventListener("click", async () => {
+  const {data} = await client.auth.getUser();
+  if(data?.user) await loadAdminWithdrawalReview(data.user);
+});
 
 /* REFERRAL DASHBOARD */
 
