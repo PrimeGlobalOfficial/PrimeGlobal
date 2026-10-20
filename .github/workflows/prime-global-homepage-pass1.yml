@@ -1,0 +1,178 @@
+name: Prime Global Homepage Pass 1
+
+on:
+  push:
+    paths:
+      - homepage-pass1.trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  enhance-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Apply homepage conversion and presentation pass
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          if "id=\"pg-growth-pass-1\"" in html:
+              print("Pass 1 already applied; nothing to do.")
+              raise SystemExit(0)
+
+          css = r'''
+
+/* PRIME GLOBAL GROWTH PASS 1 */
+#pg-growth-pass-1{
+  position:relative;
+  z-index:1;
+}
+.pg-trust-strip{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  transform:translateY(-24px);
+  position:relative;
+  z-index:5;
+}
+.pg-trust-inner{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  background:#fff;
+  border:1px solid #dbe6f4;
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 16px 35px #173b7814;
+}
+.pg-trust-item{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:11px;
+  background:#f7faff;
+}
+.pg-trust-icon{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:#eaf1ff;
+  color:#246bfd;
+  font-weight:900;
+  flex:0 0 auto;
+}
+.pg-trust-item:nth-child(2) .pg-trust-icon{background:#e2fbf5;color:#087a68}
+.pg-trust-item:nth-child(3) .pg-trust-icon{background:#fff3dc;color:#a65d00}
+.pg-trust-item:nth-child(4) .pg-trust-icon{background:#f0eaff;color:#6540a8}
+.pg-trust-item strong{display:block;color:#173b78;font-size:13px}
+.pg-trust-item span{display:block;color:#62718a;font-size:11px;margin-top:2px}
+.pg-cta-panel{
+  background:linear-gradient(135deg,#101c3a 0%,#173b78 62%,#155e75 100%);
+  color:#fff;
+  border-radius:20px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1.5fr .5fr;
+  gap:24px;
+  align-items:center;
+  box-shadow:0 18px 45px #173b7820;
+  overflow:hidden;
+  position:relative;
+}
+.pg-cta-panel:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border:1px solid #ffffff1c;
+  border-radius:50%;
+  right:-110px;
+  top:-120px;
+  box-shadow:0 0 0 35px #ffffff07,0 0 0 70px #ffffff05;
+}
+.pg-cta-panel h3{margin:0 0 7px;font-size:27px;position:relative;z-index:1}
+.pg-cta-panel p{margin:0;color:#dbe8fb;position:relative;z-index:1}
+.pg-cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;position:relative;z-index:1}
+.pg-cta-actions .btn{white-space:nowrap}
+.pg-disclaimer{margin-top:13px;color:#7b879b;font-size:12px}
+@media(max-width:950px){
+  .pg-trust-inner{grid-template-columns:repeat(2,1fr)}
+  .pg-cta-panel{grid-template-columns:1fr}
+  .pg-cta-actions{justify-content:flex-start}
+}
+@media(max-width:700px){
+  .pg-trust-strip{padding:0 14px;transform:translateY(-16px)}
+  .pg-trust-inner{grid-template-columns:1fr;padding:9px}
+  .pg-trust-item{min-height:50px}
+  .pg-cta-panel{padding:22px}
+  .pg-cta-panel h3{font-size:23px}
+}
+'''
+
+          marker = "</style>"
+          if marker not in html:
+              raise SystemExit("Could not find closing style tag")
+          html = html.replace(marker, css + "\n" + marker, 1)
+
+          hero_end = '''</section>\n\n\n<main>'''
+          trust = '''</section>
+
+<div class="pg-trust-strip" id="pg-growth-pass-1" aria-label="Prime Global service principles">
+  <div class="pg-trust-inner">
+    <div class="pg-trust-item"><div class="pg-trust-icon">✓</div><div><strong>Official routes</strong><span>Follow employer and platform links</span></div></div>
+    <div class="pg-trust-item"><div class="pg-trust-icon">◎</div><div><strong>Clear requirements</strong><span>Know what to check before applying</span></div></div>
+    <div class="pg-trust-item"><div class="pg-trust-icon">$</div><div><strong>Payment awareness</strong><span>Verify rates and payout rules</span></div></div>
+    <div class="pg-trust-item"><div class="pg-trust-icon">◈</div><div><strong>Safety first</strong><span>Never pay to secure a job</span></div></div>
+  </div>
+</div>
+
+<main>'''
+          if hero_end not in html:
+              raise SystemExit("Could not find homepage hero boundary")
+          html = html.replace(hero_end, trust, 1)
+
+          opportunity_end = '''</section>\n\n<!-- PUBLIC START WORKING HUB -->'''
+          cta = '''</section>
+
+<section aria-label="Prime Global next step">
+  <div class="pg-cta-panel">
+    <div>
+      <h3>Ready to explore your next opportunity?</h3>
+      <p>Start with the opportunity guides, then check the official application route and requirements before applying.</p>
+      <div class="pg-disclaimer">Prime Global does not guarantee hiring, income, acceptance, or third-party payment.</div>
+    </div>
+    <div class="pg-cta-actions">
+      <a class="btn primary" href="#opportunities">Explore opportunities →</a>
+      <a class="btn secondary" href="faq.html">Read FAQ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLIC START WORKING HUB -->'''
+          if opportunity_end not in html:
+              raise SystemExit("Could not find opportunities boundary")
+          html = html.replace(opportunity_end, cta, 1)
+
+          path.write_text(html, encoding="utf-8")
+          print("Homepage Pass 1 applied successfully.")
+
+      - name: Commit homepage update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Improve homepage conversion and trust presentation"
+          git push
