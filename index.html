@@ -457,7 +457,7 @@ input[type="date"]{
   background:#fff;
 }
 
-input:focus{
+textarea:focus,\nselect:focus{\n  outline:2px solid #1d4ed833;\n  border-color:var(--blue);\n}\n\ninput:focus{
   outline:2px solid #1d4ed833;
   border-color:var(--blue);
 }
@@ -2211,6 +2211,21 @@ class="small">
   <p class="small" id="referralInfo" style="margin-top:10px;">Minimum withdrawal: $30.00 USD. Planned methods: PayPal, Airtm and Wise.</p>
 </div>
 
+
+<div class="info task-panel" style="margin-top:18px;">
+  <h3 style="margin-top:0;color:#071a3d;">Submit Completed Task for Review</h3>
+  <p class="small">Use this form only after completing real work on an external platform. Submitting evidence does not guarantee approval or payment. Do not include passwords, one-time codes, identity documents, private customer data, or confidential work.</p>
+  <form id="taskSubmissionForm">
+    <div><label for="taskPlatform">Work platform</label><input id="taskPlatform" type="text" minlength="2" maxlength="120" placeholder="e.g. Corpshore, TaskUs, Welo Global" required></div>
+    <div><label for="taskTitle">Task or project title</label><input id="taskTitle" type="text" minlength="3" maxlength="180" placeholder="Describe the completed task" required></div>
+    <div><label for="taskCompletionDate">Completion date</label><input id="taskCompletionDate" type="date" required></div>
+    <div><label for="taskEvidenceNote">Evidence summary (redacted)</label><textarea id="taskEvidenceNote" minlength="10" maxlength="1200" rows="4" placeholder="Describe what you completed and the non-sensitive proof available for review. Do not paste private data." required style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;resize:vertical;"></textarea></div>
+    <button type="submit" class="submit">Submit task for review</button>
+    <div id="taskSubmissionMsg" class="msg" role="status" aria-live="polite"></div>
+  </form>
+  <div style="margin-top:18px;"><h4 style="margin-bottom:8px;color:#071a3d;">My task submissions</h4><div id="taskSubmissionHistory" class="small" aria-live="polite">Sign in to view your submissions.</div></div>
+</div>
+
 <div class="info payment-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Request a Withdrawal</h3>
   <p class="small">You can request a withdrawal once your approved rewards meet the minimum threshold and cover the requested amount. Payment requests are reviewed manually.</p>
@@ -2962,7 +2977,79 @@ async function loadReferralDashboard(user){
 
   const referralCount = (referralsResult.data || []).length;
   $("referralInfo").textContent += " Your referrals: " + referralCount + ".";
+  await loadTaskSubmissions(user);
 }
+
+/* TASK SUBMISSIONS */
+async function loadTaskSubmissions(user){
+  const history = $("taskSubmissionHistory");
+  history.textContent = "Loading submissions…";
+  const {data, error} = await client.from("task_submissions")
+    .select("id,platform,task_title,completion_date,status,admin_note,created_at,reviewed_at")
+    .eq("user_id", user.id).order("created_at", {ascending:false}).limit(20);
+  history.replaceChildren();
+  if(error){
+    history.textContent = "Task submissions could not be loaded. Please refresh and try again.";
+    console.error("Task submission history error:", error);
+    return;
+  }
+  if(!data || !data.length){ history.textContent = "No task submissions yet."; return; }
+  data.forEach(item => {
+    const row = document.createElement("div");
+    row.style.padding = "12px 0";
+    row.style.borderBottom = "1px solid #e5e7eb";
+    const title = document.createElement("strong");
+    title.textContent = item.task_title + " — " + item.platform;
+    row.appendChild(title);
+    const details = document.createElement("div");
+    details.className = "small";
+    details.textContent = "Completed: " + item.completion_date + " · Status: " + item.status;
+    row.appendChild(details);
+    if(item.admin_note){
+      const note = document.createElement("div");
+      note.className = "small";
+      note.textContent = "Review note: " + item.admin_note;
+      row.appendChild(note);
+    }
+    history.appendChild(row);
+  });
+}
+
+/* Submit completed task for manual review */
+$("taskSubmissionForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if(!currentMemberId){
+    showMessage($("taskSubmissionMsg"), "Please sign in again before submitting a task.");
+    return;
+  }
+  const completionDate = $("taskCompletionDate").value;
+  if(!completionDate || completionDate > new Date().toISOString().slice(0,10)){
+    showMessage($("taskSubmissionMsg"), "Choose a valid completion date that is not in the future.");
+    return;
+  }
+  const submitButton = $("taskSubmissionForm").querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting…";
+  try{
+    const {error} = await client.from("task_submissions").insert({
+      user_id: currentMemberId,
+      platform: $("taskPlatform").value.trim(),
+      task_title: $("taskTitle").value.trim(),
+      completion_date: completionDate,
+      evidence_note: $("taskEvidenceNote").value.trim()
+    });
+    if(error) throw error;
+    showMessage($("taskSubmissionMsg"), "Task submitted. It is pending manual review; approval and any referral reward are not guaranteed.", true);
+    $("taskSubmissionForm").reset();
+    await loadTaskSubmissions({id:currentMemberId});
+  }catch(error){
+    console.error("Task submission error:", error);
+    showMessage($("taskSubmissionMsg"), error.message || "Could not submit your task. Please try again.");
+  }finally{
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit task for review";
+  }
+});
 
 /* Copy referral link */
 $("copyReferralLink").addEventListener("click", async () => {
