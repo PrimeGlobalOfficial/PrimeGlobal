@@ -969,6 +969,8 @@ footer{
 
 
 .pg-trust-strip{max-width:1200px;margin:0 auto;padding:0 20px;transform:translateY(-24px);position:relative;z-index:5}.pg-trust-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#fff;border:1px solid #dbe6f4;border-radius:16px;padding:12px;box-shadow:0 16px 35px #173b7814}.pg-trust-item{min-height:58px;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;background:#f7faff}.pg-trust-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#eaf1ff;color:#246bfd;font-weight:900}.pg-trust-item strong{display:block;color:#173b78;font-size:13px}.pg-trust-item span{display:block;color:#62718a;font-size:11px}.pg-cta-panel{background:linear-gradient(135deg,#101c3a,#173b78 62%,#155e75);color:#fff;border-radius:20px;padding:30px;display:grid;grid-template-columns:1.5fr .5fr;gap:24px;align-items:center;box-shadow:0 18px 45px #173b7820}.pg-cta-panel h3{margin:0 0 7px;font-size:27px}.pg-cta-panel p{margin:0;color:#dbe8fb}.pg-cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.pg-cta-actions .btn{white-space:nowrap}.pg-disclaimer{margin-top:13px;color:#c8d5e8;font-size:12px}@media(max-width:950px){.pg-trust-inner{grid-template-columns:repeat(2,1fr)}.pg-cta-panel{grid-template-columns:1fr}.pg-cta-actions{justify-content:flex-start}}@media(max-width:700px){.pg-trust-inner{grid-template-columns:1fr}.pg-cta-panel{padding:22px}.pg-cta-panel h3{font-size:23px}}
+
+.pg-account-wrap{position:relative;display:flex;align-items:center;margin-left:8px}.pg-account-btn{border:1px solid #dbe6f4;background:#fff;color:#173b78;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}.pg-account-btn:hover{background:#f5f8ff}.pg-account-menu{position:absolute;right:0;top:46px;width:230px;background:#fff;border:1px solid #dbe6f4;border-radius:14px;box-shadow:0 18px 40px #173b7820;padding:10px;display:none;z-index:50}.pg-account-menu.open{display:block}.pg-account-menu .pg-user{padding:9px 10px;border-bottom:1px solid #e5e7eb;margin-bottom:6px}.pg-account-menu .pg-user strong{display:block;color:#071a3d}.pg-account-menu .pg-user span{display:block;color:#64748b;font-size:12px;overflow:hidden;text-overflow:ellipsis}.pg-account-menu button,.pg-account-menu a{display:block;width:100%;text-align:left;border:0;background:none;padding:10px;border-radius:8px;color:#173b78;text-decoration:none;cursor:pointer;font:inherit}.pg-account-menu button:hover,.pg-account-menu a:hover{background:#f5f8ff}.pg-profile-modal{position:fixed;inset:0;background:#071a3d80;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.pg-profile-modal.open{display:flex}.pg-profile-card{width:min(520px,100%);background:#fff;border-radius:20px;padding:26px;box-shadow:0 25px 70px #071a3d45}.pg-profile-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.pg-profile-head h3{margin:0;color:#071a3d}.pg-profile-close{border:0;background:#eef3fa;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px}.pg-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.pg-profile-item{background:#f7f9fc;border:1px solid #e5e7eb;border-radius:11px;padding:12px}.pg-profile-item b{display:block;font-size:12px;color:#64748b;margin-bottom:4px}.pg-profile-item span{color:#172033;font-weight:600;word-break:break-word}@media(max-width:700px){.pg-account-wrap{margin:8px 0}.pg-profile-grid{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -1013,6 +1015,7 @@ aria-label="Open menu">
 <a href="#payments">Payments</a>
 
 <a href="#member">Member Account</a>
+<div class="pg-account-wrap" id="pg-member-profile-pass-2"><button class="pg-account-btn" id="pgAccountButton" type="button">Member ▾</button><div class="pg-account-menu" id="pgAccountMenu"><div class="pg-user"><strong id="pgAccountName">Guest</strong><span id="pgAccountEmail">Not signed in</span></div><a href="#member" id="pgAccountDashboard">Dashboard</a><button type="button" id="pgAccountProfile">My Profile</button><button type="button" id="pgAccountLogout" style="display:none">Log Out</button></div></div>
 
 <a href="about.html">About</a>
 
@@ -2336,6 +2339,8 @@ style="color:#1d4ed8">
 </section>
 
 
+
+<div class="pg-profile-modal" id="pgProfileModal" role="dialog" aria-modal="true" aria-labelledby="pgProfileTitle"><div class="pg-profile-card"><div class="pg-profile-head"><h3 id="pgProfileTitle">My Profile</h3><button class="pg-profile-close" id="pgProfileClose" type="button" aria-label="Close profile">×</button></div><p class="small" id="pgProfileStatus">Sign in to view your profile.</p><div class="pg-profile-grid"><div class="pg-profile-item"><b>Full Name</b><span id="pgProfileName">—</span></div><div class="pg-profile-item"><b>Email</b><span id="pgProfileEmail">—</span></div><div class="pg-profile-item"><b>Country</b><span id="pgProfileCountry">—</span></div><div class="pg-profile-item"><b>Date of Birth</b><span id="pgProfileDob">—</span></div><div class="pg-profile-item" style="grid-column:1/-1"><b>Opportunity Interests</b><span id="pgProfileInterests">—</span></div></div></div></div>
 </main>
 
 
@@ -3347,6 +3352,39 @@ data.session.user
 }
 
 })();
+
+
+/* MEMBER PROFILE UI */
+const pgAccountButton=$("pgAccountButton");
+const pgAccountMenu=$("pgAccountMenu");
+const pgAccountName=$("pgAccountName");
+const pgAccountEmail=$("pgAccountEmail");
+const pgAccountLogout=$("pgAccountLogout");
+const pgProfileModal=$("pgProfileModal");
+function pgSetAccount(user){
+  const signed=!!user;
+  pgAccountName.textContent=signed?(user.user_metadata?.full_name||"Member"):"Guest";
+  pgAccountEmail.textContent=signed?(user.email||""):"Not signed in";
+  pgAccountButton.textContent=signed?"My Account ▾":"Member ▾";
+  pgAccountLogout.style.display=signed?"block":"none";
+}
+function pgOpenProfile(){
+  pgAccountMenu.classList.remove("open");
+  if(!currentMemberId){ document.querySelector("#member")?.scrollIntoView({behavior:"smooth"}); return; }
+  pgProfileModal.classList.add("open");
+}
+function pgCloseProfile(){pgProfileModal.classList.remove("open");}
+pgAccountButton.addEventListener("click",()=>pgAccountMenu.classList.toggle("open"));
+document.addEventListener("click",e=>{if(!e.target.closest(".pg-account-wrap"))pgAccountMenu.classList.remove("open")});
+$("pgAccountProfile").addEventListener("click",pgOpenProfile);
+$("pgProfileClose").addEventListener("click",pgCloseProfile);
+pgProfileModal.addEventListener("click",e=>{if(e.target===pgProfileModal)pgCloseProfile()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")pgCloseProfile()});
+$("pgAccountDashboard").addEventListener("click",()=>pgAccountMenu.classList.remove("open"));
+pgAccountLogout.addEventListener("click",async()=>{pgAccountLogout.disabled=true;const {error}=await client.auth.signOut({scope:"local"});if(error)console.error("Logout error:",error);pgAccountLogout.disabled=false;pgAccountMenu.classList.remove("open")});
+const pgOriginalLoadMember=loadMember;
+loadMember=async function(user){await pgOriginalLoadMember(user);pgSetAccount(user);$("pgProfileName").textContent=$("dashName").textContent||"—";$("pgProfileEmail").textContent=user.email||"—";$("pgProfileCountry").textContent=$("dashCountry").textContent||"—";$("pgProfileDob").textContent=$("dashDob").textContent||"—";$("pgProfileInterests").textContent=$("dashInterests").textContent||"—";$("pgProfileStatus").textContent="Your Prime Global profile is loaded from your authenticated account."};
+pgSetAccount(null);
 
 </script>
 
