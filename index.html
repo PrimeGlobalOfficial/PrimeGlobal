@@ -14,7 +14,7 @@
 :root{
   --navy:#071a3d;
   --navy2:#102a56;
-  --gold:#f5c542;
+  --accent:#2dd4bf;
   --blue:#1d4ed8;
   --white:#ffffff;
   --light:#f7f9fc;
@@ -83,11 +83,11 @@ header{
 .logo{
   width:44px;
   height:44px;
-  border:2px solid var(--gold);
+  border:2px solid var(--accent);
   border-radius:10px;
   display:grid;
   place-items:center;
-  color:var(--gold);
+  color:var(--accent);
   font-weight:900;
 }
 
@@ -113,7 +113,7 @@ header{
 
 .links a:hover{
   background:#ffffff14;
-  color:var(--gold);
+  color:var(--accent);
 }
 
 .menu{
@@ -145,7 +145,7 @@ header{
 }
 
 .eyebrow{
-  color:var(--gold);
+  color:var(--accent);
   font-weight:800;
   letter-spacing:1.4px;
   text-transform:uppercase;
@@ -181,7 +181,7 @@ header{
 }
 
 .primary{
-  background:var(--gold);
+  background:var(--accent);
   color:#111;
 }
 
@@ -199,7 +199,7 @@ header{
 
 .hero-card strong{
   display:block;
-  color:var(--gold);
+  color:var(--accent);
   font-size:28px;
 }
 
@@ -268,7 +268,7 @@ main section{
 
 .icon{
   font-size:25px;
-  color:var(--gold);
+  color:var(--accent);
 }
 
 .more{
@@ -320,12 +320,12 @@ main section{
 .job-card:nth-child(3n) .job-tag{background:#f0eaff;color:#6540a8}
 .job-card .more{margin-top:auto;padding-top:8px}
 .job-safety{
-  background:#fff8e7;
-  border-left:4px solid #ffc857;
+  background:#e8fbf8;
+  border-left:4px solid #2dd4bf;
   border-radius:8px;
   padding:14px 16px;
   margin-top:22px;
-  color:#704b0a;
+  color:#155e75;
   font-size:14px;
 }
 @media(max-width:950px){.jobs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -334,7 +334,7 @@ main section{
 
 /* PUBLIC START WORKING HUB */
 .start-hub{
-  background:linear-gradient(135deg,#eaf2ff 0%,#e9fbf7 55%,#fff8e7 100%);
+  background:linear-gradient(135deg,#eaf2ff 0%,#e9fbf7 55%,#e8fbf8 100%);
   border:1px solid #c9ddf8;
   border-radius:18px;
   padding:24px;
@@ -346,7 +346,7 @@ main section{
 .start-card h3{margin:0;color:#173b78;font-size:18px}
 .start-card p{margin:0;color:#62718a;font-size:14px}
 .start-card .more{margin-top:auto;padding-top:8px}
-.start-note{background:#fff8e7;border-left:4px solid #e6a323;padding:15px 17px;border-radius:8px;margin-top:18px;color:#704b0a;font-size:14px}
+.start-note{background:#e8fbf8;border-left:4px solid #0f9f9a;padding:15px 17px;border-radius:8px;margin-top:18px;color:#155e75;font-size:14px}
 .start-step{display:inline-grid;place-items:center;min-width:32px;height:32px;border-radius:10px;background:#eaf1ff;color:#246bfd;font-weight:900}
 @media(max-width:950px){.start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.start-grid{grid-template-columns:1fr}.start-hub{padding:18px}}
@@ -371,7 +371,7 @@ main section{
   height:34px;
   border-radius:50%;
   background:var(--navy);
-  color:var(--gold);
+  color:var(--accent);
   display:grid;
   place-items:center;
   font-weight:800;
@@ -391,8 +391,8 @@ main section{
 }
 
 .notice{
-  background:#fff8df;
-  border-left:4px solid var(--gold);
+  background:#e8fbf8;
+  border-left:4px solid var(--accent);
   padding:15px;
   border-radius:7px;
   margin-top:18px;
@@ -432,7 +432,7 @@ main section{
 
 .tab.active{
   background:var(--navy);
-  color:var(--gold);
+  color:var(--accent);
 }
 
 form{
@@ -602,11 +602,11 @@ footer{
 }
 
 .footer a:hover{
-  color:var(--gold);
+  color:var(--accent);
 }
 
-.gold{
-  color:var(--gold);
+.accent{
+  color:var(--accent);
 }
 
 .hidden{
@@ -699,7 +699,7 @@ footer{
 :root{
   --navy:#101c3a;
   --navy2:#173b78;
-  --gold:#ffc857;
+  --accent:#2dd4bf;
   --blue:#246bfd;
   --white:#ffffff;
   --light:#f4f7fc;
@@ -719,17 +719,17 @@ header{
   box-shadow:0 8px 28px #102a5630;
 }
 .logo{
-  background:linear-gradient(135deg,#ffc857,#ffe7a3);
+  background:linear-gradient(135deg,#2dd4bf,#baf3eb);
   color:#101c3a;
-  border-color:#fff1c9;
-  box-shadow:0 5px 18px #ffc85745;
+  border-color:#d8f8f2;
+  box-shadow:0 5px 18px #2dd4bf45;
 }
 .links a{
   transition:background .2s ease,color .2s ease,transform .2s ease;
 }
 .links a:hover{
   background:#ffffff20;
-  color:#ffc857;
+  color:#2dd4bf;
   transform:translateY(-1px);
 }
 .hero{
@@ -756,10 +756,10 @@ header{
 .eyebrow{
   display:inline-block;
   padding:7px 12px;
-  border:1px solid #ffc85766;
+  border:1px solid #2dd4bf66;
   border-radius:999px;
-  background:#ffc85715;
-  color:#ffda78;
+  background:#2dd4bf15;
+  color:#2dd4bf;
 }
 .hero h1{letter-spacing:-1.6px}
 .hero-card{
@@ -768,13 +768,13 @@ header{
   box-shadow:0 20px 55px #06122b45;
   backdrop-filter:blur(10px);
 }
-.hero-card strong{color:#ffd36e}
+.hero-card strong{color:#2dd4bf}
 .btn{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
 .btn:hover{transform:translateY(-2px);box-shadow:0 9px 22px #0002}
 .primary{
-  background:linear-gradient(135deg,#ffd36e,#ffb938);
+  background:linear-gradient(135deg,#2dd4bf,#ffb938);
   color:#14213d;
-  box-shadow:0 7px 20px #ffc85735;
+  box-shadow:0 7px 20px #2dd4bf35;
 }
 .secondary{background:#ffffff0d}
 main section:nth-of-type(even){background:#ffffff70}
@@ -833,8 +833,8 @@ main section:nth-of-type(even){background:#ffffff70}
 }
 .info{background:linear-gradient(135deg,#fff,#f7faff)}
 .notice{
-  background:linear-gradient(100deg,#fff7df,#fffaf0);
-  border-left-color:#ffc857;
+  background:linear-gradient(100deg,#fff7df,#e8fbf8);
+  border-left-color:#2dd4bf;
   box-shadow:0 5px 18px #b7791f0b;
 }
 .auth,.dashboard{
@@ -869,7 +869,7 @@ footer{
     linear-gradient(120deg,#101c3a,#173b78);
   border-top:4px solid #13b8a6;
 }
-.gold{color:#ffd36e}
+.accent{color:#2dd4bf}
 @media(max-width:700px){
   .hero h1{letter-spacing:-.8px}
   .hero-card{padding:22px}
@@ -928,9 +928,9 @@ footer{
   box-shadow:0 7px 18px #246bfd30;
 }
 .payment-panel{
-  background:linear-gradient(135deg,#fff8e8 0%,#fff2d6 45%,#fffaf2 100%);
+  background:linear-gradient(135deg,#e8fbf8 0%,#fff2d6 45%,#fffaf2 100%);
   border:1px solid #f3d28c;
-  border-top:5px solid #e6a323;
+  border-top:5px solid #0f9f9a;
   box-shadow:0 14px 32px #d9770612;
 }
 .payment-panel h3{color:#8a4b08 !important}
@@ -942,11 +942,11 @@ footer{
 }
 .payment-panel input:focus,
 .payment-panel select:focus{
-  outline:3px solid #e6a32325;
+  outline:3px solid #0f9f9a25;
   border-color:#c7830b !important;
 }
 .payment-panel .submit{
-  background:linear-gradient(110deg,#c77a08,#e6a323);
+  background:linear-gradient(110deg,#c77a08,#0f9f9a);
   color:#fff;
   box-shadow:0 7px 18px #c77a0830;
 }
@@ -2224,7 +2224,7 @@ class="small">
 </div>
 
 <!-- ADMIN WITHDRAWAL REVIEW: privileged actions are performed by a server-verified Edge Function -->
-<div class="info" id="adminWithdrawalReviewPanel" style="display:none;margin-top:18px;border:2px solid #b7791f;background:#fffaf0;">
+<div class="info" id="adminWithdrawalReviewPanel" style="display:none;margin-top:18px;border:2px solid #b7791f;background:#e8fbf8;">
   <h3 style="margin-top:0;color:#071a3d;">Administrator · Withdrawal Review</h3>
   <p class="small">Review requests and pay manually through the selected provider. Mark a request as paid only after the transfer succeeds, and record the provider transaction/reference ID. This panel does not send money automatically.</p>
   <div id="adminWithdrawalReviewMessage" class="small" role="status" aria-live="polite">Loading withdrawal queue…</div>
@@ -2371,7 +2371,7 @@ style="color:#1d4ed8">
 
 <div>
 
-<strong class="gold">
+<strong class="accent">
 PRIME GLOBAL
 </strong>
 
