@@ -1716,6 +1716,51 @@ class="small">
 
 </div>
 
+<!-- REFERRALS AND REWARDS -->
+<div class="info" style="margin-top:18px;">
+  <h3 style="margin-top:0;color:#071a3d;">Referrals &amp; Rewards</h3>
+  <p class="small">Invite people to Prime Global using your personal link. Referral rewards remain pending until they are reviewed and approved.</p>
+  <div class="dash-grid" style="margin-top:14px;">
+    <div class="dash-item"><b>Your referral code</b><span id="referralCode">Loading…</span></div>
+    <div class="dash-item"><b>Pending rewards</b><span id="pendingRewards">$0.00 USD</span></div>
+    <div class="dash-item"><b>Approved rewards</b><span id="approvedRewards">$0.00 USD</span></div>
+  </div>
+  <label for="referralLink" style="display:block;margin-top:14px;">Your referral link</label>
+  <input id="referralLink" type="text" readonly value="" aria-label="Your personal referral link">
+  <button type="button" class="submit" id="copyReferralLink">Copy referral link</button>
+  <p class="small" id="referralInfo" style="margin-top:10px;">Minimum withdrawal: $30.00 USD. Planned methods: PayPal, Airtm and Wise.</p>
+</div>
+
+<div class="info" style="margin-top:18px;">
+  <h3 style="margin-top:0;color:#071a3d;">Request a Withdrawal</h3>
+  <p class="small">You can request a withdrawal once your approved rewards meet the minimum threshold and cover the requested amount. Payment requests are reviewed manually.</p>
+  <form id="withdrawalForm">
+    <div>
+      <label for="withdrawalAmount">Amount (USD)</label>
+      <input id="withdrawalAmount" type="number" min="30" step="0.01" placeholder="30.00" required>
+    </div>
+    <div>
+      <label for="payoutMethod">Payout method</label>
+      <select id="payoutMethod" required style="width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font:inherit;">
+        <option value="PayPal">PayPal</option>
+        <option value="Airtm">Airtm</option>
+        <option value="Wise">Wise</option>
+      </select>
+    </div>
+    <div>
+      <label for="payoutAccount">Payout account identifier</label>
+      <input id="payoutAccount" type="text" minlength="3" maxlength="250" placeholder="PayPal email or relevant account identifier" required>
+      <p class="small">Enter only the account identifier needed for payment. Never enter your password, PIN or verification code.</p>
+    </div>
+    <button type="submit" class="submit">Submit withdrawal request</button>
+    <div id="withdrawalMsg" class="msg" role="status" aria-live="polite"></div>
+  </form>
+</div>
+
+<div class="info" style="margin-top:18px;">
+  <h3 style="margin-top:0;color:#071a3d;">Withdrawal History</h3>
+  <div id="withdrawalHistory" class="small">No withdrawal requests yet.</div>
+</div>
 
 </div>
 
@@ -1869,11 +1914,19 @@ Do NOT replace it with localhost.
 const SITE_URL =
 "https://primeglobalofficial.github.io/PrimeGlobal/";
 
+const REFERRAL_CODE = (() => {
+  const candidate = new URLSearchParams(window.location.search).get("ref") || "";
+  return /^[A-Z0-9]{8,16}$/.test(candidate.trim().toUpperCase())
+    ? candidate.trim().toUpperCase()
+    : "";
+})();
 
 /* SHORTCUT */
 
 const $ = id =>
 document.getElementById(id);
+
+let currentMemberId = null;
 
 
 /* MOBILE MENU */
@@ -2053,7 +2106,10 @@ country_of_residence:
 $("country").value.trim(),
 
 interests:
-interests
+interests,
+
+referral_code:
+REFERRAL_CODE || null
 
 }
 
@@ -2234,6 +2290,8 @@ error.message ||
 
 async function loadMember(user){
 
+currentMemberId = user.id;
+
 $("authArea").classList.add("hidden");
 
 $("dashboard").style.display =
@@ -2338,6 +2396,7 @@ interests.length
 ? interests.join(" • ")
 : "No interests saved";
 
+await loadReferralDashboard(user);
 
 document
 .querySelector("#member")
@@ -2346,6 +2405,132 @@ behavior:"smooth"
 });
 
 }
+
+
+/* REFERRAL DASHBOARD */
+
+function money(value){
+  return new Intl.NumberFormat("en-US", {
+    style:"currency",
+    currency:"USD"
+  }).format(Number(value || 0));
+}
+
+async function loadReferralDashboard(user){
+  const [codeResult, referralsResult, rewardsResult, withdrawalsResult, settingsResult] = await Promise.all([
+    client.from("referral_codes").select("code").eq("user_id", user.id).maybeSingle(),
+    client.from("referrals").select("id,status").eq("referrer_id", user.id),
+    client.from("referral_rewards").select("amount_usd,status").eq("user_id", user.id),
+    client.from("withdrawal_requests").select("amount_usd,payout_method,status,created_at").eq("user_id", user.id).order("created_at", {ascending:false}).limit(10),
+    client.from("referral_program_settings").select("min_withdrawal_usd,payout_methods,is_active").eq("id", true).maybeSingle()
+  ]);
+
+  const code = codeResult.data?.code || "";
+  $("referralCode").textContent = code || "Not available";
+  $("referralLink").value = code
+    ? new URL("?ref=" + encodeURIComponent(code), SITE_URL).toString()
+    : "";
+
+  if(codeResult.error){
+    $("referralInfo").textContent = "Your referral code could not be loaded. Please try again later.";
+  }
+
+  const rewards = rewardsResult.data || [];
+  const pending = rewards.filter(item => item.status === "pending").reduce((sum,item) => sum + Number(item.amount_usd || 0), 0);
+  const approved = rewards.filter(item => item.status === "approved").reduce((sum,item) => sum + Number(item.amount_usd || 0), 0);
+  $("pendingRewards").textContent = money(pending);
+  $("approvedRewards").textContent = money(approved);
+
+  const settings = settingsResult.data;
+  const threshold = settings?.min_withdrawal_usd == null ? 30 : Number(settings.min_withdrawal_usd);
+  $("referralInfo").textContent = settings?.is_active === false
+    ? "Referral withdrawals are temporarily unavailable."
+    : "Minimum withdrawal: " + money(threshold) + ". Planned methods: " + ((settings?.payout_methods || ["PayPal","Airtm","Wise"]).join(", ")) + ".";
+  $("withdrawalAmount").min = String(threshold);
+  $("withdrawalAmount").placeholder = threshold.toFixed(2);
+
+  const payoutSelect = $("payoutMethod");
+  const allowedMethods = settings?.payout_methods || ["PayPal","Airtm","Wise"];
+  payoutSelect.replaceChildren();
+  allowedMethods.forEach(method => {
+    const option = document.createElement("option");
+    option.value = method;
+    option.textContent = method;
+    payoutSelect.appendChild(option);
+  });
+  $("withdrawalForm").querySelector('button[type="submit"]').disabled = settings?.is_active === false || !allowedMethods.length;
+
+  const history = $("withdrawalHistory");
+  history.replaceChildren();
+  const withdrawalRows = withdrawalsResult.data || [];
+  if(!withdrawalRows.length){
+    history.textContent = "No withdrawal requests yet.";
+  }else{
+    withdrawalRows.forEach(item => {
+      const row = document.createElement("div");
+      row.style.padding = "10px 0";
+      row.style.borderBottom = "1px solid #e5e7eb";
+      const date = item.created_at ? new Date(item.created_at).toLocaleDateString() : "";
+      row.textContent = money(item.amount_usd) + " · " + item.payout_method + " · " + item.status + (date ? " · " + date : "");
+      history.appendChild(row);
+    });
+  }
+
+  const referralCount = (referralsResult.data || []).length;
+  $("referralInfo").textContent += " Your referrals: " + referralCount + ".";
+}
+
+/* Copy referral link */
+$("copyReferralLink").addEventListener("click", async () => {
+  const link = $("referralLink").value;
+  if(!link){
+    $("referralInfo").textContent = "Your referral link is not available yet.";
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(link);
+    $("referralInfo").textContent = "Referral link copied. Share it with people you invite.";
+  }catch(error){
+    $("referralLink").focus();
+    $("referralLink").select();
+    $("referralInfo").textContent = "Select and copy the referral link above.";
+  }
+});
+
+/* Submit withdrawal request */
+$("withdrawalForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if(!currentMemberId){
+    showMessage($("withdrawalMsg"), "Please sign in again before requesting a withdrawal.");
+    return;
+  }
+
+  const amount = Number($("withdrawalAmount").value);
+  const payoutMethod = $("payoutMethod").value;
+  const payoutAccount = $("payoutAccount").value.trim();
+  const submitButton = $("withdrawalForm").querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting…";
+
+  try{
+    const {error} = await client.from("withdrawal_requests").insert({
+      user_id: currentMemberId,
+      amount_usd: amount,
+      payout_method: payoutMethod,
+      payout_account: payoutAccount
+    });
+    if(error) throw error;
+
+    showMessage($("withdrawalMsg"), "Withdrawal request submitted for review.", true);
+    $("withdrawalForm").reset();
+    await loadReferralDashboard({id:currentMemberId});
+  }catch(error){
+    showMessage($("withdrawalMsg"), error.message || "Could not submit the withdrawal request.");
+  }finally{
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit withdrawal request";
+  }
+});
 
 
 /* LOGOUT */
@@ -2366,6 +2551,8 @@ console.error(error);
 
 $("dashboard").style.display =
 "none";
+
+currentMemberId = null;
 
 $("authArea").classList.remove(
 "hidden"
