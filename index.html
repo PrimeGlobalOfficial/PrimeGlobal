@@ -2202,6 +2202,15 @@ class="small">
 
 </div>
 
+<!-- ADMIN TASK REVIEW: visible only to the designated administrator -->
+<div class="info" id="adminTaskReviewPanel" style="display:none;margin-top:18px;border:2px solid #0f766e;">
+  <h3 style="margin-top:0;color:#071a3d;">Administrator · Task Review</h3>
+  <p class="small">Review submitted task evidence. Approve only after verifying the work. Approval may qualify a referred member for a pending referral reward; it does not authorize an automatic payout.</p>
+  <div id="adminTaskReviewMessage" class="small" role="status" aria-live="polite">Loading review queue…</div>
+  <div id="adminTaskReviewList"></div>
+  <button type="button" class="submit" id="refreshAdminTaskReview" style="margin-top:12px;">Refresh submissions</button>
+</div>
+
 <!-- REFERRALS AND REWARDS -->
 <div class="info reward-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Referrals &amp; Rewards</h3>
@@ -2898,6 +2907,7 @@ interests.length
 : "No interests saved";
 
 await loadReferralDashboard(user);
+await loadAdminTaskReview(user);
 
 document
 .querySelector("#member")
@@ -3020,6 +3030,119 @@ async function loadTaskSubmissions(user){
     history.appendChild(row);
   });
 }
+
+/* ADMIN TASK REVIEW */
+const PRIME_GLOBAL_ADMIN_EMAIL = "kimwetichamon2@gmail.com";
+
+async function loadAdminTaskReview(user){
+  const panel = $("adminTaskReviewPanel");
+  if(!panel) return;
+  const isAdmin = (user?.email || "").toLowerCase() === PRIME_GLOBAL_ADMIN_EMAIL;
+  panel.style.display = isAdmin ? "block" : "none";
+  if(!isAdmin) return;
+
+  const message = $("adminTaskReviewMessage");
+  const list = $("adminTaskReviewList");
+  message.textContent = "Loading task submissions…";
+  list.replaceChildren();
+
+  const {data, error} = await client.from("task_submissions")
+    .select("id,user_id,platform,task_title,completion_date,evidence_note,status,admin_note,created_at,reviewed_at")
+    .order("created_at", {ascending:false}).limit(100);
+
+  if(error){
+    message.textContent = "Could not load submissions. Check administrator access and database policies, then refresh.";
+    console.error("Admin task review load error:", error);
+    return;
+  }
+
+  const rows = data || [];
+  const pendingCount = rows.filter(item => item.status === "pending").length;
+  message.textContent = rows.length
+    ? rows.length + " submission(s) shown · " + pendingCount + " pending review."
+    : "No task submissions have been received yet.";
+
+  if(!rows.length) return;
+
+  rows.forEach(item => {
+    const card = document.createElement("div");
+    card.style.cssText = "padding:14px 0;border-bottom:1px solid #dbe3ee;display:grid;gap:8px;";
+    const heading = document.createElement("strong");
+    heading.textContent = item.task_title + " — " + item.platform;
+    card.appendChild(heading);
+
+    const details = document.createElement("div");
+    details.className = "small";
+    details.textContent = "Submitted: " + (item.created_at ? new Date(item.created_at).toLocaleString() : "—")
+      + " · Completed: " + item.completion_date
+      + " · Status: " + item.status
+      + " · Member ID: " + item.user_id;
+    card.appendChild(details);
+
+    const evidenceTitle = document.createElement("b");
+    evidenceTitle.textContent = "Evidence summary";
+    card.appendChild(evidenceTitle);
+    const evidence = document.createElement("p");
+    evidence.className = "small";
+    evidence.style.whiteSpace = "pre-wrap";
+    evidence.textContent = item.evidence_note || "No evidence summary supplied.";
+    card.appendChild(evidence);
+
+    if(item.admin_note){
+      const note = document.createElement("p");
+      note.className = "small";
+      note.textContent = "Previous review note: " + item.admin_note;
+      card.appendChild(note);
+    }
+
+    if(item.status === "pending"){
+      const noteInput = document.createElement("textarea");
+      noteInput.rows = 2;
+      noteInput.maxLength = 1000;
+      noteInput.placeholder = "Optional review note (max 1,000 characters)";
+      noteInput.setAttribute("aria-label", "Review note for " + item.task_title);
+      noteInput.style.cssText = "width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;";
+      card.appendChild(noteInput);
+
+      const actions = document.createElement("div");
+      actions.style.cssText = "display:flex;gap:10px;flex-wrap:wrap;";
+      [["approved","Approve task"],["rejected","Reject task"]].forEach(([status,label]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "submit";
+        button.textContent = label;
+        button.addEventListener("click", async () => {
+          if(status === "approved" && !window.confirm("Approve this task only if you have verified the work. Continue?")) return;
+          button.disabled = true;
+          button.textContent = "Saving…";
+          const {error: updateError} = await client.from("task_submissions")
+            .update({status, admin_note: noteInput.value.trim() || null, reviewed_at: new Date().toISOString()})
+            .eq("id", item.id).eq("status", "pending");
+          if(updateError){
+            message.textContent = "Review could not be saved. The database may be blocking the approval trigger; no success is assumed.";
+            console.error("Admin task review update error:", updateError);
+            button.disabled = false;
+            button.textContent = label;
+            return;
+          }
+          message.textContent = status === "approved"
+            ? "Task marked approved. Please verify referral reward creation separately."
+            : "Task marked rejected.";
+          await loadAdminTaskReview(user);
+          await loadTaskSubmissions(user);
+        });
+        actions.appendChild(button);
+      });
+      card.appendChild(actions);
+    }
+    list.appendChild(card);
+  });
+}
+
+$("refreshAdminTaskReview")?.addEventListener("click", async () => {
+  const {data} = await client.auth.getUser();
+  if(data?.user) await loadAdminTaskReview(data.user);
+});
 
 /* Submit completed task for manual review */
 $("taskSubmissionForm").addEventListener("submit", async event => {
