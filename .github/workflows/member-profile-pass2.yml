@@ -1,0 +1,42 @@
+name: Prime Global Member Profile Pass 2
+on:
+  push:
+    paths:
+      - member-profile-pass2.trigger
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  enhance-member-profile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply JavaScript profile UI
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); h=p.read_text(encoding='utf-8')
+          if 'id="pg-member-profile-pass-2"' in h:
+              raise SystemExit(0)
+          css='''\n.pg-account-wrap{position:relative;display:flex;align-items:center;margin-left:8px}.pg-account-btn{border:1px solid #dbe6f4;background:#fff;color:#173b78;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}.pg-account-btn:hover{background:#f5f8ff}.pg-account-menu{position:absolute;right:0;top:46px;width:230px;background:#fff;border:1px solid #dbe6f4;border-radius:14px;box-shadow:0 18px 40px #173b7820;padding:10px;display:none;z-index:50}.pg-account-menu.open{display:block}.pg-account-menu .pg-user{padding:9px 10px;border-bottom:1px solid #e5e7eb;margin-bottom:6px}.pg-account-menu .pg-user strong{display:block;color:#071a3d}.pg-account-menu .pg-user span{display:block;color:#64748b;font-size:12px;overflow:hidden;text-overflow:ellipsis}.pg-account-menu button,.pg-account-menu a{display:block;width:100%;text-align:left;border:0;background:none;padding:10px;border-radius:8px;color:#173b78;text-decoration:none;cursor:pointer;font:inherit}.pg-account-menu button:hover,.pg-account-menu a:hover{background:#f5f8ff}.pg-profile-modal{position:fixed;inset:0;background:#071a3d80;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.pg-profile-modal.open{display:flex}.pg-profile-card{width:min(520px,100%);background:#fff;border-radius:20px;padding:26px;box-shadow:0 25px 70px #071a3d45}.pg-profile-head{display:flex;justify-content:space-between;gap:15px;align-items:center}.pg-profile-head h3{margin:0;color:#071a3d}.pg-profile-close{border:0;background:#eef3fa;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px}.pg-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.pg-profile-item{background:#f7f9fc;border:1px solid #e5e7eb;border-radius:11px;padding:12px}.pg-profile-item b{display:block;font-size:12px;color:#64748b;margin-bottom:4px}.pg-profile-item span{color:#172033;font-weight:600;word-break:break-word}@media(max-width:700px){.pg-account-wrap{margin:8px 0}.pg-profile-grid{grid-template-columns:1fr}}\n'''
+          h=h.replace('</style>',css+'</style>',1)
+          old='''<a href="#member">Member Account</a>'''
+          new='''<a href="#member">Member Account</a>\n<div class="pg-account-wrap" id="pg-member-profile-pass-2"><button class="pg-account-btn" id="pgAccountButton" type="button">Member ▾</button><div class="pg-account-menu" id="pgAccountMenu"><div class="pg-user"><strong id="pgAccountName">Guest</strong><span id="pgAccountEmail">Not signed in</span></div><a href="#member" id="pgAccountDashboard">Dashboard</a><button type="button" id="pgAccountProfile">My Profile</button><button type="button" id="pgAccountLogout" style="display:none">Log Out</button></div></div>'''
+          if old not in h: raise SystemExit('Member Account nav boundary not found')
+          h=h.replace(old,new,1)
+          modal='''\n<div class="pg-profile-modal" id="pgProfileModal" role="dialog" aria-modal="true" aria-labelledby="pgProfileTitle"><div class="pg-profile-card"><div class="pg-profile-head"><h3 id="pgProfileTitle">My Profile</h3><button class="pg-profile-close" id="pgProfileClose" type="button" aria-label="Close profile">×</button></div><p class="small" id="pgProfileStatus">Sign in to view your profile.</p><div class="pg-profile-grid"><div class="pg-profile-item"><b>Full Name</b><span id="pgProfileName">—</span></div><div class="pg-profile-item"><b>Email</b><span id="pgProfileEmail">—</span></div><div class="pg-profile-item"><b>Country</b><span id="pgProfileCountry">—</span></div><div class="pg-profile-item"><b>Date of Birth</b><span id="pgProfileDob">—</span></div><div class="pg-profile-item" style="grid-column:1/-1"><b>Opportunity Interests</b><span id="pgProfileInterests">—</span></div></div></div></div>\n'''
+          h=h.replace('</main>',modal+'</main>',1)
+          js='''\n\n/* MEMBER PROFILE UI */\nconst pgAccountButton=$("pgAccountButton");\nconst pgAccountMenu=$("pgAccountMenu");\nconst pgAccountName=$("pgAccountName");\nconst pgAccountEmail=$("pgAccountEmail");\nconst pgAccountLogout=$("pgAccountLogout");\nconst pgProfileModal=$("pgProfileModal");\nfunction pgSetAccount(user){\n  const signed=!!user;\n  pgAccountName.textContent=signed?(user.user_metadata?.full_name||"Member"):"Guest";\n  pgAccountEmail.textContent=signed?(user.email||""):"Not signed in";\n  pgAccountButton.textContent=signed?"My Account ▾":"Member ▾";\n  pgAccountLogout.style.display=signed?"block":"none";\n}\nfunction pgOpenProfile(){\n  pgAccountMenu.classList.remove("open");\n  if(!currentMemberId){ document.querySelector("#member")?.scrollIntoView({behavior:"smooth"}); return; }\n  pgProfileModal.classList.add("open");\n}\nfunction pgCloseProfile(){pgProfileModal.classList.remove("open");}\npgAccountButton.addEventListener("click",()=>pgAccountMenu.classList.toggle("open"));\ndocument.addEventListener("click",e=>{if(!e.target.closest(".pg-account-wrap"))pgAccountMenu.classList.remove("open")});\n$("pgAccountProfile").addEventListener("click",pgOpenProfile);\n$("pgProfileClose").addEventListener("click",pgCloseProfile);\npgProfileModal.addEventListener("click",e=>{if(e.target===pgProfileModal)pgCloseProfile()});\ndocument.addEventListener("keydown",e=>{if(e.key==="Escape")pgCloseProfile()});\n$("pgAccountDashboard").addEventListener("click",()=>pgAccountMenu.classList.remove("open"));\npgAccountLogout.addEventListener("click",async()=>{pgAccountLogout.disabled=true;const {error}=await client.auth.signOut({scope:"local"});if(error)console.error("Logout error:",error);pgAccountLogout.disabled=false;pgAccountMenu.classList.remove("open")});\nconst pgOriginalLoadMember=loadMember;\nloadMember=async function(user){await pgOriginalLoadMember(user);pgSetAccount(user);$("pgProfileName").textContent=$("dashName").textContent||"—";$("pgProfileEmail").textContent=user.email||"—";$("pgProfileCountry").textContent=$("dashCountry").textContent||"—";$("pgProfileDob").textContent=$("dashDob").textContent||"—";$("pgProfileInterests").textContent=$("dashInterests").textContent||"—";$("pgProfileStatus").textContent="Your Prime Global profile is loaded from your authenticated account."};\npgSetAccount(null);\n'''
+          marker='''\n</script>'''
+          if marker not in h: raise SystemExit('Script closing boundary not found')
+          h=h.replace(marker,js+marker,1)
+          p.write_text(h,encoding='utf-8')
+          PY
+      - name: Commit member profile update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Add JavaScript member profile experience"
+          git push
