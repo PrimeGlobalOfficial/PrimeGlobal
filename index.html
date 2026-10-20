@@ -796,6 +796,97 @@ footer{
   .section-head h2{font-size:29px}
 }
 
+
+
+/* REWARDS AND PAYMENTS: DISTINCT COLOUR PANELS */
+.reward-panel{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#eef5ff 0%,#e6f8ff 52%,#e5fbf3 100%);
+  border:1px solid #b9d8fb;
+  border-top:5px solid #246bfd;
+  box-shadow:0 14px 32px #246bfd18;
+}
+.reward-panel:after{
+  content:"$";
+  position:absolute;
+  right:18px;
+  top:10px;
+  font-size:100px;
+  line-height:1;
+  font-weight:900;
+  color:#246bfd0c;
+  pointer-events:none;
+}
+.reward-panel h3{color:#173b78 !important}
+.reward-panel .dash-item{
+  position:relative;
+  z-index:1;
+  background:linear-gradient(145deg,#fff,#eaf2ff);
+  border:1px solid #c8dcff;
+  border-radius:13px;
+  box-shadow:0 5px 14px #246bfd10;
+}
+.reward-panel .dash-item:nth-child(2){
+  background:linear-gradient(145deg,#e0f2fe,#dbeafe);
+  border-color:#a9cdfb;
+}
+.reward-panel .dash-item:nth-child(3){
+  background:linear-gradient(145deg,#d1fae5,#e7fff5);
+  border-color:#9ce8cb;
+}
+.reward-panel .dash-item b{color:#173b78}
+.reward-panel #pendingRewards{color:#246bfd;font-weight:900;font-size:20px}
+.reward-panel #approvedRewards{color:#07845e;font-weight:900;font-size:20px}
+.reward-panel #referralCode{color:#173b78;font-weight:900;letter-spacing:1px}
+.reward-panel #referralLink{
+  border-color:#9dbdf5;
+  background:#ffffffd9;
+}
+.reward-panel #copyReferralLink{
+  background:linear-gradient(110deg,#246bfd,#13b8a6);
+  box-shadow:0 7px 18px #246bfd30;
+}
+.payment-panel{
+  background:linear-gradient(135deg,#fff8e8 0%,#fff2d6 45%,#fffaf2 100%);
+  border:1px solid #f3d28c;
+  border-top:5px solid #e6a323;
+  box-shadow:0 14px 32px #d9770612;
+}
+.payment-panel h3{color:#8a4b08 !important}
+.payment-panel label{color:#70400c}
+.payment-panel input,
+.payment-panel select{
+  background:#fff !important;
+  border-color:#e8c77f !important;
+}
+.payment-panel input:focus,
+.payment-panel select:focus{
+  outline:3px solid #e6a32325;
+  border-color:#c7830b !important;
+}
+.payment-panel .submit{
+  background:linear-gradient(110deg,#c77a08,#e6a323);
+  color:#fff;
+  box-shadow:0 7px 18px #c77a0830;
+}
+.payment-panel .submit:hover{
+  box-shadow:0 10px 22px #c77a0840;
+}
+.history-panel{
+  background:linear-gradient(135deg,#f0eaff,#f7f3ff 60%,#eef5ff);
+  border:1px solid #d7c8fa;
+  border-top:5px solid #805ad5;
+}
+.history-panel h3{color:#5937a4 !important}
+.history-panel #withdrawalHistory{
+  display:block;
+  padding:13px;
+  border-radius:10px;
+  background:#ffffffc9;
+  border:1px solid #e4dafa;
+}
+
 </style>
 </head>
 
@@ -1900,7 +1991,7 @@ class="small">
 </div>
 
 <!-- REFERRALS AND REWARDS -->
-<div class="info" style="margin-top:18px;">
+<div class="info reward-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Referrals &amp; Rewards</h3>
   <p class="small">Invite genuine members using your personal link. The proposed reward is shown below and is credited only after the referred member verifies their account, completes an approved task, and Prime Global reviews the referral.</p>
   <div class="dash-grid" style="margin-top:14px;">
@@ -1914,7 +2005,7 @@ class="small">
   <p class="small" id="referralInfo" style="margin-top:10px;">Minimum withdrawal: $30.00 USD. Planned methods: PayPal, Airtm and Wise.</p>
 </div>
 
-<div class="info" style="margin-top:18px;">
+<div class="info payment-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Request a Withdrawal</h3>
   <p class="small">You can request a withdrawal once your approved rewards meet the minimum threshold and cover the requested amount. Payment requests are reviewed manually.</p>
   <form id="withdrawalForm">
@@ -1940,7 +2031,7 @@ class="small">
   </form>
 </div>
 
-<div class="info" style="margin-top:18px;">
+<div class="info history-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Withdrawal History</h3>
   <div id="withdrawalHistory" class="small">No withdrawal requests yet.</div>
 </div>
