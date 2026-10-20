@@ -3046,17 +3046,32 @@ async function loadAdminTaskReview(user){
   message.textContent = "Loading task submissions…";
   list.replaceChildren();
 
-  const {data, error} = await client.from("task_submissions")
-    .select("id,user_id,platform,task_title,completion_date,evidence_note,status,admin_note,created_at,reviewed_at")
-    .order("created_at", {ascending:false}).limit(100);
-
-  if(error){
-    message.textContent = "Could not load submissions. Check administrator access and database policies, then refresh.";
-    console.error("Admin task review load error:", error);
+  const {data: sessionData} = await client.auth.getSession();
+  const accessToken = sessionData?.session?.access_token;
+  if(!accessToken){
+    message.textContent = "Please sign in again to review submissions.";
+    return;
+  }
+  let response;
+  let payload;
+  try {
+    response = await fetch(SUPABASE_URL + "/functions/v1/prime-global-task-review", {
+      method: "GET",
+      headers: { "Authorization": "Bearer " + accessToken, "apikey": SUPABASE_KEY }
+    });
+    payload = await response.json();
+  } catch(fetchError) {
+    message.textContent = "Could not connect to the secure review service. Please refresh and try again.";
+    console.error("Admin task review request error:", fetchError);
+    return;
+  }
+  if(!response.ok){
+    message.textContent = payload?.error || "Could not load submissions. Check administrator access.";
+    console.error("Admin task review response:", payload);
     return;
   }
 
-  const rows = data || [];
+  const rows = payload.submissions || [];
   const pendingCount = rows.filter(item => item.status === "pending").length;
   message.textContent = rows.length
     ? rows.length + " submission(s) shown · " + pendingCount + " pending review."
@@ -3115,18 +3130,37 @@ async function loadAdminTaskReview(user){
           if(status === "approved" && !window.confirm("Approve this task only if you have verified the work. Continue?")) return;
           button.disabled = true;
           button.textContent = "Saving…";
-          const {error: updateError} = await client.from("task_submissions")
-            .update({status, admin_note: noteInput.value.trim() || null, reviewed_at: new Date().toISOString()})
-            .eq("id", item.id).eq("status", "pending");
-          if(updateError){
-            message.textContent = "Review could not be saved. The database may be blocking the approval trigger; no success is assumed.";
-            console.error("Admin task review update error:", updateError);
+          const {data: sessionData} = await client.auth.getSession();
+          const accessToken = sessionData?.session?.access_token;
+          let response;
+          let payload;
+          try {
+            response = await fetch(SUPABASE_URL + "/functions/v1/prime-global-task-review", {
+              method: "POST",
+              headers: {
+                "Authorization": "Bearer " + accessToken,
+                "apikey": SUPABASE_KEY,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({id: item.id, status, admin_note: noteInput.value.trim() || null})
+            });
+            payload = await response.json();
+          } catch(updateError) {
+            message.textContent = "Could not connect to the secure review service. No success is assumed.";
+            console.error("Admin task review request error:", updateError);
+            button.disabled = false;
+            button.textContent = label;
+            return;
+          }
+          if(!response.ok){
+            message.textContent = payload?.error || "Review could not be saved.";
+            console.error("Admin task review response:", payload);
             button.disabled = false;
             button.textContent = label;
             return;
           }
           message.textContent = status === "approved"
-            ? "Task marked approved. Please verify referral reward creation separately."
+            ? "Task marked approved. Check referral rewards for any qualifying referral."
             : "Task marked rejected.";
           await loadAdminTaskReview(user);
           await loadTaskSubmissions(user);
