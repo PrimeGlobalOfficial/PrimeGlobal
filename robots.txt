@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://primeglobalofficial.github.io/PrimeGlobal/sitemap.xml
