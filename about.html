@@ -1,560 +1,2406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Training & Evaluation | Prime Global</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root {
-      --navy: #071a3d;
-      --navy2: #102a56;
-      --gold: #f5c542;
-      --blue: #1d4ed8;
-      --white: #ffffff;
-      --light: #f8fafc;
-      --text: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-    }
+<meta name="description" content="Prime Global connects people worldwide with information about digital work and global remote opportunities.">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta name="theme-color" content="#071a3d">
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--light);
-      color: var(--text);
-      line-height: 1.6;
-    }
+<title>Prime Global | Opportunities Worldwide</title>
 
-    header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 16px 5%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+<style>
+:root{
+  --navy:#071a3d;
+  --navy2:#102a56;
+  --gold:#f5c542;
+  --blue:#1d4ed8;
+  --white:#ffffff;
+  --light:#f7f9fc;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e5e7eb;
+  --success:#10b981;
+  --danger:#dc2626;
+}
 
-    .nav {
-      max-width: 1150px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: white;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .logo {
-      width: 42px;
-      height: 42px;
-      background: var(--gold);
-      color: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 9px;
-      font-weight: 900;
-      font-size: 18px;
-    }
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--text);
+  line-height:1.6;
+}
 
-    .brand-text strong {
-      display: block;
-      font-size: 18px;
-    }
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-    .brand-text span {
-      font-size: 12px;
-      color: #dbe5f5;
-    }
+button,
+input{
+  font:inherit;
+}
 
-    .back {
-      color: white;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,.3);
-      padding: 9px 15px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
+/* HEADER */
 
-    .back:hover {
-      background: rgba(255,255,255,.1);
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:var(--navy);
+  color:#fff;
+  box-shadow:0 2px 12px #0003;
+}
 
-    .hero {
-      background: linear-gradient(135deg, var(--navy), var(--navy2));
-      color: white;
-      padding: 70px 5%;
-    }
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
 
-    .hero-inner {
-      max-width: 1050px;
-      margin: auto;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:20px;
+}
 
-    .label {
-      color: var(--gold);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
+.logo{
+  width:44px;
+  height:44px;
+  border:2px solid var(--gold);
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  color:var(--gold);
+  font-weight:900;
+}
 
-    h1 {
-      font-size: clamp(32px, 6vw, 54px);
-      line-height: 1.1;
-      margin-bottom: 18px;
-    }
+.brand small{
+  display:block;
+  color:#dbe4f4;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.5px;
+}
 
-    .hero p {
-      max-width: 760px;
-      color: #dbe5f5;
-      font-size: 18px;
-    }
+.links{
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
 
-    main {
-      max-width: 1050px;
-      margin: 45px auto;
-      padding: 0 5%;
-    }
+.links a{
+  padding:9px 10px;
+  border-radius:7px;
+  font-size:14px;
+}
 
-    section {
-      background: white;
-      padding: 30px;
-      margin-bottom: 25px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      box-shadow: 0 5px 20px rgba(7,26,61,.05);
-    }
+.links a:hover{
+  background:#ffffff14;
+  color:var(--gold);
+}
 
-    h2 {
-      color: var(--navy);
-      margin-bottom: 15px;
-      font-size: 25px;
-    }
+.menu{
+  display:none;
+  background:none;
+  border:1px solid #ffffff55;
+  color:#fff;
+  border-radius:7px;
+  padding:8px 11px;
+  font-size:18px;
+  cursor:pointer;
+}
 
-    h3 {
-      color: var(--navy2);
-      margin: 20px 0 8px;
-      font-size: 18px;
-    }
+/* HERO */
 
-    p {
-      margin-bottom: 12px;
-    }
+.hero{
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff;
+}
 
-    ul {
-      padding-left: 22px;
-      margin-bottom: 12px;
-    }
+.hero-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:50px;
+  align-items:center;
+}
 
-    li {
-      margin-bottom: 8px;
-    }
+.eyebrow{
+  color:var(--gold);
+  font-weight:800;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+  font-size:13px;
+}
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-top: 20px;
-    }
+.hero h1{
+  font-size:clamp(40px,6vw,68px);
+  line-height:1.04;
+  margin:12px 0 18px;
+}
 
-    .step {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
+.hero p{
+  font-size:18px;
+  color:#dce6f7;
+  max-width:720px;
+}
 
-    .number {
-      width: 34px;
-      height: 34px;
-      background: var(--gold);
-      color: var(--navy);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
 
-    .notice {
-      background: #fff8dc;
-      border-left: 5px solid var(--gold);
-      padding: 18px;
-      border-radius: 8px;
-    }
+.btn{
+  display:inline-block;
+  border:1px solid transparent;
+  border-radius:9px;
+  padding:12px 18px;
+  font-weight:800;
+  cursor:pointer;
+}
 
-    .official {
-      background: #eef4ff;
-      border-left: 5px solid var(--blue);
-      padding: 18px;
-      border-radius: 8px;
-    }
+.primary{
+  background:var(--gold);
+  color:#111;
+}
 
-    .official a {
-      display: inline-block;
-      margin-top: 8px;
-      background: var(--blue);
-      color: white;
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 7px;
-      font-weight: bold;
-    }
+.secondary{
+  border-color:#ffffff66;
+  color:#fff;
+}
 
-    .official a:hover {
-      opacity: .9;
-    }
+.hero-card{
+  background:#ffffff0d;
+  border:1px solid #ffffff22;
+  border-radius:18px;
+  padding:28px;
+}
 
-    .bottom {
-      text-align: center;
-      margin: 35px 0;
-    }
+.hero-card strong{
+  display:block;
+  color:var(--gold);
+  font-size:28px;
+}
 
-    .home-btn {
-      display: inline-block;
-      background: var(--navy);
-      color: white;
-      text-decoration: none;
-      padding: 12px 22px;
-      border-radius: 8px;
-      font-weight: bold;
-    }
+.hero-card p{
+  font-size:14px;
+  margin:4px 0 20px;
+}
 
-    footer {
-      background: var(--navy);
-      color: #dbe5f5;
-      text-align: center;
-      padding: 30px 5%;
-      margin-top: 50px;
-    }
+/* SECTIONS */
 
-    footer a {
-      color: white;
-      text-decoration: none;
-      margin: 0 8px;
-    }
+main section{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px;
+}
 
-    footer a:hover {
-      color: var(--gold);
-    }
+.section-head{
+  max-width:750px;
+  margin-bottom:30px;
+}
 
-    .contact {
-      margin-top: 12px;
-      font-size: 14px;
-    }
+.section-head h2{
+  margin:0 0 8px;
+  color:var(--navy);
+  font-size:32px;
+}
 
-    @media (max-width: 800px) {
-      .steps {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
+.section-head p{
+  margin:0;
+  color:var(--muted);
+}
 
-    @media (max-width: 550px) {
-      header {
-        padding: 12px 4%;
-      }
+/* OPPORTUNITIES */
 
-      .brand-text span {
-        display: none;
-      }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
 
-      .back {
-        padding: 8px 10px;
-        font-size: 13px;
-      }
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+  box-shadow:0 4px 16px #0b17330a;
+  transition:.2s;
+}
 
-      .hero {
-        padding: 50px 5%;
-      }
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px #0b173314;
+}
 
-      section {
-        padding: 22px;
-      }
+.card h3{
+  margin:10px 0 7px;
+  color:var(--navy);
+  font-size:18px;
+}
 
-      .steps {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  margin:0 0 13px;
+}
+
+.icon{
+  font-size:25px;
+  color:var(--gold);
+}
+
+.more{
+  color:var(--blue);
+  font-weight:800;
+  font-size:14px;
+}
+
+/* STEPS */
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.step{
+  background:#fff;
+  border-radius:14px;
+  padding:22px;
+  border:1px solid var(--border);
+}
+
+.num{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--navy);
+  color:var(--gold);
+  display:grid;
+  place-items:center;
+  font-weight:800;
+}
+
+/* INFORMATION */
+
+.info{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:25px;
+}
+
+.info ul{
+  padding-left:20px;
+}
+
+.notice{
+  background:#fff8df;
+  border-left:4px solid var(--gold);
+  padding:15px;
+  border-radius:7px;
+  margin-top:18px;
+}
+
+/* MEMBER AREA */
+
+.auth-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  align-items:start;
+}
+
+.auth{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:25px;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.tab{
+  flex:1;
+  padding:10px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:7px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.tab.active{
+  background:var(--navy);
+  color:var(--gold);
+}
+
+form{
+  display:grid;
+  gap:12px;
+}
+
+label{
+  font-weight:700;
+  font-size:13px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"]{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  font:inherit;
+  background:#fff;
+}
+
+input:focus{
+  outline:2px solid #1d4ed833;
+  border-color:var(--blue);
+}
+
+.checks{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.check{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  font-size:13px;
+  font-weight:600;
+}
+
+.check input{
+  width:auto;
+  margin-top:4px;
+}
+
+.submit{
+  background:var(--blue);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  padding:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.submit:hover{
+  opacity:.9;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.msg{
+  font-size:13px;
+  padding:10px;
+  border-radius:7px;
+  display:none;
+}
+
+.msg.ok{
+  display:block;
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.msg.err{
+  display:block;
+  background:#fef2f2;
+  color:#b91c1c;
+}
+
+.dashboard{
+  display:none;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:25px;
+}
+
+.dash-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.dash-item{
+  background:var(--light);
+  padding:15px;
+  border-radius:10px;
+}
+
+.dash-item b{
+  display:block;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+
+.logout{
+  background:#fff;
+  border:1px solid #fecaca;
+  color:var(--danger);
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* ADVERTISEMENT */
+
+.ad-box{
+  min-height:90px;
+  border:1px dashed #cbd5e1;
+  background:#fff;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:var(--muted);
+  padding:15px;
+}
+
+.ad-box strong{
+  display:block;
+  color:var(--navy);
+}
+
+/* FOOTER */
+
+footer{
+  background:var(--navy);
+  color:#dbe4f4;
+}
+
+.footer{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footer a{
+  color:#fff;
+}
+
+.footer a:hover{
+  color:var(--gold);
+}
+
+.gold{
+  color:var(--gold);
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .steps{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+
+  .auth-wrap{
+    grid-template-columns:1fr;
+  }
+
+  .dash-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  .menu{
+    display:block;
+  }
+
+  .links{
+    display:none;
+    position:absolute;
+    left:0;
+    right:0;
+    top:70px;
+    background:var(--navy);
+    padding:10px 20px 16px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .links.open{
+    display:flex;
+  }
+
+  .links a{
+    padding:12px;
+  }
+
+  .grid,
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .checks{
+    grid-template-columns:1fr;
+  }
+
+  .hero-inner{
+    padding-top:55px;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .footer{
+    display:block;
+  }
+
+  .footer div{
+    margin-bottom:15px;
+  }
+
+  .dash-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-  <div class="nav">
 
-    <a class="brand" href="index.html">
-      <div class="logo">PG</div>
-      <div class="brand-text">
-        <strong>PRIME GLOBAL</strong>
-        <span>Opportunities Worldwide</span>
-      </div>
-    </a>
+<nav class="nav">
 
-    <a class="back" href="index.html">← Back to Opportunities</a>
+<a class="brand" href="./">
 
-  </div>
+<span class="logo">PG</span>
+
+<span>
+PRIME GLOBAL
+<small>OPPORTUNITIES WORLDWIDE</small>
+</span>
+
+</a>
+
+<button
+class="menu"
+id="menuBtn"
+aria-label="Open menu">
+☰
+</button>
+
+<div class="links" id="navLinks">
+
+<a href="#opportunities">Opportunities</a>
+
+<a href="#how">How It Works</a>
+
+<a href="#requirements">Requirements</a>
+
+<a href="#payments">Payments</a>
+
+<a href="#member">Member Account</a>
+
+<a href="about.html">About</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+</nav>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
-  <div class="hero-inner">
-    <div class="label">Prime Global Opportunity Guide</div>
 
-    <h1>AI Training &amp; Evaluation</h1>
+<div class="hero-inner">
 
-    <p>
-      Learn what AI training and evaluation work involves, what applicants
-      may need, how assessments usually work, and what to check before
-      applying.
-    </p>
-  </div>
+<div>
+
+<div class="eyebrow">
+Global Digital Work Library
+</div>
+
+<h1>
+Find opportunities.
+Understand the work.
+Apply with confidence.
+</h1>
+
+<p>
+Prime Global connects people worldwide with information about digital work and global remote opportunities, organized in one easy-to-use place.
+</p>
+
+<div class="buttons">
+
+<a
+class="btn primary"
+href="#opportunities">
+Explore Opportunities
+</a>
+
+<a
+class="btn secondary"
+href="#member">
+Member Account
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<strong>Worldwide</strong>
+
+<p>
+Information for people looking for legitimate digital and remote-work opportunities.
+</p>
+
+<strong>One Place</strong>
+
+<p>
+Browse categories, understand requirements and follow official application routes.
+</p>
+
+<strong>Transparent</strong>
+
+<p>
+Prime Global does not guarantee acceptance, employment or income.
+</p>
+
+</div>
+
+</div>
+
 </section>
+
 
 <main>
 
-  <section>
-    <h2>What is AI Training &amp; Evaluation?</h2>
 
-    <p>
-      AI training and evaluation work involves helping improve artificial
-      intelligence systems by reviewing, rating, comparing, correcting,
-      or creating data used to train and evaluate AI models.
-    </p>
+<!-- OPPORTUNITIES -->
 
-    <p>
-      Depending on the project, tasks may include evaluating AI-generated
-      answers, checking whether information is relevant, rating search
-      results, reviewing text, comparing responses, following detailed
-      guidelines, or providing language and cultural feedback.
-    </p>
-  </section>
+<section id="opportunities">
 
-  <section>
-    <h2>Who Can Apply?</h2>
+<div class="section-head">
 
-    <p>Requirements vary by company and project, but applicants may commonly need:</p>
+<h2>
+Opportunities
+</h2>
 
-    <ul>
-      <li>Good written and spoken English.</li>
-      <li>Strong reading and comprehension skills.</li>
-      <li>Ability to follow detailed instructions.</li>
-      <li>Good attention to detail.</li>
-      <li>Reliable internet access.</li>
-      <li>A suitable computer for projects that require desktop work.</li>
-      <li>Relevant academic, professional, technical, or language knowledge for specialized projects.</li>
-      <li>Residence in a country supported by the particular project.</li>
-    </ul>
+<p>
+Choose a category to learn what the work involves, typical requirements, assessments, equipment and how to find the official application route.
+</p>
 
-    <p>
-      Some projects accept beginners, while others require previous
-      professional or subject-matter experience.
-    </p>
-  </section>
+</div>
 
-  <section>
-    <h2>Typical Application &amp; Assessment Process</h2>
 
-    <div class="steps">
+<div class="grid">
 
-      <div class="step">
-        <div class="number">1</div>
-        <h3>Apply</h3>
-        <p>
-          Create an account or submit an application through the official
-          platform.
-        </p>
-      </div>
 
-      <div class="step">
-        <div class="number">2</div>
-        <h3>Screening</h3>
-        <p>
-          Your location, language, experience, profile, or qualifications
-          may be reviewed.
-        </p>
-      </div>
+<a
+class="card"
+href="ai-training.html">
 
-      <div class="step">
-        <div class="number">3</div>
-        <h3>Assessment</h3>
-        <p>
-          You may be required to complete qualification tests or sample
-          evaluation tasks.
-        </p>
-      </div>
+<div class="icon">✦</div>
 
-      <div class="step">
-        <div class="number">4</div>
-        <h3>Project</h3>
-        <p>
-          Successful applicants may receive access to available tasks or
-          projects.
-        </p>
-      </div>
+<h3>
+AI Training &amp; Evaluation
+</h3>
 
-    </div>
-  </section>
+<p>
+Help improve artificial intelligence systems through evaluation, comparison and structured feedback tasks.
+</p>
 
-  <section>
-    <h2>Hardware &amp; Software</h2>
+<span class="more">
+View Guide →
+</span>
 
-    <h3>Possible requirements</h3>
+</a>
 
-    <ul>
-      <li>Computer or laptop for many evaluation projects.</li>
-      <li>Stable internet connection.</li>
-      <li>Modern web browser.</li>
-      <li>Email account.</li>
-      <li>Headphones for audio-related projects.</li>
-      <li>Specific software or browser extensions when required by the project.</li>
-    </ul>
 
-    <div class="notice">
-      <strong>Phone-only applicants:</strong>
-      Some AI-related tasks can be performed on a smartphone, but many
-      professional AI evaluation and annotation projects require a
-      computer. Always check the equipment requirements of the specific
-      project before applying.
-    </div>
-  </section>
+<a
+class="card"
+href="data-annotation.html">
 
-  <section>
-    <h2>Payments</h2>
+<div class="icon">⌕</div>
 
-    <p>
-      Payment methods and rates depend on the company, project, country,
-      task type, and worker agreement.
-    </p>
+<h3>
+Data Annotation
+</h3>
 
-    <p>Possible payment methods may include:</p>
+<p>
+Label, classify or review data used to train machine-learning systems.
+</p>
 
-    <ul>
-      <li>PayPal</li>
-      <li>Bank transfer</li>
-      <li>Payoneer</li>
-      <li>Airtm</li>
-      <li>Other payment providers specified by the platform</li>
-    </ul>
+<span class="more">
+View Guide →
+</span>
 
-    <p>
-      Always confirm the current payment method, minimum withdrawal
-      requirements, currency, and eligibility directly with the official
-      platform before starting work.
-    </p>
-  </section>
+</a>
 
-  <section>
-    <h2>Country Availability</h2>
 
-    <p>
-      AI training projects are often restricted by country, language,
-      client requirements, or project availability.
-    </p>
+<a
+class="card"
+href="data-entry.html">
 
-    <p>
-      Being able to create an account does not necessarily mean that a
-      project is currently available in your country. Check the specific
-      project requirements before applying.
-    </p>
+<div class="icon">▤</div>
 
-    <div class="notice">
-      <strong>For applicants in Kenya:</strong>
-      Look specifically for projects that list Kenya or worldwide
-      eligibility. Availability can change as projects open and close.
-    </div>
-  </section>
+<h3>
+Data Entry
+</h3>
 
-  <section>
-    <h2>Important Safety Checks</h2>
+<p>
+Organize, enter and verify information accurately using digital tools.
+</p>
 
-    <ul>
-      <li>Use the company's official website or application portal.</li>
-      <li>Never pay someone simply to obtain a job or guaranteed project.</li>
-      <li>Do not give anyone your password.</li>
-      <li>Be careful with requests for unusual payments or cryptocurrency.</li>
-      <li>Verify the domain before submitting personal information.</li>
-      <li>Read the project terms and payment conditions carefully.</li>
-    </ul>
-  </section>
+<span class="more">
+View Guide →
+</span>
 
-  <section>
-    <h2>Official Application</h2>
+</a>
 
-    <div class="official">
-      <p>
-        Prime Global provides opportunity information and guides. Before
-        adding an external application link, verify that it is the
-        company's current official recruitment or project page.
-      </p>
 
-      <p>
-        <strong>Official application link:</strong> Verify the current
-        project and application page before applying.
-      </p>
-    </div>
-  </section>
+<a
+class="card"
+href="voice-recording.html">
 
-  <section>
-    <h2>Prime Global Disclaimer</h2>
+<div class="icon">◖</div>
 
-    <p>
-      Prime Global is an information and opportunity directory. We do not
-      employ applicants for the opportunities described on this page and
-      do not guarantee acceptance, task availability, income, payment
-      amount, or continued project access.
-    </p>
+<h3>
+Voice Recording
+</h3>
 
-    <p>
-      Requirements, countries, assessments, payment methods, rates, and
-      project availability may change. Always confirm current information
-      with the relevant company before applying or providing personal
-      information.
-    </p>
-  </section>
+<p>
+Record natural speech, scripts or conversations for approved audio projects.
+</p>
 
-  <div class="bottom">
-    <a class="home-btn" href="index.html">
-      ← Return to Prime Global Opportunities
-    </a>
-  </div>
+<span class="more">
+View Guide →
+</span>
+
+</a>
+
+
+<a
+class="card"
+href="transcription.html">
+
+<div class="icon">≋</div>
+
+<h3>
+Transcription
+</h3>
+
+<p>
+Convert recorded audio or video into accurate written text.
+</p>
+
+<span class="more">
+View Guide →
+</span>
+
+</a>
+
+
+<a
+class="card"
+href="translation-proofreading.html">
+
+<div class="icon">文</div>
+
+<h3>
+Translation &amp; Proofreading
+</h3>
+
+<p>
+Translate, review and improve written content across languages.
+</p>
+
+<span class="more">
+View Guide →
+</span>
+
+</a>
+
+
+<a
+class="card"
+href="chat-support.html">
+
+<div class="icon">☏</div>
+
+<h3>
+Chat Support
+</h3>
+
+<p>
+Assist customers or users through written communication and support channels.
+</p>
+
+<span class="more">
+View Guide →
+</span>
+
+</a>
+
+
+<a
+class="card"
+href="other-remote-jobs.html">
+
+<div class="icon">＋</div>
+
+<h3>
+Other Remote Jobs
+</h3>
+
+<p>
+Explore additional legitimate online work categories and remote opportunities.
+</p>
+
+<span class="more">
+View Guide →
+</span>
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section id="how">
+
+<div class="section-head">
+
+<h2>
+How Prime Global Works
+</h2>
+
+<p>
+We organize information so members can understand an opportunity before visiting the official platform.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+<div class="step">
+
+<div class="num">1</div>
+
+<h3>
+Choose a Category
+</h3>
+
+<p>
+Find the type of digital work that matches your interests.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="num">2</div>
+
+<h3>
+Read the Guide
+</h3>
+
+<p>
+Review the work, requirements, assessments, equipment and payment information.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="num">3</div>
+
+<h3>
+Check the Official Route
+</h3>
+
+<p>
+Use the official company or platform application link where one is provided.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="num">4</div>
+
+<h3>
+Track Your Interests
+</h3>
+
+<p>
+Members can keep their opportunity interests in their Prime Global account.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REQUIREMENTS -->
+
+<section id="requirements">
+
+<div class="section-head">
+
+<h2>
+General Requirements
+</h2>
+
+<p>
+Requirements vary by project and company. Always check the official listing before applying.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<ul>
+
+<li>
+Reliable internet connection.
+</li>
+
+<li>
+A smartphone may be enough for some projects; others require a computer.
+</li>
+
+<li>
+Clear communication and attention to detail.
+</li>
+
+<li>
+Ability to follow project instructions and pass any required assessment.
+</li>
+
+<li>
+Some projects require specific language skills, location eligibility or identity verification.
+</li>
+
+<li>
+A payment method supported by the specific platform.
+</li>
+
+</ul>
+
+
+<div class="notice">
+
+<strong>
+Safety:
+</strong>
+
+Never pay an unknown person to "activate" a job. Verify the official website, application page and payment terms before providing sensitive information.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PAYMENTS -->
+
+<section id="payments">
+
+<div class="section-head">
+
+<h2>
+Payments
+</h2>
+
+<p>
+Payment methods and rates are determined by each opportunity provider.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<p>
+Prime Global is an information and opportunity directory. We do not control third-party rates, approval decisions or payment schedules.
+</p>
+
+<ul>
+
+<li>
+Check the official platform's payment rules before starting work.
+</li>
+
+<li>
+Confirm minimum payout thresholds and supported countries.
+</li>
+
+<li>
+Confirm whether your preferred payment method is supported.
+</li>
+
+<li>
+Keep records of completed work and payments.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- ADVERTISING -->
+
+<section id="advertising">
+
+<div class="section-head">
+
+<h2>
+Advertising
+</h2>
+
+<p>
+Prime Global may display clearly identified advertising to help support the free information service.
+</p>
+
+</div>
+
+
+<div class="ad-box">
+
+<div>
+
+<strong>
+Advertisement
+</strong>
+
+Advertising space reserved for an approved advertising provider.
+
+</div>
+
+</div>
+
+
+<p class="small">
+
+No advertiser placement shown here is an endorsement of an opportunity. Actual advertising will only be enabled after a valid advertising account and publisher code are configured.
+
+</p>
+
+</section>
+
+
+<!-- MEMBER ACCOUNT -->
+
+<section id="member">
+
+<div class="section-head">
+
+<h2>
+Member Account
+</h2>
+
+<p>
+Create one account per email address, sign in securely and access your personal Prime Global dashboard.
+</p>
+
+</div>
+
+
+<div
+class="auth-wrap"
+id="authArea">
+
+
+<!-- AUTH BOX -->
+
+<div
+class="auth"
+id="authBox">
+
+
+<div class="tabs">
+
+<button
+class="tab active"
+id="loginTab">
+
+Login
+
+</button>
+
+<button
+class="tab"
+id="registerTab">
+
+Register
+
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginFormWrap">
+
+<form id="loginForm">
+
+
+<label>
+
+Email
+
+<input
+type="email"
+id="loginEmail"
+required
+autocomplete="email">
+
+</label>
+
+
+<label>
+
+Password
+
+<input
+type="password"
+id="loginPassword"
+required
+autocomplete="current-password">
+
+</label>
+
+
+<button
+class="submit"
+type="submit">
+
+Log In
+
+</button>
+
+
+<button
+type="button"
+class="small"
+id="forgotBtn"
+style="border:0;background:none;text-align:left;padding:0;cursor:pointer">
+
+Forgot password?
+
+</button>
+
+
+<div
+id="loginMsg"
+class="msg">
+</div>
+
+
+</form>
+
+</div>
+
+
+<!-- REGISTRATION -->
+
+<div
+id="registerFormWrap"
+class="hidden">
+
+<form id="registerForm">
+
+
+<label>
+
+Full Name
+
+<input
+type="text"
+id="fullName"
+required
+autocomplete="name">
+
+</label>
+
+
+<label>
+
+Email
+
+<input
+type="email"
+id="regEmail"
+required
+autocomplete="email">
+
+</label>
+
+
+<label>
+
+Date of Birth
+
+<input
+type="date"
+id="dob"
+required>
+
+</label>
+
+
+<label>
+
+Country of Residence
+
+<input
+type="text"
+id="country"
+required
+autocomplete="country-name"
+placeholder="Enter your country">
+
+</label>
+
+
+<label>
+
+Password
+
+<input
+type="password"
+id="regPassword"
+required
+minlength="8"
+autocomplete="new-password">
+
+</label>
+
+
+<label>
+
+Confirm Password
+
+<input
+type="password"
+id="confirmPassword"
+required
+minlength="8"
+autocomplete="new-password">
+
+</label>
+
+
+<label>
+
+Opportunity Interests
+
+<span class="small">
+(select all that apply)
+</span>
+
+</label>
+
+
+<div class="checks">
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="AI Training & Evaluation">
+
+AI Training &amp; Evaluation
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Data Annotation">
+
+Data Annotation
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Data Entry">
+
+Data Entry
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Voice Recording">
+
+Voice Recording
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Transcription">
+
+Transcription
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Translation & Proofreading">
+
+Translation &amp; Proofreading
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Chat Support">
+
+Chat Support
+
+</label>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+name="interest"
+value="Other Remote Jobs">
+
+Other Remote Jobs
+
+</label>
+
+
+</div>
+
+
+<label class="check">
+
+<input
+type="checkbox"
+id="agree"
+required>
+
+I agree to the
+<a
+href="terms.html"
+style="color:#1d4ed8">
+
+Terms of Use
+
+</a>
+
+and acknowledge the
+
+<a
+href="privacy.html"
+style="color:#1d4ed8">
+
+Privacy Policy
+
+</a>.
+
+</label>
+
+
+<button
+class="submit"
+type="submit">
+
+Create Member Account
+
+</button>
+
+
+<div
+id="registerMsg"
+class="msg">
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- MEMBER INFORMATION -->
+
+<div class="info">
+
+<h3>
+Member Benefits
+</h3>
+
+<ul>
+
+<li>
+Keep your opportunity interests in one account.
+</li>
+
+<li>
+See your saved profile information after signing in.
+</li>
+
+<li>
+Return to the opportunity library quickly.
+</li>
+
+<li>
+Use secure Supabase authentication rather than a fake login.
+</li>
+
+<li>
+Reset your password if you forget it.
+</li>
+
+</ul>
+
+<p class="small">
+
+One email address can only have one Supabase account. Preventing one individual from using multiple different email addresses would require additional identity verification.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div
+class="dashboard"
+id="dashboard">
+
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:center;
+flex-wrap:wrap;
+">
+
+
+<div>
+
+<div class="eyebrow">
+MEMBER AREA
+</div>
+
+<h2
+id="dashWelcome"
+style="margin:5px 0;color:#071a3d">
+
+Welcome
+
+</h2>
+
+<p
+class="small"
+id="dashEmail">
+</p>
+
+</div>
+
+
+<button
+class="logout"
+id="logoutBtn">
+
+Log Out
+
+</button>
+
+
+</div>
+
+
+<div
+class="dash-grid"
+style="margin-top:20px;">
+
+
+<div class="dash-item">
+
+<b>
+Full Name
+</b>
+
+<span id="dashName">
+—
+</span>
+
+</div>
+
+
+<div class="dash-item">
+
+<b>
+Country of Residence
+</b>
+
+<span id="dashCountry">
+—
+</span>
+
+</div>
+
+
+<div class="dash-item">
+
+<b>
+Date of Birth
+</b>
+
+<span id="dashDob">
+—
+</span>
+
+</div>
+
+
+</div>
+
+
+<div
+class="info"
+style="margin-top:16px;">
+
+<h3>
+Your Opportunity Interests
+</h3>
+
+<div
+id="dashInterests"
+class="small">
+
+—
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="section-head">
+
+<h2>
+Contact Prime Global
+</h2>
+
+<p>
+For general questions about Prime Global.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<p>
+
+<strong>
+Email:
+</strong>
+
+<a
+href="mailto:primeglobalofficialacc@gmail.com"
+style="color:#1d4ed8">
+
+primeglobalofficialacc@gmail.com
+
+</a>
+
+</p>
+
+
+<p>
+
+<strong>
+WhatsApp:
+</strong>
+
+<a
+href="https://wa.me/639971642057"
+target="_blank"
+rel="noopener"
+style="color:#1d4ed8">
+
++63 997 164 2057
+
+</a>
+
+</p>
+
+</div>
+
+</section>
+
 
 </main>
 
+
+<!-- FOOTER -->
+
 <footer>
 
-  <div>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Use</a>
-  </div>
+<div class="footer">
 
-  <div class="contact">
-    Email: primeglobalofficialacc@gmail.com |
-    WhatsApp: +63 997 164 2057
-  </div>
 
-  <p style="margin-top:15px;">
-    © 2026 Prime Global. Connecting people with information about
-    digital work and global remote opportunities.
-  </p>
+<div>
+
+<strong class="gold">
+PRIME GLOBAL
+</strong>
+
+<br>
+
+<span>
+Connecting people with information about digital work and global remote opportunities.
+</span>
+
+</div>
+
+
+<div>
+
+<a href="about.html">
+About
+</a>
+
+·
+
+<a href="privacy.html">
+Privacy Policy
+</a>
+
+·
+
+<a href="terms.html">
+Terms of Use
+</a>
+
+</div>
+
+
+<div>
+
+© 2026 Prime Global. All rights reserved.
+
+</div>
+
+
+</div>
 
 </footer>
 
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://aehmswdhykcdpkqzbjgl.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6SsI9";
+
+const client =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/*
+IMPORTANT:
+
+This must be your real GitHub Pages URL.
+Do NOT replace it with localhost.
+*/
+
+const SITE_URL =
+"https://primeglobalofficial.github.io/PrimeGlobal/";
+
+
+/* SHORTCUT */
+
+const $ = id =>
+document.getElementById(id);
+
+
+/* MOBILE MENU */
+
+$("menuBtn").addEventListener(
+"click",
+() => {
+
+$("navLinks").classList.toggle("open");
+
+}
+);
+
+
+document
+.querySelectorAll("#navLinks a")
+.forEach(link => {
+
+link.addEventListener(
+"click",
+() => {
+
+$("navLinks").classList.remove("open");
+
+}
+);
+
+});
+
+
+/* MESSAGE */
+
+function showMessage(
+element,
+text,
+success = false
+){
+
+element.textContent = text;
+
+element.className =
+"msg " +
+(success ? "ok" : "err");
+
+}
+
+
+/* INTERESTS */
+
+function getSelectedInterests(){
+
+return [
+...document.querySelectorAll(
+'input[name="interest"]:checked'
+)
+].map(
+input => input.value
+);
+
+}
+
+
+/* LOGIN TAB */
+
+$("loginTab").onclick = () => {
+
+$("loginTab").classList.add("active");
+
+$("registerTab").classList.remove("active");
+
+$("loginFormWrap").classList.remove("hidden");
+
+$("registerFormWrap").classList.add("hidden");
+
+};
+
+
+/* REGISTER TAB */
+
+$("registerTab").onclick = () => {
+
+$("registerTab").classList.add("active");
+
+$("loginTab").classList.remove("active");
+
+$("registerFormWrap").classList.remove("hidden");
+
+$("loginFormWrap").classList.add("hidden");
+
+};
+
+
+/* REGISTER */
+
+$("registerForm")
+.addEventListener(
+"submit",
+async event => {
+
+event.preventDefault();
+
+
+const password =
+$("regPassword").value;
+
+const confirmPassword =
+$("confirmPassword").value;
+
+const interests =
+getSelectedInterests();
+
+
+if(password !== confirmPassword){
+
+showMessage(
+$("registerMsg"),
+"Passwords do not match."
+);
+
+return;
+
+}
+
+
+if(password.length < 8){
+
+showMessage(
+$("registerMsg"),
+"Password must contain at least 8 characters."
+);
+
+return;
+
+}
+
+
+if(interests.length === 0){
+
+showMessage(
+$("registerMsg"),
+"Select at least one opportunity interest."
+);
+
+return;
+
+}
+
+
+try{
+
+const {
+data,
+error
+} =
+await client.auth.signUp({
+
+email:
+$("regEmail").value.trim(),
+
+password:
+password,
+
+options:{
+
+emailRedirectTo:
+SITE_URL,
+
+data:{
+
+full_name:
+$("fullName").value.trim(),
+
+date_of_birth:
+$("dob").value,
+
+country_of_residence:
+$("country").value.trim(),
+
+interests:
+interests
+
+}
+
+}
+
+});
+
+
+if(error){
+
+throw error;
+
+}
+
+
+/*
+If email confirmation is disabled,
+Supabase may immediately create a session.
+*/
+
+if(data.session){
+
+showMessage(
+$("registerMsg"),
+"Account created successfully. You are now signed in.",
+true
+);
+
+await loadMember(
+data.user
+);
+
+}else{
+
+showMessage(
+$("registerMsg"),
+"Registration successful. Check your email and confirm your account before logging in.",
+true
+);
+
+}
+
+}catch(error){
+
+showMessage(
+$("registerMsg"),
+error.message ||
+"Registration failed."
+);
+
+}
+
+}
+);
+
+
+/* LOGIN */
+
+$("loginForm")
+.addEventListener(
+"submit",
+async event => {
+
+event.preventDefault();
+
+
+try{
+
+const {
+data,
+error
+} =
+await client.auth.signInWithPassword({
+
+email:
+$("loginEmail").value.trim(),
+
+password:
+$("loginPassword").value
+
+});
+
+
+if(error){
+
+throw error;
+
+}
+
+
+/*
+Successful login:
+hide authentication area
+and show member dashboard.
+*/
+
+await loadMember(
+data.user
+);
+
+
+}catch(error){
+
+showMessage(
+$("loginMsg"),
+error.message ||
+"Login failed."
+);
+
+}
+
+}
+);
+
+
+/* PASSWORD RESET */
+
+$("forgotBtn").onclick =
+async () => {
+
+const email =
+$("loginEmail").value.trim();
+
+
+if(!email){
+
+showMessage(
+$("loginMsg"),
+"Enter your email first, then tap Forgot password."
+);
+
+return;
+
+}
+
+
+try{
+
+const {
+error
+} =
+await client.auth.resetPasswordForEmail(
+email,
+{
+redirectTo: SITE_URL
+}
+);
+
+
+if(error){
+
+throw error;
+
+}
+
+
+showMessage(
+$("loginMsg"),
+"Password reset instructions have been sent to your email.",
+true
+);
+
+
+}catch(error){
+
+showMessage(
+$("loginMsg"),
+error.message ||
+"Could not send reset instructions."
+);
+
+}
+
+};
+
+
+/* LOAD MEMBER DASHBOARD */
+
+async function loadMember(user){
+
+$("authArea").classList.add("hidden");
+
+$("dashboard").style.display =
+"block";
+
+
+const metadata =
+user.user_metadata || {};
+
+
+$("dashWelcome").textContent =
+"Welcome, " +
+(metadata.full_name || "Member");
+
+
+$("dashEmail").textContent =
+user.email || "";
+
+
+/*
+Load the secure profile created
+by the Supabase database trigger.
+*/
+
+let profile = null;
+
+
+try{
+
+const {
+data,
+error
+} =
+await client
+.from("profiles")
+.select(
+"full_name,date_of_birth,country_of_residence,interests"
+)
+.eq("id", user.id)
+.maybeSingle();
+
+
+if(!error){
+
+profile = data;
+
+}
+
+}catch(error){
+
+console.log(
+"Profile loading error:",
+error
+);
+
+}
+
+
+/*
+Fallback to authentication metadata
+if the profile has not appeared yet.
+*/
+
+const name =
+profile?.full_name ||
+metadata.full_name ||
+"—";
+
+
+const country =
+profile?.country_of_residence ||
+metadata.country_of_residence ||
+"—";
+
+
+const dob =
+profile?.date_of_birth ||
+metadata.date_of_birth ||
+"—";
+
+
+const interests =
+profile?.interests ||
+metadata.interests ||
+[];
+
+
+$("dashName").textContent =
+name;
+
+
+$("dashCountry").textContent =
+country;
+
+
+$("dashDob").textContent =
+dob;
+
+
+$("dashInterests").textContent =
+interests.length
+? interests.join(" • ")
+: "No interests saved";
+
+
+document
+.querySelector("#member")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* LOGOUT */
+
+$("logoutBtn").onclick =
+async () => {
+
+try{
+
+await client.auth.signOut();
+
+}catch(error){
+
+console.error(error);
+
+}
+
+
+$("dashboard").style.display =
+"none";
+
+$("authArea").classList.remove(
+"hidden"
+);
+
+$("loginForm").reset();
+
+window.scrollTo({
+
+top:
+$("member").offsetTop - 70,
+
+behavior:"smooth"
+
+});
+
+};
+
+
+/* AUTH STATE */
+
+client.auth.onAuthStateChange(
+(event, session) => {
+
+if(session){
+
+loadMember(
+session.user
+);
+
+}
+
+}
+);
+
+
+/*
+CHECK EXISTING SESSION
+
+If the member is already logged in,
+show the dashboard automatically.
+*/
+
+(async function(){
+
+const {
+data
+} =
+await client.auth.getSession();
+
+
+if(data.session){
+
+await loadMember(
+data.session.user
+);
+
+}
+
+})();
+
+</script>
+
 </body>
-      </html>
+  </html>
