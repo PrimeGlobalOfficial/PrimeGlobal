@@ -3590,8 +3590,13 @@ function pgShowLoggedOutMember(){
 }
 const pgExistingLoadMember=loadMember;
 loadMember=async function(user){
-  await pgExistingLoadMember(user);
+  // Hide the sign-in/register panel immediately, even if profile loading takes time.
   pgShowAuthenticatedMember();
+  try {
+    await pgExistingLoadMember(user);
+  } finally {
+    pgShowAuthenticatedMember();
+  }
 };
 $("logoutBtn")?.addEventListener("click",()=>{
   setTimeout(pgShowLoggedOutMember,300);
