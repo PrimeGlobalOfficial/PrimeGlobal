@@ -331,6 +331,26 @@ main section{
 @media(max-width:950px){.jobs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.jobs-grid{grid-template-columns:1fr}}
 
+
+/* PUBLIC START WORKING HUB */
+.start-hub{
+  background:linear-gradient(135deg,#eaf2ff 0%,#e9fbf7 55%,#fff8e7 100%);
+  border:1px solid #c9ddf8;
+  border-radius:18px;
+  padding:24px;
+  margin-bottom:24px;
+}
+.start-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.start-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.start-card{background:#fff;border:1px solid #dce6f4;border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;box-shadow:0 7px 20px #173b780c}
+.start-card h3{margin:0;color:#173b78;font-size:18px}
+.start-card p{margin:0;color:#62718a;font-size:14px}
+.start-card .more{margin-top:auto;padding-top:8px}
+.start-note{background:#fff8e7;border-left:4px solid #e6a323;padding:15px 17px;border-radius:8px;margin-top:18px;color:#704b0a;font-size:14px}
+.start-step{display:inline-grid;place-items:center;min-width:32px;height:32px;border-radius:10px;background:#eaf1ff;color:#246bfd;font-weight:900}
+@media(max-width:950px){.start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.start-grid{grid-template-columns:1fr}.start-hub{padding:18px}}
+
 /* STEPS */
 
 .steps{
@@ -974,6 +994,8 @@ aria-label="Open menu">
 
 <a href="#opportunities">Opportunities</a>
 
+<a href="#start-working">Start Working</a>
+
 <a href="#jobs">Jobs Board</a>
 
 <a href="#how">How It Works</a>
@@ -1284,6 +1306,71 @@ View Guide →
 
 </section>
 
+
+<!-- PUBLIC START WORKING HUB -->
+<section id="start-working">
+  <div class="section-head">
+    <h2>Start Working</h2>
+    <p>Choose a real external work platform or role, check its requirements, and apply directly. Prime Global helps members find opportunities; the platform or employer makes the hiring decision.</p>
+  </div>
+
+  <div class="start-hub">
+    <h3 style="margin:0;color:#173b78">Your first steps</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:16px">
+      <div><span class="start-step">1</span><p><strong>Create your free Prime Global account</strong><br><span class="small">Use your referrer's link if someone invited you.</span></p></div>
+      <div><span class="start-step">2</span><p><strong>Choose a platform below</strong><br><span class="small">Check country eligibility, device needs, assessments, and current openings.</span></p></div>
+      <div><span class="start-step">3</span><p><strong>Apply and complete approved work</strong><br><span class="small">Follow the employer's instructions and keep confirmation of completed work.</span></p></div>
+    </div>
+    <div class="start-actions">
+      <a class="btn primary" href="#member" onclick="document.getElementById('registerTab').click();">Create Prime Global account →</a>
+      <a class="btn" style="background:#fff;border-color:#c9d8ee;color:#173b78" href="#jobs">Browse selected roles ↓</a>
+    </div>
+  </div>
+
+  <div class="start-grid">
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Kenya</span><span class="job-tag">AI data</span></div>
+      <h3>Corpshore / Jwuma</h3>
+      <p>The provider's Kenya page describes annotation, transcription, and data-collection work. Projects depend on language, qualification, and actual availability.</p>
+      <a class="more" href="https://platform.corpshore.ai/kenya" target="_blank" rel="noopener noreferrer">Explore Kenya opportunities →</a>
+    </article>
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Remote / contract</span><span class="job-tag">Swahili + English</span></div>
+      <h3>Swahili AI Annotation Specialist</h3>
+      <p>A listed role for Swahili text, speech, and multimodal annotation. Review the assessment, location, and current status before applying.</p>
+      <a class="more" href="https://corpshore.ai/careers/roles/swahili-annotation-specialist" target="_blank" rel="noopener noreferrer">Read role and apply →</a>
+    </article>
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Freelance</span><span class="job-tag">Project-based</span></div>
+      <h3>TaskUs — Swahili AI data</h3>
+      <p>A recent listing describes a project-based Swahili data-labeling role. Check that the listing is still open and apply only through the employer's stated process.</p>
+      <a class="more" href="https://ke.linkedin.com/jobs/view/ai-data-labeling-specialist-swahili-kenya-at-taskus-4478629077" target="_blank" rel="noopener noreferrer">Check listing →</a>
+    </article>
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Language work</span><span class="job-tag">Open roles vary</span></div>
+      <h3>Welo Global</h3>
+      <p>Search the company's career listings for language, AI evaluation, and data projects. Availability and accepted countries vary by role.</p>
+      <a class="more" href="https://jobs.lever.co/weloglobal/?location=Nairobi%2C%20Kenya" target="_blank" rel="noopener noreferrer">Search official listings →</a>
+    </article>
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Freelancing</span><span class="job-tag">Build a service profile</span></div>
+      <h3>Upwork</h3>
+      <p>Create a freelancer profile and apply to client projects that match your skills. Competition is common; proposal or platform rules and fees may apply.</p>
+      <a class="more" href="https://www.upwork.com/nx/signup/" target="_blank" rel="noopener noreferrer">Visit Upwork signup →</a>
+    </article>
+    <article class="start-card">
+      <div class="job-meta"><span class="job-tag">Freelancing</span><span class="job-tag">Sell a service</span></div>
+      <h3>Fiverr</h3>
+      <p>Set up a seller profile and publish a service you can deliver. Orders are not guaranteed; read seller terms and payment availability for your location.</p>
+      <a class="more" href="https://www.fiverr.com/start_selling" target="_blank" rel="noopener noreferrer">Visit Fiverr seller page →</a>
+    </article>
+  </div>
+
+  <div class="start-note">
+    <strong>Important — referral eligibility:</strong> Creating a Prime Global account or applying to an external platform does not by itself qualify a referral. The current programme rule is a verified account plus one qualifying task that Prime Global has reviewed and approved. External platforms do not automatically notify Prime Global when a task is completed, so approval must be confirmed manually. Do not promise members a reward until the task is verified and the reward is approved.
+    <p style="margin:9px 0 0">To request a manual review, email <a href="mailto:primeglobalofficialacc@gmail.com?subject=Prime%20Global%20task%20verification%20request" style="font-weight:800;text-decoration:underline">primeglobalofficialacc@gmail.com</a> with your Prime Global account email, the platform and task name, completion date, and a redacted confirmation or evidence. Do not send passwords, one-time codes, identity documents, or other sensitive information by email. Review does not guarantee approval.</p>
+  </div>
+</section>
 
 <!-- JOBS BOARD -->
 <section id="jobs">
