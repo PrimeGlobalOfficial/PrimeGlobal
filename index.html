@@ -1719,7 +1719,7 @@ class="small">
 <!-- REFERRALS AND REWARDS -->
 <div class="info" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Referrals &amp; Rewards</h3>
-  <p class="small">Invite people to Prime Global using your personal link. Referral rewards remain pending until they are reviewed and approved.</p>
+  <p class="small">Invite genuine members using your personal link. The proposed reward is shown below and is credited only after the referred member verifies their account, completes an approved task, and Prime Global reviews the referral.</p>
   <div class="dash-grid" style="margin-top:14px;">
     <div class="dash-item"><b>Your referral code</b><span id="referralCode">Loading…</span></div>
     <div class="dash-item"><b>Pending rewards</b><span id="pendingRewards">$0.00 USD</span></div>
@@ -2422,7 +2422,7 @@ async function loadReferralDashboard(user){
     client.from("referrals").select("id,status").eq("referrer_id", user.id),
     client.from("referral_rewards").select("amount_usd,status").eq("user_id", user.id),
     client.from("withdrawal_requests").select("amount_usd,payout_method,status,created_at").eq("user_id", user.id).order("created_at", {ascending:false}).limit(10),
-    client.from("referral_program_settings").select("min_withdrawal_usd,payout_methods,is_active").eq("id", true).maybeSingle()
+    client.from("referral_program_settings").select("min_withdrawal_usd,payout_methods,is_active,reward_amount_usd,qualification_rule").eq("id", true).maybeSingle()
   ]);
 
   const code = codeResult.data?.code || "";
@@ -2443,9 +2443,13 @@ async function loadReferralDashboard(user){
 
   const settings = settingsResult.data;
   const threshold = settings?.min_withdrawal_usd == null ? 30 : Number(settings.min_withdrawal_usd);
+  const rewardAmount = settings?.reward_amount_usd == null ? 2 : Number(settings.reward_amount_usd);
+  const qualificationText = settings?.qualification_rule === "verified_account_and_approved_task"
+    ? "Qualification: verified account + one approved task."
+    : "Qualification requirements are set by Prime Global.";
   $("referralInfo").textContent = settings?.is_active === false
     ? "Referral withdrawals are temporarily unavailable."
-    : "Minimum withdrawal: " + money(threshold) + ". Planned methods: " + ((settings?.payout_methods || ["PayPal","Airtm","Wise"]).join(", ")) + ".";
+    : "Reward: " + money(rewardAmount) + " per qualified referral. " + qualificationText + " Minimum withdrawal: " + money(threshold) + ". Planned methods: " + ((settings?.payout_methods || ["PayPal","Airtm","Wise"]).join(", ")) + ". Rewards require manual approval; payouts are not automatic.";
   $("withdrawalAmount").min = String(threshold);
   $("withdrawalAmount").placeholder = threshold.toFixed(2);
 
