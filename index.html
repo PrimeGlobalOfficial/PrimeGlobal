@@ -277,6 +277,60 @@ main section{
   font-size:14px;
 }
 
+/* JOBS BOARD */
+.jobs-intro{
+  background:linear-gradient(135deg,#eaf2ff,#e5fbf5);
+  border:1px solid #c9ddf8;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:22px;
+}
+.jobs-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.job-card{
+  background:#fff;
+  border:1px solid #dce6f4;
+  border-top:4px solid #246bfd;
+  border-radius:15px;
+  padding:22px;
+  box-shadow:0 8px 24px #173b780d;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:9px;
+}
+.job-card:nth-child(3n+2){border-top-color:#13b8a6}
+.job-card:nth-child(3n){border-top-color:#805ad5}
+.job-card h3{margin:2px 0;color:#173b78;font-size:19px}
+.job-card p{margin:0;color:#62718a;font-size:14px}
+.job-meta{display:flex;flex-wrap:wrap;gap:7px}
+.job-tag{
+  display:inline-block;
+  background:#edf3ff;
+  color:#244b92;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:12px;
+  font-weight:800;
+}
+.job-card:nth-child(3n+2) .job-tag{background:#e2fbf5;color:#087a68}
+.job-card:nth-child(3n) .job-tag{background:#f0eaff;color:#6540a8}
+.job-card .more{margin-top:auto;padding-top:8px}
+.job-safety{
+  background:#fff8e7;
+  border-left:4px solid #ffc857;
+  border-radius:8px;
+  padding:14px 16px;
+  margin-top:22px;
+  color:#704b0a;
+  font-size:14px;
+}
+@media(max-width:950px){.jobs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.jobs-grid{grid-template-columns:1fr}}
+
 /* STEPS */
 
 .steps{
@@ -920,6 +974,8 @@ aria-label="Open menu">
 
 <a href="#opportunities">Opportunities</a>
 
+<a href="#jobs">Jobs Board</a>
+
 <a href="#how">How It Works</a>
 
 <a href="#requirements">Requirements</a>
@@ -1228,6 +1284,69 @@ View Guide →
 
 </section>
 
+
+<!-- JOBS BOARD -->
+<section id="jobs">
+  <div class="section-head">
+    <h2>Jobs Board</h2>
+    <p>Explore selected opportunities from external employers. Prime Global links you to the official application page; each employer controls eligibility, hiring decisions, and availability.</p>
+  </div>
+
+  <div class="jobs-intro">
+    <strong>Start here: remote and language-based work</strong>
+    <p style="margin:6px 0 0;color:#44536c">Some roles are remote, while others may require a specific location, device, assessment, or work schedule. Read the full requirements before applying.</p>
+  </div>
+
+  <div class="jobs-grid">
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Remote</span><span class="job-tag">Swahili</span></div>
+      <h3>AI Trainer — Swahili</h3>
+      <p><strong>Employer:</strong> Welo Global</p>
+      <p>Help evaluate or improve AI content using strong Swahili and language skills. Check the listing for the accepted locations and current requirements.</p>
+      <a class="more" href="https://jobs.lever.co/weloglobal/?location=Nairobi%2C%20Kenya" target="_blank" rel="noopener noreferrer">View official listing →</a>
+    </article>
+
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Remote / Contract</span><span class="job-tag">Swahili + English</span></div>
+      <h3>Swahili AI Annotation Specialist</h3>
+      <p><strong>Employer:</strong> Corpshore AI</p>
+      <p>Label and quality-check Swahili text, speech, and other data for AI training. The employer describes the pay as indicative; verify terms on the application page.</p>
+      <a class="more" href="https://corpshore.ai/careers/roles/swahili-annotation-specialist" target="_blank" rel="noopener noreferrer">View official listing →</a>
+    </article>
+
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Freelance</span><span class="job-tag">Project-based</span></div>
+      <h3>AI Data Labeling Specialist — Swahili</h3>
+      <p><strong>Employer:</strong> TaskUs</p>
+      <p>Create and review natural Swahili-language content for AI training. Confirm that the vacancy is still accepting applications and check the assessment requirements.</p>
+      <a class="more" href="https://ke.linkedin.com/jobs/view/ai-data-labeling-specialist-swahili-kenya-at-taskus-4478629077" target="_blank" rel="noopener noreferrer">View job on LinkedIn →</a>
+    </article>
+
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Remote worldwide</span><span class="job-tag">Per task / project</span></div>
+      <h3>Bilingual Annotator — Swahili</h3>
+      <p><strong>Platform:</strong> Jwuma by Corpshore AI</p>
+      <p>Review Swahili text and audio, check translations, and evaluate AI responses. Work depends on project availability and qualification.</p>
+      <a class="more" href="https://platform.corpshore.ai/roles/bilingual-annotator-swahili" target="_blank" rel="noopener noreferrer">View role details →</a>
+    </article>
+
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Browse vacancies</span><span class="job-tag">Kenya location filter</span></div>
+      <h3>More AI and language roles</h3>
+      <p>Browse additional roles and filter by country, language, and remote work. Open the employer's page to confirm whether a role fits your situation.</p>
+      <a class="more" href="https://platform.corpshore.ai/kenya" target="_blank" rel="noopener noreferrer">Explore Kenya opportunities →</a>
+    </article>
+
+    <article class="job-card">
+      <div class="job-meta"><span class="job-tag">Global search</span><span class="job-tag">Multiple job types</span></div>
+      <h3>Find more remote jobs</h3>
+      <p>Search for customer support, data entry, AI evaluation, transcription, and other remote vacancies. Always check whether applicants in Kenya are eligible.</p>
+      <a class="more" href="https://ke.linkedin.com/jobs/remote-jobs" target="_blank" rel="noopener noreferrer">Search remote jobs →</a>
+    </article>
+  </div>
+
+  <div class="job-safety"><strong>Stay safe:</strong> Prime Global does not guarantee hiring or payment from third-party employers. Never pay a recruiter to secure a job, and never share your account password, PIN, or one-time verification code. Check the employer's own site for the latest listing status and payment terms.</div>
+</section>
 
 <!-- HOW IT WORKS -->
 
