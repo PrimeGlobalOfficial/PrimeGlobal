@@ -3579,13 +3579,21 @@ pgSetAccount(null);
 function pgShowAuthenticatedMember(){
   const authArea=$("authArea");
   const dashboard=$("dashboard");
-  if(authArea) authArea.classList.add("pg-auth-hidden");
+  if(authArea){
+    authArea.classList.add("pg-auth-hidden");
+    authArea.style.setProperty("display","none","important");
+    authArea.setAttribute("aria-hidden","true");
+  }
   if(dashboard) dashboard.classList.add("pg-dashboard-visible");
 }
 function pgShowLoggedOutMember(){
   const authArea=$("authArea");
   const dashboard=$("dashboard");
-  if(authArea) authArea.classList.remove("pg-auth-hidden");
+  if(authArea){
+    authArea.classList.remove("pg-auth-hidden");
+    authArea.style.removeProperty("display");
+    authArea.removeAttribute("aria-hidden");
+  }
   if(dashboard) dashboard.classList.remove("pg-dashboard-visible");
 }
 const pgExistingLoadMember=loadMember;
