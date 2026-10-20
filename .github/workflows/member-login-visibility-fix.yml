@@ -1,0 +1,37 @@
+name: Prime Global Member Login Visibility Fix
+on:
+  push:
+    paths:
+      - member-login-visibility-fix.trigger
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix-login-visibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure login disappears after authentication
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html'); h=p.read_text(encoding='utf-8')
+          if 'id="pg-login-visibility-fix"' in h:
+              raise SystemExit(0)
+          css='''\n/* MEMBER LOGIN VISIBILITY FIX */\n#authArea.pg-auth-hidden{display:none !important}\n#dashboard.pg-dashboard-visible{display:block !important}\n.pg-login-hidden-note{display:none}\n'''
+          h=h.replace('</style>',css+'</style>',1)
+          js='''\n\n/* MEMBER LOGIN VISIBILITY FIX */\nfunction pgShowAuthenticatedMember(){\n  const authArea=$("authArea");\n  const dashboard=$("dashboard");\n  if(authArea) authArea.classList.add("pg-auth-hidden");\n  if(dashboard) dashboard.classList.add("pg-dashboard-visible");\n}\nfunction pgShowLoggedOutMember(){\n  const authArea=$("authArea");\n  const dashboard=$("dashboard");\n  if(authArea) authArea.classList.remove("pg-auth-hidden");\n  if(dashboard) dashboard.classList.remove("pg-dashboard-visible");\n}\nconst pgExistingLoadMember=loadMember;\nloadMember=async function(user){\n  await pgExistingLoadMember(user);\n  pgShowAuthenticatedMember();\n};\n$("logoutBtn")?.addEventListener("click",()=>{\n  setTimeout(pgShowLoggedOutMember,300);\n});\nclient.auth.onAuthStateChange((event,session)=>{\n  if(session) pgShowAuthenticatedMember();\n  else if(event === "SIGNED_OUT") pgShowLoggedOutMember();\n});\n'''
+          marker='\n</script>'
+          if marker not in h: raise SystemExit('Script closing boundary not found')
+          h=h.replace(marker,js+marker,1)
+          h=h.replace('<body>','<body id="pg-login-visibility-fix">',1)
+          p.write_text(h,encoding='utf-8')
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Ensure login section hides after member authentication"
+          git push
