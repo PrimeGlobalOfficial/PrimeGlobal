@@ -1,0 +1,121 @@
+name: Prime Global SEO and Discoverability Pass
+
+on:
+  push:
+    paths:
+      - seo-growth-pass.trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply-seo-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Apply SEO, metadata, structured data and sitemap improvements
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+          from html import escape
+          from xml.etree.ElementTree import Element, SubElement, ElementTree
+
+          BASE = 'https://primeglobalofficial.github.io/PrimeGlobal/'
+          root = Path('.')
+          html_files = sorted(p for p in root.glob('*.html') if p.is_file())
+
+          def title_for(path, html):
+              m = re.search(r'<title>(.*?)</title>', html, re.I | re.S)
+              if m:
+                  return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', m.group(1))).strip()
+              name = path.stem.replace('-', ' ').title()
+              return f'Prime Global | {name}'
+
+          def description_for(path, html):
+              m = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\'](.*?)["\']', html, re.I | re.S)
+              if m:
+                  return re.sub(r'\s+', ' ', m.group(1)).strip()
+              return 'Explore legitimate online work and remote opportunities with Prime Global. Review requirements, application routes and payment information before applying.'
+
+          for path in html_files:
+              html = path.read_text(encoding='utf-8')
+              url = BASE + ('' if path.name == 'index.html' else path.name)
+              title = title_for(path, html)
+              desc = description_for(path, html)
+
+              # Remove previously generated SEO block so this pass is safely repeatable.
+              html = re.sub(r'\n<!-- PRIME GLOBAL SEO PASS -->.*?<!-- /PRIME GLOBAL SEO PASS -->\n?', '\n', html, flags=re.S)
+
+              schema_type = 'WebSite' if path.name == 'index.html' else 'WebPage'
+              schema = {
+                  '@context': 'https://schema.org',
+                  '@type': schema_type,
+                  'name': title,
+                  'url': url,
+                  'description': desc,
+                  'isPartOf': {'@type': 'WebSite', 'name': 'Prime Global', 'url': BASE}
+              }
+              if path.name == 'index.html':
+                  schema['publisher'] = {'@type': 'Organization', 'name': 'Prime Global', 'url': BASE}
+
+              import json
+              block = f'''<!-- PRIME GLOBAL SEO PASS -->\n<link rel="canonical" href="{escape(url, quote=True)}">\n<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">\n<meta property="og:type" content="website">\n<meta property="og:title" content="{escape(title, quote=True)}">\n<meta property="og:description" content="{escape(desc, quote=True)}">\n<meta property="og:url" content="{escape(url, quote=True)}">\n<meta property="og:site_name" content="Prime Global">\n<meta name="twitter:card" content="summary">\n<meta name="twitter:title" content="{escape(title, quote=True)}">\n<meta name="twitter:description" content="{escape(desc, quote=True)}">\n<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(',', ':'))}</script>\n<!-- /PRIME GLOBAL SEO PASS -->'''
+              html = html.replace('</head>', block + '\n</head>', 1)
+              path.write_text(html, encoding='utf-8')
+
+          # Add a focused discovery hub to the homepage, using pages that already exist.
+          index = root / 'index.html'
+          html = index.read_text(encoding='utf-8')
+          html = re.sub(r'\n<!-- PRIME GLOBAL DISCOVERY HUB -->.*?<!-- /PRIME GLOBAL DISCOVERY HUB -->\n?', '\n', html, flags=re.S)
+          hub = '''<!-- PRIME GLOBAL DISCOVERY HUB -->
+<section aria-labelledby="discovery-heading">
+  <div class="section-head">
+    <h2 id="discovery-heading">Find online work by category</h2>
+    <p>Explore Prime Global guides for different types of remote and online work. Always review the requirements and the official application route before applying.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="jobs.html"><div class="icon">↗</div><h3>Online Jobs Worldwide</h3><p>Browse the main Prime Global opportunities hub and application guidance.</p><span class="more">Explore jobs →</span></a>
+    <a class="card" href="online-jobs-kenya.html"><div class="icon">◎</div><h3>Online Jobs in Kenya</h3><p>Review online work options and practical eligibility information for Kenya.</p><span class="more">View Kenya guide →</span></a>
+    <a class="card" href="data-annotation.html"><div class="icon">◈</div><h3>Data Annotation</h3><p>Learn about annotation and data-labeling work, requirements and application routes.</p><span class="more">View guide →</span></a>
+    <a class="card" href="ai-training.html"><div class="icon">AI</div><h3>AI Training</h3><p>Explore AI evaluation and training-related work and what applicants should check.</p><span class="more">View guide →</span></a>
+    <a class="card" href="data-entry.html"><div class="icon">▤</div><h3>Data Entry</h3><p>Explore data-entry opportunities and the skills commonly requested.</p><span class="more">View guide →</span></a>
+    <a class="card" href="chat-support.html"><div class="icon">◌</div><h3>Chat Support</h3><p>Explore customer and chat-support work, requirements and application guidance.</p><span class="more">View guide →</span></a>
+    <a class="card" href="transcription.html"><div class="icon">♫</div><h3>Transcription</h3><p>Learn about transcription work and the skills commonly required.</p><span class="more">View guide →</span></a>
+    <a class="card" href="translation-proofreading.html"><div class="icon">文</div><h3>Translation & Proofreading</h3><p>Explore language-related remote work and application considerations.</p><span class="more">View guide →</span></a>
+  </div>
+</section>
+<!-- /PRIME GLOBAL DISCOVERY HUB -->'''
+          marker = '<main>'
+          if marker not in html:
+              raise SystemExit('Homepage main boundary not found')
+          html = html.replace(marker, marker + '\n\n' + hub, 1)
+          index.write_text(html, encoding='utf-8')
+
+          # Generate a complete sitemap from the site's public HTML pages.
+          urls = [BASE]
+          for p in html_files:
+              if p.name != 'index.html':
+                  urls.append(BASE + p.name)
+          urls = sorted(set(urls))
+          urlset = Element('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
+          for u in urls:
+              item = SubElement(urlset, 'url')
+              SubElement(item, 'loc').text = u
+              SubElement(item, 'changefreq').text = 'weekly'
+              SubElement(item, 'priority').text = '1.0' if u == BASE else '0.7'
+          ElementTree(urlset).write(root / 'sitemap.xml', encoding='utf-8', xml_declaration=True)
+          print(f'Applied SEO metadata to {len(html_files)} HTML pages and generated sitemap with {len(urls)} URLs.')
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' sitemap.xml
+          git diff --cached --quiet && exit 0
+          git commit -m "Strengthen SEO metadata and job discovery"
+          git push
