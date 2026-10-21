@@ -3,109 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Worldwide Online Jobs & Remote Work | Prime Global</title>
-  <meta name="description" content="Explore worldwide online work categories, including AI training, data annotation, transcription, translation, and remote digital work. Learn how to evaluate opportunities with Prime Global.">
+  <title>Live Online Job Listings | Prime Global</title>
+  <meta name="description" content="Search published remote and online job listings on Prime Global. Check job eligibility, employer details, and application instructions before applying.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://primeglobalofficial.github.io/PrimeGlobal/jobs.html">
+  <link rel="icon" type="image/png" href="./prime-global-favicon.png">
   <meta name="theme-color" content="#071a3d">
   <style>
-    :root{--navy:#071a3d;--blue:#1d4ed8;--gold:#f5c542;--light:#f7f9fc;--text:#172033;--muted:#64748b;--border:#e5e7eb}
+    :root{--navy:#071a3d;--blue:#1d4ed8;--teal:#2dd4bf;--light:#f7f9fc;--text:#172033;--muted:#64748b;--border:#e5e7eb}
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:var(--text);background:var(--light)}
-    header{background:var(--navy);color:#fff;padding:18px 20px}
-    .nav,main,footer{max-width:980px;margin:auto}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;line-height:1.65;color:var(--text);background:var(--light)}
+    header{background:var(--navy);color:#fff;padding:16px 20px}
+    .nav,main,footer{max-width:1100px;margin:auto}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .brand{font-size:1.2rem;font-weight:700;color:#fff;text-decoration:none}
     .nav a:not(.brand){color:#fff;text-decoration:none}
     main{padding:28px 20px 48px}
-    .hero{background:#fff;border:1px solid var(--border);border-radius:16px;padding:clamp(24px,5vw,44px);box-shadow:0 8px 28px #071a3d0a}
-    h1,h2{line-height:1.2;color:var(--navy)}
-    h1{font-size:clamp(2rem,5vw,3rem);margin-top:0}
-    h2{margin-top:32px}
-    .lead{font-size:1.12rem;color:#334155}
+    .hero{background:linear-gradient(135deg,#071a3d,#102a56);color:#fff;border-radius:16px;padding:clamp(24px,5vw,44px)}
+    h1,h2{line-height:1.2}h1{font-size:clamp(2rem,5vw,3rem);margin-top:0}h2{color:var(--navy);margin-top:34px}
+    .lead{font-size:1.1rem;color:#e2e8f0}
+    .button{display:inline-block;background:var(--teal);color:#071a3d;font-weight:700;padding:10px 15px;border-radius:8px;text-decoration:none;border:0;cursor:pointer}
+    a{color:var(--blue)}
+    .board{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;margin-top:24px}
+    .filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:16px 0}
+    input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff}
+    .job-list{display:grid;gap:14px}
+    .job{border:1px solid var(--border);border-radius:12px;padding:18px;display:grid;gap:8px}
+    .job h3{margin:0;color:var(--navy);font-size:1.15rem}
+    .meta{color:var(--muted);font-size:.92rem}
+    .job-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+    .secondary{display:inline-block;padding:9px 13px;border:1px solid #cbd5e1;border-radius:8px;text-decoration:none;font-weight:700;background:#fff}
+    .status{padding:12px;border-radius:8px;background:#eef4ff;color:#17366b}
+    .note{background:#eef4ff;border-left:4px solid var(--blue);padding:14px 16px;border-radius:6px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:22px 0}
     .item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
     .item h3{margin-top:0;color:var(--navy)}
-    .button{display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:11px 17px;border-radius:8px;text-decoration:none}
-    a{color:var(--blue)}
-    .note{background:#eef4ff;border-left:4px solid var(--blue);padding:14px 16px;border-radius:6px}
     footer{padding:22px 20px;color:var(--muted);font-size:.95rem}
+    @media(max-width:680px){.filters{grid-template-columns:1fr}.job-actions>*{width:100%;text-align:center}}
   </style>
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Worldwide Online Jobs and Remote Work",
-    "url":"https://primeglobalofficial.github.io/PrimeGlobal/jobs.html",
-    "description":"Information about online work categories including AI training, data annotation, transcription, translation, and remote digital work.",
-    "isPartOf":{"@type":"WebSite","name":"Prime Global","url":"https://primeglobalofficial.github.io/PrimeGlobal/"}
-  }
+  {"@context":"https://schema.org","@type":"WebPage","name":"Live Online Job Listings","url":"https://primeglobalofficial.github.io/PrimeGlobal/jobs.html","description":"Search published online and remote job listings on Prime Global.","isPartOf":{"@type":"WebSite","name":"Prime Global","url":"https://primeglobalofficial.github.io/PrimeGlobal/"}}
   </script>
 </head>
 <body>
   <header>
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="./">Prime Global</a>
-      <a href="./">Home</a>
+      <div><a href="./">Home</a> &nbsp; <a href="./#member">Member account</a></div>
     </nav>
   </header>
   <main>
     <section class="hero">
-      <h1>Worldwide Online Jobs and Remote Work</h1>
-      <p class="lead">Prime Global helps people explore digital-work opportunities and understand common types of remote work available through online platforms. Opportunities, eligibility, and payment methods vary by employer and country.</p>
-      <a class="button" href="./">Explore Prime Global</a>
+      <h1>Online Jobs & Remote Opportunities</h1>
+      <p class="lead">Search live listings published by employers on Prime Global. Always confirm eligibility, company identity, job requirements, and payment terms before applying.</p>
+      <a class="button" href="#live-jobs">Browse job listings</a>
+    </section>
+
+    <section class="board" id="live-jobs" aria-labelledby="job-heading">
+      <h2 id="job-heading" style="margin-top:0">Published job listings</h2>
+      <p>Listings are loaded from the Prime Global database. Only jobs marked as published appear here.</p>
+      <div class="filters">
+        <input id="jobSearch" type="search" placeholder="Search title, company, or keywords" aria-label="Search jobs">
+        <select id="jobCategory" aria-label="Filter by category"><option value="">All categories</option></select>
+        <select id="jobType" aria-label="Filter by job type">
+          <option value="">All job types</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="freelance">Freelance</option><option value="internship">Internship</option>
+        </select>
+      </div>
+      <p id="jobStatus" class="status" role="status" aria-live="polite">Connecting to job listings…</p>
+      <div id="jobList" class="job-list"></div>
     </section>
 
     <h2>Types of online work to explore</h2>
     <div class="grid">
-      <section class="item">
-        <h3>AI Training and Evaluation</h3>
-        <p>Tasks may include rating AI responses, checking factual accuracy, evaluating search results, and writing feedback to improve AI systems. Some roles require assessments or specialist knowledge.</p>
-      </section>
-      <section class="item">
-        <h3>Data Annotation</h3>
-        <p>Label text, images, audio, or other data according to project guidelines. Work may require attention to detail, training, and passing qualification tests.</p>
-      </section>
-      <section class="item">
-        <h3>Transcription and Translation</h3>
-        <p>Convert audio into written text or translate content between languages. Requirements depend on language pair, accuracy standards, and the client.</p>
-      </section>
-      <section class="item">
-        <h3>Data Entry and Online Research</h3>
-        <p>Organize information, verify records, research public information, or update spreadsheets and databases. Check task instructions and expected rates carefully.</p>
-      </section>
-      <section class="item">
-        <h3>Customer Support and Virtual Assistance</h3>
-        <p>Support customers, manage inboxes, schedule appointments, maintain records, or assist teams remotely. Some positions require set hours and a reliable internet connection.</p>
-      </section>
-      <section class="item">
-        <h3>Freelance Digital Services</h3>
-        <p>Offer writing, design, editing, web support, or other skills to clients online. Build a clear profile and portfolio that accurately reflects your experience.</p>
-      </section>
+      <section class="item"><h3>AI Training and Evaluation</h3><p>Tasks may include rating AI responses, checking factual accuracy, evaluating search results, and writing feedback to improve AI systems. Some roles require assessments or specialist knowledge.</p></section>
+      <section class="item"><h3>Data Annotation</h3><p>Label text, images, audio, or other data according to project guidelines. Work may require attention to detail, training, and qualification tests.</p></section>
+      <section class="item"><h3>Transcription and Translation</h3><p>Convert audio into written text or translate content between languages. Requirements depend on language pair, accuracy standards, and the client.</p></section>
+      <section class="item"><h3>Data Entry and Online Research</h3><p>Organize information, verify records, research public information, or update spreadsheets and databases.</p></section>
+      <section class="item"><h3>Customer Support and Virtual Assistance</h3><p>Support customers, manage inboxes, schedule appointments, maintain records, or assist teams remotely.</p></section>
+      <section class="item"><h3>Freelance Digital Services</h3><p>Offer writing, design, editing, web support, or other skills to clients online. Build a clear profile and portfolio.</p></section>
     </div>
 
-    <h2>Finding opportunities from Kenya and worldwide</h2>
-    <p>Before applying, check whether a platform accepts applicants in your country, what equipment and language skills are required, how tasks are assigned, and which payment methods are supported. A platform may be global but still restrict specific projects by location.</p>
-
-    <h2>How to evaluate an online job</h2>
-    <ul>
-      <li>Read the eligibility requirements and job description before applying.</li>
-      <li>Confirm payment terms, minimum withdrawal amounts, fees, and payment availability in your country.</li>
-      <li>Never pay an upfront fee to secure a job or release supposed earnings.</li>
-      <li>Use the official platform website and protect your identity documents and account credentials.</li>
-      <li>Do not assume work or income is guaranteed; selection, task availability, and earnings can vary.</li>
-    </ul>
-
-    <div class="note">
-      <strong>Important:</strong> Prime Global does not promise that every listed work category has an active vacancy. Always verify the current opening, employer, eligibility, and payment conditions directly with the hiring platform.
-    </div>
-
-    <h2>Start here</h2>
-    <p>Visit the Prime Global homepage to learn more about the website and its focus on worldwide digital-work opportunities.</p>
-    <p><a class="button" href="./">Visit Prime Global Homepage</a></p>
+    <h2>Safety before applying</h2>
+    <div class="note"><strong>Protect yourself:</strong> Never pay an upfront fee to secure a job or release supposed earnings. Check the official employer website and confirm country eligibility and payment options. Prime Global does not guarantee selection, task availability, or income. If a listing looks suspicious, do not share passwords, one-time codes, or sensitive identity documents.</div>
+    <h2>Want to publish a job?</h2>
+    <p>Employer self-service posting is being developed. At this stage, a job listing only appears publicly after it has been created in the database and approved for publication.</p>
   </main>
-  <footer>
-    <p>© Prime Global. Information is general guidance; confirm details with each employer or platform.</p>
-  </footer>
+  <footer><p>© 2026 Prime Global. Verify each opportunity directly with the employer.</p></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (() => {
+      const SUPABASE_URL = "https://aehmswdhykcdpkqzbjgl.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6Ss9I";
+      const status = document.getElementById("jobStatus");
+      const list = document.getElementById("jobList");
+      const search = document.getElementById("jobSearch");
+      const category = document.getElementById("jobCategory");
+      const type = document.getElementById("jobType");
+      let jobs = [];
+      let client = null;
+
+      function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+      function cleanUrl(value) {
+        try {
+          const url = new URL(value);
+          return ["https:", "http:"].includes(url.protocol) ? url.href : null;
+        } catch (_) { return null; }
+      }
+      function render() {
+        const term = search.value.trim().toLowerCase();
+        const chosenCategory = category.value;
+        const chosenType = type.value;
+        const visible = jobs.filter(job => {
+          const haystack = [job.title, job.company_name, job.description, job.category, job.location].join(" ").toLowerCase();
+          return (!term || haystack.includes(term))
+            && (!chosenCategory || job.category === chosenCategory)
+            && (!chosenType || job.job_type === chosenType);
+        });
+        list.replaceChildren();
+        if (!visible.length) {
+          list.appendChild(el("p", "meta", jobs.length ? "No listings match those filters. Try a different search." : "No published listings are available yet. Please check again later."));
+          return;
+        }
+        visible.forEach(job => {
+          const card = el("article", "job");
+          card.appendChild(el("h3", "", job.title));
+          card.appendChild(el("strong", "", job.company_name));
+          card.appendChild(el("p", "meta", [job.category, (job.job_type || "contract").replace("-", " "), job.location || "Remote"].join(" · ")));
+          card.appendChild(el("p", "", job.description));
+          if (Array.isArray(job.country_eligibility) && job.country_eligibility.length) {
+            card.appendChild(el("p", "meta", "Eligible locations: " + job.country_eligibility.join(", ")));
+          }
+          const actions = el("div", "job-actions");
+          const applicationUrl = cleanUrl(job.application_url || "");
+          if (applicationUrl) {
+            const apply = el("a", "button", "Apply on employer site");
+            apply.href = applicationUrl;
+            apply.target = "_blank";
+            apply.rel = "noopener noreferrer";
+            actions.appendChild(apply);
+          } else if (job.application_email) {
+            const apply = el("a", "button", "Email to apply");
+            apply.href = "mailto:" + job.application_email;
+            actions.appendChild(apply);
+          }
+          const save = el("button", "secondary", "Save job");
+          save.type = "button";
+          save.addEventListener("click", async () => {
+            if (!client) return;
+            save.disabled = true;
+            try {
+              const { data: userData, error: userError } = await client.auth.getUser();
+              if (userError || !userData.user) {
+                status.textContent = "Sign in from the Prime Global homepage before saving jobs.";
+                window.location.href = "./#member";
+                return;
+              }
+              const { error } = await client.from("saved_jobs").insert({user_id: userData.user.id, job_id: job.id});
+              if (error && error.code === "23505") {
+                status.textContent = "This job is already in your saved jobs.";
+              } else if (error) {
+                throw error;
+              } else {
+                status.textContent = "Job saved to your account.";
+                save.textContent = "Saved";
+              }
+            } catch (error) {
+              status.textContent = "Could not save this job. Please sign in and try again.";
+              console.error("Save job error:", error);
+            } finally { save.disabled = false; }
+          });
+          actions.appendChild(save);
+          card.appendChild(actions);
+          list.appendChild(card);
+        });
+      }
+
+      search.addEventListener("input", render);
+      category.addEventListener("change", render);
+      type.addEventListener("change", render);
+
+      async function init() {
+        if (!window.supabase || !window.supabase.createClient) {
+          status.textContent = "The job service did not load. Check your connection and refresh.";
+          return;
+        }
+        client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        try {
+          const { data, error } = await client
+            .from("jobs")
+            .select("id,title,company_name,description,category,job_type,location,country_eligibility,application_url,application_email,published_at")
+            .eq("status", "published")
+            .order("published_at", { ascending: false, nullsFirst: false })
+            .limit(100);
+          if (error) throw error;
+          jobs = data || [];
+          [...new Set(jobs.map(job => job.category).filter(Boolean))].sort().forEach(value => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+            category.appendChild(option);
+          });
+          status.textContent = jobs.length
+            ? jobs.length + " published listing(s) loaded. Check each employer's terms before applying."
+            : "The live job database is connected, but there are no published listings yet.";
+          render();
+        } catch (error) {
+          console.error("Load jobs error:", error);
+          status.textContent = "We could not load live listings. The database may need API permissions or configuration. Please try again later.";
+        }
+      }
+      init();
+    })();
+  </script>
 </body>
 </html>
