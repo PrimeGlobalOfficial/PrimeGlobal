@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Browse current job listings published on Prime Global. Search by keyword, category, and work type.">
+<meta name="theme-color" content="#071a3d">
+<title>Live Jobs Board | Prime Global</title>
+<link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
+<style>
+:root{--navy:#071a3d;--blue:#1d4ed8;--mint:#2dd4bf;--bg:#f5f8fc;--text:#172033;--muted:#64748b;--border:#dbe3ef}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Arial,Helvetica,sans-serif}
+header{background:var(--navy);color:white;padding:16px 20px}.nav,main,footer{max-width:1100px;margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.nav a{color:white;text-decoration:none;font-weight:700}
+main{padding:30px 20px 60px}.hero{background:linear-gradient(135deg,#071a3d,#173b78);color:white;padding:clamp(24px,5vw,44px);border-radius:18px}.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:0 0 12px}.hero p{max-width:700px;color:#dce6f7}.panel{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;margin:22px 0}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}label{display:grid;gap:6px;font-weight:700;font-size:13px}input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:white;font:inherit}button,.button{border:0;border-radius:8px;background:var(--blue);color:white;font-weight:700;padding:12px 16px;cursor:pointer;text-decoration:none;display:inline-block}button:disabled{opacity:.6;cursor:wait}
+.status{color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.job{background:white;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}.job h2{font-size:1.2rem;line-height:1.3;margin:0;color:var(--navy)}.meta{display:flex;gap:7px;flex-wrap:wrap}.tag{background:#eaf2ff;color:#244b92;border-radius:99px;padding:4px 9px;font-size:12px;font-weight:700}.desc{white-space:pre-wrap;overflow-wrap:anywhere}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:8px}.secondary{background:#edf2f7;color:#173b78}.empty{background:white;border:1px dashed #b8c7db;border-radius:12px;padding:24px;text-align:center;color:var(--muted)}
+footer{padding:22px 20px;color:var(--muted);font-size:13px}
+@media(max-width:750px){.filters{grid-template-columns:1fr 1fr}.filters label:first-child{grid-column:1/-1}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><nav class="nav"><a href="./">Prime Global</a><a href="./index.html#member">Member account</a><a href="./jobs.html">Work guides</a></nav></header>
+<main>
+<section class="hero"><p style="color:#2dd4bf;font-weight:800;text-transform:uppercase;letter-spacing:1px">Prime Global opportunities</p><h1>Live Jobs Board</h1><p>Search job listings submitted to Prime Global. Only listings marked as published are displayed here. Always check the employer's official application route and terms.</p></section>
+<section class="panel" aria-label="Job search">
+<div class="filters">
+<label>Search jobs<input id="keyword" type="search" placeholder="Job title, company, or keyword"></label>
+<label>Category<select id="category"><option value="">All categories</option></select></label>
+<label>Work type<select id="type"><option value="">All work types</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="freelance">Freelance</option><option value="internship">Internship</option></select></label>
+<button id="refresh" type="button">Refresh jobs</button>
+</div>
+<p id="status" class="status" role="status" aria-live="polite">Connecting to the jobs database…</p>
+</section>
+<div id="results" class="grid"></div>
+<section class="panel"><strong>Want to post a job?</strong><p>Employer registration and a secure job-submission workflow are still being developed. Contact Prime Global to discuss employer access; do not send sensitive account information by email.</p><a class="button" href="mailto:primeglobalofficialacc@gmail.com?subject=Prime%20Global%20employer%20enquiry">Employer enquiry</a></section>
+<section class="panel"><strong>Safety reminder</strong><p>Prime Global does not guarantee hiring, task availability, or payment. Never pay an upfront fee to secure a job. Listings must be independently checked; published status is not a guarantee of employer legitimacy.</p></section>
+</main>
+<footer>© 2026 Prime Global. Confirm eligibility, listing status, and payment terms directly with the employer.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+ const URL = "https://aehmswdhykcdpkqzbjgl.supabase.co";
+ const KEY = "sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6SsI9";
+ const status = document.getElementById("status");
+ const results = document.getElementById("results");
+ const category = document.getElementById("category");
+ let allJobs = [];
+ let client = null;
+ const el = (tag, cls, value) => {
+   const node = document.createElement(tag);
+   if (cls) node.className = cls;
+   if (value !== undefined) node.textContent = value;
+   return node;
+ };
+ function render() {
+   const q = document.getElementById("keyword").value.trim().toLowerCase();
+   const cat = category.value;
+   const type = document.getElementById("type").value;
+   const jobs = allJobs.filter(j =>
+     (!q || [j.title,j.company_name,j.description,j.category].some(v => (v || "").toLowerCase().includes(q))) &&
+     (!cat || j.category === cat) && (!type || j.job_type === type)
+   );
+   results.replaceChildren();
+   if (!jobs.length) {
+     results.appendChild(el("div","empty",allJobs.length ? "No published jobs match these filters. Try another keyword or category." : "No published jobs are available yet. Please check back later."));
+     return;
+   }
+   jobs.forEach(j => {
+     const card = el("article","job");
+     card.appendChild(el("h2","",j.title));
+     card.appendChild(el("strong","",j.company_name));
+     const tags = el("div","meta");
+     [j.category,j.job_type,j.location || "Remote",...(Array.isArray(j.country_eligibility) ? j.country_eligibility.slice(0,3) : [])].filter(Boolean).forEach(t => tags.appendChild(el("span","tag",String(t))));
+     card.appendChild(tags);
+     card.appendChild(el("p","desc",j.description));
+     const actions = el("div","actions");
+     const href = j.application_url;
+     if (href) {
+       try {
+         const parsed = new URL(href);
+         if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+           const link = el("a","button","Apply on employer site");
+           link.href = parsed.href; link.target = "_blank"; link.rel = "noopener noreferrer";
+           actions.appendChild(link);
+         }
+       } catch (_) {}
+     } else if (j.application_email) {
+       const link = el("a","button","Contact employer");
+       link.href = "mailto:" + j.application_email;
+       actions.appendChild(link);
+     }
+     card.appendChild(actions);
+     results.appendChild(card);
+   });
+ }
+ async function load() {
+   const button = document.getElementById("refresh");
+   button.disabled = true;
+   status.textContent = "Loading published listings…";
+   results.replaceChildren();
+   try {
+     if (!window.supabase) throw new Error("The database client could not load. Check your connection and refresh.");
+     if (!client) client = window.supabase.createClient(URL, KEY);
+     const {data,error} = await client.from("jobs").select("id,title,company_name,description,category,job_type,location,country_eligibility,application_url,application_email,published_at").eq("status","published").order("published_at",{ascending:false});
+     if (error) throw error;
+     allJobs = data || [];
+     const cats = [...new Set(allJobs.map(j => j.category).filter(Boolean))].sort();
+     category.replaceChildren(el("option","","All categories"));
+     cats.forEach(c => {const option=el("option","",c);option.value=c;category.appendChild(option);});
+     status.textContent = allJobs.length + " published listing(s) loaded from Prime Global's database.";
+     render();
+   } catch (e) {
+     allJobs = [];
+     status.textContent = "We could not load the jobs database. Please try Refresh jobs later. " + (e && e.message ? e.message : "");
+     results.appendChild(el("div","empty","Jobs are temporarily unavailable. This may mean the database permissions or network connection need attention."));
+   } finally { button.disabled = false; }
+ }
+ document.getElementById("refresh").addEventListener("click",load);
+ document.getElementById("keyword").addEventListener("input",render);
+ category.addEventListener("change",render);
+ document.getElementById("type").addEventListener("change",render);
+ load();
+})();
+</script>
+</body>
+</html>
