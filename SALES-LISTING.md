@@ -41,19 +41,31 @@ A buyer can extend Prime Global with:
 - analytics; and
 - a custom domain and backend service.
 
-## License options
+## Initial license pricing
 
-### Standard commercial license
+These are **asking prices**, not guaranteed valuations. Custom requirements can change the final price.
+
+### Standard commercial license — US$149
 
 For one business deployment, with modification rights for that deployment. Ownership of the underlying Prime Global intellectual property remains with the owner.
 
-### Extended commercial license
+### Extended commercial license — US$349
 
-For buyers needing broader deployment or client-service rights. Exact permissions are agreed in writing.
+For broader deployment or client-service use. Exact permissions are agreed in writing before payment.
 
-### Exclusive acquisition
+### Exclusive acquisition — from US$1,500, negotiable
 
 Available only by separate negotiation. An exclusive transaction would require a separate written agreement covering intellectual-property rights, branding, repository access, existing deployments, and retained rights.
+
+## Optional services
+
+Additional paid services may be negotiated separately, including:
+
+- custom branding;
+- deployment assistance;
+- content/category customization;
+- backend integration planning; and
+- future development work.
 
 ## Important buyer note
 
