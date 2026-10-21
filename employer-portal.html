@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Request employer access and submit job listings for review on Prime Global.">
+<meta name="theme-color" content="#071a3d"><title>Employer Portal | Prime Global</title>
+<link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
+<style>
+:root{--navy:#071a3d;--blue:#1d4ed8;--bg:#f5f8fc;--text:#172033;--muted:#64748b;--border:#dbe3ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Arial,sans-serif}header{background:var(--navy);color:white;padding:16px 20px}.nav,main,footer{max-width:900px;margin:auto}.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:white;text-decoration:none;font-weight:700}main{padding:28px 20px 60px}.hero{background:linear-gradient(135deg,#071a3d,#173b78);color:white;padding:32px;border-radius:16px}.hero h1{margin:0;font-size:clamp(2rem,5vw,3rem);line-height:1.15}.hero p{color:#dce6f7}.panel{background:white;border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:20px}form{display:grid;gap:14px}label{display:grid;gap:6px;font-weight:700;font-size:14px}input,select,textarea{width:100%;font:inherit;padding:11px;border:1px solid #cbd5e1;border-radius:8px}textarea{min-height:130px;resize:vertical}button,.btn{display:inline-block;border:0;border-radius:8px;background:var(--blue);color:white;padding:12px 16px;font-weight:700;font:inherit;text-decoration:none;cursor:pointer}button:disabled{opacity:.55}.muted{color:var(--muted);font-size:14px}.status{padding:12px;background:#eff6ff;border-radius:8px;overflow-wrap:anywhere}.hidden{display:none!important}.notice{background:#fff7ed;border:1px solid #fed7aa;padding:13px;border-radius:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}footer{padding:22px 20px;color:var(--muted);font-size:13px}@media(max-width:650px){.row{grid-template-columns:1fr}.hero{padding:24px}}
+</style>
+</head>
+<body>
+<header><nav class="nav"><a href="./">Prime Global</a><a href="./live-jobs.html">Browse jobs</a><a href="./index.html#member">Member login/register</a></nav></header>
+<main>
+<section class="hero"><p style="color:#2dd4bf;font-weight:800;letter-spacing:1px;text-transform:uppercase">Employer tools</p><h1>Post opportunities responsibly</h1><p>Request employer verification, then submit job listings for review. A submission is not published automatically.</p></section>
+<section class="panel"><h2>1. Sign in</h2><p class="muted">Use your existing Prime Global account. If you don't have one, register on the main website, confirm your email if required, then return here.</p><form id="loginForm"><label>Email<input type="email" id="email" autocomplete="email" required></label><label>Password<input type="password" id="password" autocomplete="current-password" required></label><button id="loginBtn">Sign in</button></form><button id="logoutBtn" class="hidden" type="button" style="margin-top:10px;background:#475569">Sign out</button><p id="authStatus" class="status" role="status">Checking sign-in status…</p></section>
+<section class="panel hidden" id="profilePanel"><h2>2. Employer verification request</h2><p class="muted">Submit your organization details. Verification status is managed by Prime Global; you cannot approve your own account.</p><form id="profileForm"><label>Company / organization name<input id="company" maxlength="160" required></label><div class="row"><label>Official website (optional)<input id="website" type="url" placeholder="https://example.com"></label><label>Business contact email (optional)<input id="contactEmail" type="email"></label></div><button id="profileBtn">Request employer verification</button></form><p id="profileStatus" class="status" role="status"></p></section>
+<section class="panel hidden" id="jobPanel"><h2>3. Submit a job for review</h2><p id="verificationStatus" class="status"></p><form id="jobForm"><label>Job title<input id="title" minlength="3" maxlength="180" required></label><div class="row"><label>Company name<input id="jobCompany" maxlength="160" required></label><label>Category<input id="category" maxlength="100" placeholder="e.g. Customer Support" required></label></div><div class="row"><label>Work type<select id="jobType"><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract" selected>Contract</option><option value="freelance">Freelance</option><option value="internship">Internship</option></select></label><label>Location / eligibility note<input id="location" value="Remote" required></label></div><label>Eligible countries (comma-separated)<input id="countries" value="Worldwide" required></label><label>Job description<textarea id="description" minlength="30" maxlength="12000" required></textarea></label><div class="row"><label>Application URL (https:// preferred)<input id="applyUrl" type="url" placeholder="https://..."></label><label>Application email (if no URL)<input id="applyEmail" type="email"></label></div><button id="jobBtn">Submit job for review</button></form><p id="jobStatus" class="status" role="status"></p></section>
+<section class="panel"><h2>Important requirements</h2><ul><li>Only submit genuine opportunities you are authorized to advertise.</li><li>Do not ask applicants to pay to apply or secure a job.</li><li>Never submit passwords, payment card details, or other sensitive data through this form.</li><li>Listings are stored as pending review and must be approved through a trusted administrative process before appearing publicly.</li></ul><p class="notice">Employer verification and job submission are connected to the database. Admin approval tools are not yet included on this page; do not promise a publication date until review is complete.</p></section>
+</main><footer>© 2026 Prime Global. Review eligibility and employer details independently.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+ const SUPABASE_URL="https://aehmswdhykcdpkqzbjgl.supabase.co";
+ const SUPABASE_KEY="sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6SsI9";
+ const $=id=>document.getElementById(id);
+ let db=null,user=null,profile=null;
+ const msg=(id,text)=>$(id).textContent=text;
+ const setBusy=(id,on)=>$(id).disabled=on;
+ async function init(){
+  try{
+   if(!window.supabase) throw new Error("Database client did not load. Check your connection.");
+   db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+   const {data,error}=await db.auth.getSession();if(error)throw error;
+   user=data.session?.user||null;await refresh();
+   db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;setTimeout(refresh,0)});
+  }catch(e){msg("authStatus","Could not connect: "+e.message)}
+ }
+ async function refresh(){
+  $("logoutBtn").classList.toggle("hidden",!user);
+  $("profilePanel").classList.toggle("hidden",!user);
+  $("jobPanel").classList.add("hidden");
+  if(!user){msg("authStatus","You are signed out. Sign in with your Prime Global account above.");return}
+  $("loginForm").classList.add("hidden");
+  msg("authStatus","Signed in as "+user.email);
+  const {data,error}=await db.from("employer_profiles").select("user_id,company_name,website_url,contact_email,verification_status").eq("user_id",user.id).maybeSingle();
+  if(error){msg("profileStatus","Could not load employer status: "+error.message);return}
+  profile=data;
+  if(profile){
+   $("company").value=profile.company_name||"";$("website").value=profile.website_url||"";$("contactEmail").value=profile.contact_email||"";
+   msg("profileStatus","Employer status: "+profile.verification_status+".");
+   if(profile.verification_status==="verified"){
+    $("jobPanel").classList.remove("hidden");$("profileForm").classList.add("hidden");
+    $("jobCompany").value=profile.company_name;
+    msg("verificationStatus","Verified employer. New jobs will enter pending review; they are not published automatically.");
+   }else{
+    $("profileForm").classList.remove("hidden");
+    $("profileBtn").textContent="Update employer details";
+   }
+  }else{$("profileForm").classList.remove("hidden");msg("profileStatus","No employer request found yet.")}
+ }
+ $("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();setBusy("loginBtn",true);msg("authStatus","Signing in…");
+  try{const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)throw error;user=data.user;await refresh()}
+  catch(err){msg("authStatus","Sign-in failed: "+err.message)}
+  finally{setBusy("loginBtn",false)}
+ });
+ $("logoutBtn").addEventListener("click",async()=>{const {error}=await db.auth.signOut();if(error)msg("authStatus",error.message);else{user=null;$("loginForm").classList.remove("hidden");await refresh()}});
+ $("profileForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(!user){msg("profileStatus","Please sign in first.");return}setBusy("profileBtn",true);
+  const record={user_id:user.id,company_name:$("company").value.trim(),website_url:$("website").value.trim()||null,contact_email:$("contactEmail").value.trim()||null,verification_status:"pending"};
+  try{
+   let result;
+   if(profile){result=await db.from("employer_profiles").update({company_name:record.company_name,website_url:record.website_url,contact_email:record.contact_email}).eq("user_id",user.id)}
+   else{result=await db.from("employer_profiles").insert(record)}
+   if(result.error)throw result.error;
+   msg("profileStatus","Request saved. Your status remains pending until an administrator verifies your organization.");
+   await refresh();
+  }catch(err){msg("profileStatus","Could not save request: "+err.message)}
+  finally{setBusy("profileBtn",false)}
+ });
+ $("jobForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(!user||!profile||profile.verification_status!=="verified"){msg("jobStatus","A verified employer account is required.");return}
+  const appUrl=$("applyUrl").value.trim(),appEmail=$("applyEmail").value.trim();
+  if(!appUrl&&!appEmail){msg("jobStatus","Provide an application URL or an application email.");return}
+  if(appUrl&&!/^https?:\/\//i.test(appUrl)){msg("jobStatus","Application URL must begin with http:// or https://.");return}
+  setBusy("jobBtn",true);
+  const record={employer_id:user.id,title:$("title").value.trim(),company_name:$("jobCompany").value.trim(),category:$("category").value.trim(),job_type:$("jobType").value,location:$("location").value.trim(),country_eligibility:$("countries").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("description").value.trim(),application_url:appUrl||null,application_email:appEmail||null,status:"pending_review"};
+  try{const {error}=await db.from("jobs").insert(record);if(error)throw error;$("jobForm").reset();$("jobCompany").value=profile.company_name;$("location").value="Remote";$("countries").value="Worldwide";msg("jobStatus","Submitted successfully for review. It will not appear publicly until an authorized reviewer publishes it.")}
+  catch(err){msg("jobStatus","Submission failed: "+err.message)}
+  finally{setBusy("jobBtn",false)}
+ });
+ init();
+})();
+</script></body></html>
