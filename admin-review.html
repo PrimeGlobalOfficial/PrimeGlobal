@@ -52,8 +52,11 @@
    if(session){
      const result=await db.rpc("is_prime_global_admin");
      if(!result.error) isAdmin=result.data===true;
-     if(!isAdmin) say("authStatus","This account is signed in but has not been granted Prime Global administrator access. Ask the project owner to authorize the correct account in Supabase.");
-     else say("authStatus","Administrator access verified.");
+     const actualId=session.user?.id||"(unavailable)";
+     const actualEmail=session.user?.email||"(email unavailable)";
+     if(result.error) say("authStatus","Signed in: "+actualEmail+" | ID: "+actualId+" | Admin check error: "+result.error.message);
+     else if(!isAdmin) say("authStatus","Signed in: "+actualEmail+" | ID: "+actualId+" | Admin check returned false. Compare this ID with the authorized UUID.");
+     else say("authStatus","Administrator access verified for "+actualEmail+".");
    }else say("authStatus","You are signed out. Sign in with the authorized administrator account.");
    setView();
    if(isAdmin) await loadQueue();
