@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071a3d">
+<meta name="description" content="Restricted Prime Global administrator review workspace.">
+<title>Admin Review | Prime Global</title>
+<link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
+<style>
+:root{--navy:#071a3d;--blue:#1d4ed8;--mint:#2dd4bf;--bg:#f4f7fb;--ink:#172033;--muted:#64748b;--line:#dbe3ef;--red:#b91c1c;--green:#166534}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Arial,Helvetica,sans-serif}header{background:var(--navy);color:#fff;padding:16px 20px}.nav,main,footer{max-width:1120px;margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.nav a{color:#fff;text-decoration:none;font-weight:800}main{padding:28px 20px 60px}.hero{background:linear-gradient(135deg,#071a3d,#173b78);color:white;padding:28px;border-radius:16px}.hero h1{margin:0 0 8px;font-size:clamp(28px,4vw,42px)}.hero p{margin:0;color:#dce6f7}.panel,.item{background:#fff;border:1px solid var(--line);border-radius:13px;padding:20px;margin:18px 0}.hidden{display:none!important}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{display:grid;gap:6px;font-size:14px;font-weight:700}input{padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;width:100%}button,.btn{border:0;border-radius:8px;padding:10px 14px;background:var(--blue);color:white;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}button:disabled{opacity:.55;cursor:wait}.muted{color:var(--muted);font-size:14px}.status{padding:12px;background:#eff6ff;border-radius:8px;overflow-wrap:anywhere}.item h3{margin:0 0 5px;color:var(--navy)}.meta{font-size:13px;color:var(--muted);margin-bottom:12px;overflow-wrap:anywhere}.description{white-space:pre-wrap;overflow-wrap:anywhere}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.approve{background:var(--green)}.reject{background:var(--red)}.neutral{background:#e8eef7;color:#173b78}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}footer{padding:20px;color:var(--muted);font-size:13px}@media(max-width:650px){.fields{grid-template-columns:1fr}.hero{padding:22px}}
+</style>
+</head>
+<body>
+<header><nav class="nav"><a href="./">Prime Global</a><a href="./employer-portal.html">Employer Portal</a></nav></header>
+<main>
+<section class="hero"><h1>Administrator Review</h1><p>Restricted workspace for reviewing employer verification requests and submitted job listings.</p></section>
+<section id="loginPanel" class="panel">
+<h2>Administrator sign-in</h2>
+<p class="muted">Use the Prime Global account that has been explicitly granted administrator access in the database. Signing in alone does not grant admin privileges.</p>
+<form id="loginForm"><div class="fields"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label></div><p><button id="loginBtn" type="submit">Sign in</button></p></form>
+<p id="authStatus" class="status" role="status" aria-live="polite">Checking session…</p>
+</section>
+<section id="dashboard" class="hidden">
+<div class="panel"><div class="section-title"><h2>Review queue</h2><div class="actions"><button id="refreshBtn" class="neutral" type="button">Refresh queue</button><button id="logoutBtn" class="neutral" type="button">Sign out</button></div></div><p id="queueStatus" class="muted" role="status" aria-live="polite">Loading…</p></div>
+<section class="panel"><h2>Employer verification requests</h2><div id="employerList"></div></section>
+<section class="panel"><h2>Job submissions</h2><div id="jobList"></div></section>
+</section>
+<section class="panel"><strong>Security reminder</strong><p class="muted">Admin access is enforced by database policies, not by hiding this page. Never put a Supabase secret/service-role key in this file. Verify employers and applications independently before publishing listings.</p></section>
+</main>
+<footer>© 2026 Prime Global · Internal review workspace</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+ const URL="https://aehmswdhykcdpkqzbjgl.supabase.co";
+ const KEY="sb_publishable_dET4G4NFL5SNK2ECdj35EA_aTC6Ss9I";
+ const $=id=>document.getElementById(id);
+ let db=null, session=null, isAdmin=false;
+ const say=(id,text)=>$(id).textContent=text;
+ const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+ function action(label,cls,fn){const b=node("button",cls,label);b.type="button";b.addEventListener("click",fn);return b;}
+ function setView(){
+   $("loginPanel").classList.toggle("hidden",!!session&&isAdmin);
+   $("dashboard").classList.toggle("hidden",!(session&&isAdmin));
+   $("loginForm").classList.toggle("hidden",!!session);
+ }
+ async function checkAccess(){
+   const {data,error}=await db.auth.getSession();
+   session=data.session||null;
+   isAdmin=false;
+   if(session){
+     const result=await db.rpc("is_prime_global_admin");
+     if(!result.error) isAdmin=result.data===true;
+     if(!isAdmin) say("authStatus","This account is signed in but has not been granted Prime Global administrator access. Ask the project owner to authorize the correct account in Supabase.");
+     else say("authStatus","Administrator access verified.");
+   }else say("authStatus","You are signed out. Sign in with the authorized administrator account.");
+   setView();
+   if(isAdmin) await loadQueue();
+ }
+ async function loadQueue(){
+   say("queueStatus","Loading review requests…");
+   $("employerList").replaceChildren();$("jobList").replaceChildren();
+   try{
+     const [employers,jobs]=await Promise.all([
+       db.from("employer_profiles").select("user_id,company_name,website_url,contact_email,verification_status,created_at").in("verification_status",["pending","rejected"]).order("created_at",{ascending:true}),
+       db.from("jobs").select("id,employer_id,title,company_name,description,category,job_type,location,country_eligibility,application_url,application_email,status,created_at").in("status",["pending_review","rejected","draft"]).order("created_at",{ascending:true})
+     ]);
+     if(employers.error)throw employers.error;if(jobs.error)throw jobs.error;
+     const pendingEmployers=employers.data||[], pendingJobs=jobs.data||[];
+     say("queueStatus",pendingEmployers.length+" employer request(s) and "+pendingJobs.length+" job listing(s) need review or follow-up.");
+     if(!pendingEmployers.length)$("employerList").append(node("p","muted","No employer verification requests to show."));
+     pendingEmployers.forEach(p=>{
+       const card=node("article","item");card.append(node("h3","",p.company_name));
+       card.append(node("div","meta","Status: "+p.verification_status+" · Submitted: "+new Date(p.created_at).toLocaleString()));
+       if(p.website_url){const link=node("a","",p.website_url);link.href=p.website_url;link.target="_blank";link.rel="noopener noreferrer";card.append(link)}
+       if(p.contact_email)card.append(node("p","", "Contact: "+p.contact_email));
+       card.append(node("p","meta","Account ID: "+p.user_id));
+       const actions=node("div","actions");
+       actions.append(action("Verify employer","approve",()=>reviewEmployer(p.user_id,"verified")));
+       actions.append(action("Reject request","reject",()=>reviewEmployer(p.user_id,"rejected")));
+       card.append(actions);$("employerList").append(card);
+     });
+     if(!pendingJobs.length)$("jobList").append(node("p","muted","No job submissions to show."));
+     pendingJobs.forEach(j=>{
+       const card=node("article","item");card.append(node("h3","",j.title+" — "+j.company_name));
+       card.append(node("div","meta","Status: "+j.status+" · "+j.category+" · "+j.job_type+" · "+j.location+" · Submitted: "+new Date(j.created_at).toLocaleString()));
+       card.append(node("p","description",j.description));
+       card.append(node("p","muted","Eligible locations: "+((j.country_eligibility||[]).join(", ")||"Not specified")));
+       if(j.application_url){const link=node("a","", "Application URL: "+j.application_url);link.href=j.application_url;link.target="_blank";link.rel="noopener noreferrer";card.append(link)}
+       if(j.application_email)card.append(node("p","", "Application email: "+j.application_email));
+       const actions=node("div","actions");
+       actions.append(action("Publish listing","approve",()=>reviewJob(j.id,"published")));
+       actions.append(action("Reject listing","reject",()=>reviewJob(j.id,"rejected")));
+       actions.append(action("Close listing","neutral",()=>reviewJob(j.id,"closed")));
+       card.append(actions);$("jobList").append(card);
+     });
+   }catch(e){say("queueStatus","Could not load the review queue: "+(e.message||"Unknown error")+". Check database permissions and refresh.");}
+ }
+ async function reviewEmployer(id,status){
+   const label=status==="verified"?"verify this employer":"reject this employer request";
+   if(!confirm("Are you sure you want to "+label+"?"))return;
+   try{const {error}=await db.from("employer_profiles").update({verification_status:status,updated_at:new Date().toISOString()}).eq("user_id",id);if(error)throw error;await loadQueue();}
+   catch(e){alert("Update failed: "+e.message)}
+ }
+ async function reviewJob(id,status){
+   const label=status==="published"?"publish this listing":status==="rejected"?"reject this listing":"close this listing";
+   if(!confirm("Are you sure you want to "+label+"?"))return;
+   try{const {error}=await db.from("jobs").update({status,published_at:status==="published"?new Date().toISOString():null,updated_at:new Date().toISOString()}).eq("id",id);if(error)throw error;await loadQueue();}
+   catch(e){alert("Update failed: "+e.message)}
+ }
+ async function init(){
+   try{
+     if(!window.supabase)throw new Error("Supabase client did not load. Check your connection.");
+     db=window.supabase.createClient(URL,KEY);
+     await checkAccess();
+     db.auth.onAuthStateChange((_event,newSession)=>{session=newSession;setTimeout(checkAccess,0)});
+   }catch(e){say("authStatus","Could not initialize the administrator workspace: "+e.message)}
+ }
+ $("loginForm").addEventListener("submit",async e=>{
+   e.preventDefault();$("loginBtn").disabled=true;say("authStatus","Signing in…");
+   try{const {error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)throw error;await checkAccess();}
+   catch(err){say("authStatus","Sign-in failed: "+err.message)}
+   finally{$("loginBtn").disabled=false}
+ });
+ $("logoutBtn").addEventListener("click",async()=>{await db.auth.signOut();session=null;isAdmin=false;setView();say("authStatus","You are signed out.")});
+ $("refreshBtn").addEventListener("click",loadQueue);
+ init();
+})();
+</script>
+</body>
+</html>
