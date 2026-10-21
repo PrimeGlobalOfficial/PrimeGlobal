@@ -2217,6 +2217,15 @@ class="small">
 
 </div>
 
+<!-- SAVED JOBS: each member can access only their own saved listings -->
+<div class="info" id="savedJobsPanel" style="margin-top:18px;">
+  <h3 style="margin-top:0;color:#071a3d;">My Saved Jobs</h3>
+  <p class="small">Keep track of published opportunities you want to revisit.</p>
+  <div id="savedJobsMessage" class="small" role="status" aria-live="polite">Sign in to view your saved jobs.</div>
+  <div id="savedJobsList"></div>
+  <p style="margin-bottom:0;"><a href="live-jobs.html" style="color:#1d4ed8;font-weight:700;">Browse published jobs</a></p>
+</div>
+
 <!-- ADMIN TASK REVIEW: visible only to the designated administrator -->
 <div class="info" id="adminTaskReviewPanel" style="display:none;margin-top:18px;border:2px solid #0f766e;">
   <h3 style="margin-top:0;color:#071a3d;">Administrator · Task Review</h3>
@@ -2932,6 +2941,7 @@ interests.length
 ? interests.join(" • ")
 : "No interests saved";
 
+await loadSavedJobs(user);
 await loadReferralDashboard(user);
 await loadAdminTaskReview(user);
 await loadAdminWithdrawalReview(user);
@@ -2944,6 +2954,86 @@ behavior:"smooth"
 
 }
 
+
+/* MEMBER SAVED JOBS */
+async function loadSavedJobs(user) {
+  const message = $("savedJobsMessage");
+  const list = $("savedJobsList");
+  if (!message || !list) return;
+  message.textContent = "Loading your saved jobs…";
+  list.replaceChildren();
+  try {
+    const { data: savedRows, error: savedError } = await client.from("saved_jobs")
+      .select("job_id,created_at").eq("user_id", user.id).order("created_at", { ascending: false });
+    if (savedError) throw savedError;
+    if (!savedRows || savedRows.length === 0) {
+      message.textContent = "You haven't saved any jobs yet.";
+      return;
+    }
+    const ids = savedRows.map(row => row.job_id);
+    const { data: jobs, error: jobsError } = await client.from("jobs")
+      .select("id,title,company_name,category,job_type,location,application_url,application_email")
+      .in("id", ids).eq("status", "published");
+    if (jobsError) throw jobsError;
+    const byId = new Map((jobs || []).map(job => [job.id, job]));
+    const visible = savedRows.map(row => byId.get(row.job_id)).filter(Boolean);
+    if (!visible.length) {
+      message.textContent = "Your saved jobs are no longer published. Browse current opportunities below.";
+      return;
+    }
+    message.textContent = visible.length + " saved job(s).";
+    visible.forEach(job => {
+      const card = document.createElement("div");
+      card.style.cssText = "padding:14px 0;border-bottom:1px solid #dbe3ef;display:grid;gap:6px;";
+      const title = document.createElement("strong");
+      title.textContent = job.title || "Untitled opportunity";
+      card.appendChild(title);
+      const details = document.createElement("span");
+      details.className = "small";
+      details.textContent = [job.company_name, job.category, job.job_type, job.location || "Remote"].filter(Boolean).join(" · ");
+      card.appendChild(details);
+      const actions = document.createElement("div");
+      actions.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;";
+      if (job.application_url) {
+        try {
+          const parsed = new URL(job.application_url);
+          if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+            const apply = document.createElement("a");
+            apply.href = parsed.href; apply.target = "_blank"; apply.rel = "noopener noreferrer";
+            apply.textContent = "View application"; apply.className = "submit";
+            apply.style.cssText = "display:inline-block;text-decoration:none;";
+            actions.appendChild(apply);
+          }
+        } catch (_) {}
+      } else if (job.application_email) {
+        const apply = document.createElement("a");
+        apply.href = "mailto:" + job.application_email;
+        apply.textContent = "Contact employer"; apply.className = "submit";
+        apply.style.cssText = "display:inline-block;text-decoration:none;";
+        actions.appendChild(apply);
+      }
+      const remove = document.createElement("button");
+      remove.type = "button"; remove.className = "submit"; remove.textContent = "Remove saved job";
+      remove.style.cssText = "background:#e8eef7;color:#173b78;";
+      remove.addEventListener("click", async () => {
+        remove.disabled = true;
+        const { error } = await client.from("saved_jobs").delete().eq("user_id", user.id).eq("job_id", job.id);
+        if (error) {
+          remove.disabled = false;
+          message.textContent = "Could not remove this saved job. Please try again.";
+          return;
+        }
+        await loadSavedJobs(user);
+      });
+      actions.appendChild(remove);
+      card.appendChild(actions);
+      list.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Saved jobs loading error:", error);
+    message.textContent = "Saved jobs could not be loaded. Refresh the dashboard and try again.";
+  }
+}
 
 /* ADMIN WITHDRAWAL REVIEW */
 async function loadAdminWithdrawalReview(user){
