@@ -74,6 +74,34 @@ footer{padding:22px 20px;color:var(--muted);font-size:13px}
      card.appendChild(tags);
      card.appendChild(el("p","desc",j.description));
      const actions = el("div","actions");
+     const save = el("button","secondary","Save job");
+     save.type = "button";
+     save.addEventListener("click", async () => {
+       save.disabled = true;
+       const originalText = save.textContent;
+       save.textContent = "Saving…";
+       try {
+         const { data: userData, error: userError } = await client.auth.getUser();
+         if (userError || !userData?.user) {
+           status.textContent = "Sign in to save jobs. Opening the member account page…";
+           window.location.href = "./index.html#member";
+           return;
+         }
+         const { error } = await client.from("saved_jobs").upsert(
+           { user_id: userData.user.id, job_id: j.id },
+           { onConflict: "user_id,job_id", ignoreDuplicates: true }
+         );
+         if (error) throw error;
+         save.textContent = "Saved ✓";
+         status.textContent = "Job saved to your member dashboard.";
+       } catch (error) {
+         console.error("Save job error:", error);
+         save.textContent = originalText;
+         status.textContent = "Could not save this job. Sign in and try again.";
+         save.disabled = false;
+       }
+     });
+     actions.appendChild(save);
      const href = j.application_url;
      if (href) {
        try {
