@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Prime Global PG logo</title>
+  <desc id="desc">A blue and teal PG monogram inside a global orbit mark.</desc>
+  <defs>
+    <linearGradient id="pg-blue" x1="15%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0" stop-color="#6b8cff"/>
+      <stop offset=".55" stop-color="#3867f3"/>
+      <stop offset="1" stop-color="#183b9b"/>
+    </linearGradient>
+    <linearGradient id="pg-teal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#71f1df"/>
+      <stop offset="1" stop-color="#0b9d91"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="80" r="59" fill="#0b1733"/>
+  <circle cx="80" cy="80" r="52" fill="none" stroke="url(#pg-blue)" stroke-width="3.5"/>
+  <ellipse cx="80" cy="80" rx="24" ry="52" fill="none" stroke="#78a7ff" stroke-width="2" opacity=".72"/>
+  <path d="M29 80h102M37 57h86M37 103h86" fill="none" stroke="#78a7ff" stroke-width="2" opacity=".5"/>
+  <path d="M24 102c22-44 85-71 119-42" fill="none" stroke="url(#pg-teal)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M18 106c32 12 83 8 120-21" fill="none" stroke="#f8fbff" stroke-width="2.5" stroke-linecap="round" opacity=".92"/>
+  <text x="80" y="91" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="39" font-weight="800" letter-spacing="-4" fill="#fff">PG</text>
+  <circle cx="142" cy="57" r="7" fill="#5ce6d3" stroke="#0b1733" stroke-width="3"/>
+</svg>
