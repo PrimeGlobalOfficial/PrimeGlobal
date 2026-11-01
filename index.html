@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
+<link rel="icon" type="image/svg+xml" href="./assets/brand/prime-global-mark.svg" sizes="any">
 
 <meta name="description" content="Discover worldwide remote-work opportunities, AI training, data annotation, transcription, translation and practical application guides. Check eligibility and pay with each employer.">
 
@@ -1002,7 +1002,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
 <a class="brand" href="./">
 
-<span class="logo">PG</span>
+<span class="logo"><img class="pg-logo-art" src="./assets/brand/prime-global-mark.svg" alt=""></span>
 
 <span>
 PRIME GLOBAL
@@ -1467,6 +1467,41 @@ View Guide →
   </div>
 
   <div class="job-safety"><strong>Stay safe:</strong> Prime Global does not guarantee hiring or payment from third-party employers. Never pay a recruiter to secure a job, and never share your account password, PIN, or one-time verification code. Check the employer's own site for the latest listing status and payment terms.</div>
+</section>
+
+<!-- LIVE DATABASE OPPORTUNITIES -->
+<section class="pg-live-section" id="live-opportunities" data-pg-live-board aria-labelledby="pgLiveHeading">
+  <div class="section-head">
+    <span class="pg-live-kicker">Latest from the jobs database</span>
+    <h2 id="pgLiveHeading">Opportunities that keep moving.</h2>
+    <p>Explore published listings from the Prime Global jobs database. Search by skill, category, work type or eligible country. Always confirm the latest details with the employer.</p>
+  </div>
+  <div class="pg-live-topline">
+    <span class="pg-live-count" id="pgLiveCount" aria-live="polite">Checking published opportunities…</span>
+    <span class="pg-live-updated" id="pgLiveUpdated">Connecting to the jobs board</span>
+  </div>
+  <div class="pg-live-filters" role="search" aria-label="Filter live opportunities">
+    <input id="pgLiveSearch" type="search" placeholder="Search role, company or skill" aria-label="Search published opportunities">
+    <select id="pgLiveCategory" aria-label="Filter by category"><option value="">All categories</option></select>
+    <select id="pgLiveType" aria-label="Filter by work type">
+      <option value="">All work types</option>
+      <option value="full-time">Full-time</option>
+      <option value="part-time">Part-time</option>
+      <option value="contract">Contract</option>
+      <option value="freelance">Freelance</option>
+      <option value="internship">Internship</option>
+    </select>
+    <select id="pgLiveCountry" aria-label="Filter by eligible country"><option value="">All eligible countries</option></select>
+    <button class="pg-live-refresh" id="pgLiveRefresh" type="button">Refresh listings</button>
+  </div>
+  <p class="pg-live-status" id="pgLiveStatus" role="status" aria-live="polite">Loading the latest published opportunities…</p>
+  <div class="pg-live-list" id="pgLiveList">
+    <div class="pg-live-empty">Loading published opportunities…</div>
+  </div>
+  <div class="pg-live-footer">
+    <p>Listings are not guarantees of hiring, task availability or income. Verify each opportunity with its source.</p>
+    <a class="btn primary" href="jobs.html">Open full Jobs Board →</a>
+  </div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -2396,9 +2431,7 @@ style="color:#1d4ed8">
 
 <div>
 
-<strong class="accent">
-PRIME GLOBAL
-</strong>
+<div class="pg-footer-brand"><img class="pg-logo-art" src="./assets/brand/prime-global-mark.svg" alt=""><div><strong>PRIME GLOBAL</strong><span>OPPORTUNITIES WORLDWIDE</span></div></div>
 
 <br>
 
@@ -2460,6 +2493,7 @@ window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
+window.pgSupabaseClient = client;
 
 
 /*
@@ -3717,5 +3751,6 @@ client.auth.onAuthStateChange((event,session)=>{
 
 </script>
 
+<script src="./assets/js/prime-global-interactions.js?v=20261101b"></script>
 </body>
   </html>
