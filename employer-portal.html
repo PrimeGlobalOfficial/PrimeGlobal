@@ -4,14 +4,14 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Request employer access and submit job listings for review on Prime Global.">
 <meta name="theme-color" content="#071a3d"><title>Employer Portal | Prime Global</title>
-<link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
+<link rel="icon" type="image/svg+xml" href="./assets/brand/prime-global-mark.svg" sizes="any">
 <style>
 :root{--navy:#071a3d;--blue:#1d4ed8;--bg:#f5f8fc;--text:#172033;--muted:#64748b;--border:#dbe3ef}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Arial,sans-serif}header{background:var(--navy);color:white;padding:16px 20px}.nav,main,footer{max-width:900px;margin:auto}.nav{display:flex;gap:18px;flex-wrap:wrap}.nav a{color:white;text-decoration:none;font-weight:700}main{padding:28px 20px 60px}.hero{background:linear-gradient(135deg,#071a3d,#173b78);color:white;padding:32px;border-radius:16px}.hero h1{margin:0;font-size:clamp(2rem,5vw,3rem);line-height:1.15}.hero p{color:#dce6f7}.panel{background:white;border:1px solid var(--border);border-radius:14px;padding:22px;margin-top:20px}form{display:grid;gap:14px}label{display:grid;gap:6px;font-weight:700;font-size:14px}input,select,textarea{width:100%;font:inherit;padding:11px;border:1px solid #cbd5e1;border-radius:8px}textarea{min-height:130px;resize:vertical}button,.btn{display:inline-block;border:0;border-radius:8px;background:var(--blue);color:white;padding:12px 16px;font-weight:700;font:inherit;text-decoration:none;cursor:pointer}button:disabled{opacity:.55}.muted{color:var(--muted);font-size:14px}.status{padding:12px;background:#eff6ff;border-radius:8px;overflow-wrap:anywhere}.hidden{display:none!important}.notice{background:#fff7ed;border:1px solid #fed7aa;padding:13px;border-radius:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}footer{padding:22px 20px;color:var(--muted);font-size:13px}@media(max-width:650px){.row{grid-template-columns:1fr}.hero{padding:24px}}
 </style>
 <link rel="stylesheet" href="./assets/css/prime-global-theme.css?v=20261101">
 </head>
 <body>
-<header><nav class="nav"><a href="./">Prime Global</a><a href="./jobs.html">Browse jobs</a><a href="./index.html#member">Member login/register</a></nav></header>
+<header><nav class="nav"><a class="brand" href="./"><img class="pg-logo-art" src="./assets/brand/prime-global-mark.svg" alt=""> Prime Global</a><a href="./jobs.html">Browse jobs</a><a href="./index.html#member">Member login/register</a></nav></header>
 <main>
 <section class="hero"><p style="color:#2dd4bf;font-weight:800;letter-spacing:1px;text-transform:uppercase">Employer tools</p><h1>Post opportunities responsibly</h1><p>Request employer verification, then submit job listings for review. A submission is not published automatically.</p></section>
 <section class="panel"><h2>1. Sign in</h2><p class="muted">Use your existing Prime Global account. If you don't have one, register on the main website, confirm your email if required, then return here.</p><form id="loginForm"><label>Email<input type="email" id="email" autocomplete="email" required></label><label>Password<input type="password" id="password" autocomplete="current-password" required></label><button id="loginBtn">Sign in</button></form><button id="logoutBtn" class="hidden" type="button" style="margin-top:10px;background:#475569">Sign out</button><p id="authStatus" class="status" role="status">Checking sign-in status…</p></section>
@@ -93,4 +93,5 @@
  });
  init();
 })();
-</script></body></html>
+</script><script src="./assets/js/prime-global-interactions.js?v=20261101b"></script>
+</body></html>
