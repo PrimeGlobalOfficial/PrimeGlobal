@@ -484,25 +484,21 @@ footer{
 .footer a,footer a{color:#eaf2ff}
 .footer a:hover,footer a:hover{color:#7be8db}
 body>p:has(a[href="./"]){padding:8px 0}
-body>main:has(> .card:first-child){
-  width:min(100% - 40px,1040px);
-  padding-top:42px;
-  padding-bottom:64px;
-}
-body>main:has(> .card:first-child) .card{
-  margin:0;
+body>main.card{
+  width:min(calc(100% - 40px),1040px);
   padding:clamp(22px,4vw,40px);
+  margin:42px auto 64px;
   border-radius:20px;
   box-shadow:var(--shadow-md);
 }
-body>main .card h1{font-size:clamp(2rem,4vw,3rem);color:var(--navy)}
-body>main .card h2{
+body>main.card h1{font-size:clamp(2rem,4vw,3rem);color:var(--navy)}
+body>main.card h2{
   margin-top:30px;
   font-size:1.25rem;
   letter-spacing:-.025em;
 }
-body>main .card p,body>main .card li{color:#52617a}
-body>main .card a{color:var(--blue);font-weight:700}
+body>main.card p,body>main.card li{color:#52617a}
+body>main.card a{color:var(--blue);font-weight:700}
 
 /* EMPLOYER PORTAL */
 form .row{gap:14px}
