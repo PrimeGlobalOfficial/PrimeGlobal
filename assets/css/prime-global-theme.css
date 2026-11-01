@@ -693,3 +693,12 @@ button:disabled{cursor:not-allowed;opacity:.62}
   .pg-reveal{opacity:1;transform:none;transition:none}
   .pg-live-card,.pg-live-apply,.pg-scroll-top{transition:none}
 }
+
+/* Consistent logo sizing in wordmarks and legal-page links */
+.brand>.pg-logo-art{width:48px;height:48px;flex:0 0 48px}
+.pg-legal-brand{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--navy)!important;text-decoration:none;
+  font-family:Manrope,sans-serif;font-weight:800
+}
+.pg-legal-brand>.pg-logo-art{width:38px;height:38px;flex:0 0 38px}
