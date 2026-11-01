@@ -702,3 +702,243 @@ button:disabled{cursor:not-allowed;opacity:.62}
   font-family:Manrope,sans-serif;font-weight:800
 }
 .pg-legal-brand>.pg-logo-art{width:38px;height:38px;flex:0 0 38px}
+
+
+/* COLOUR-CODED CLICK TARGETS — Prime Global */
+:root{
+  --pg-action:#245be9;
+  --pg-action-dark:#1746c5;
+  --pg-action-soft:#eaf0ff;
+  --pg-action-teal:#0b9d91;
+  --pg-action-teal-dark:#08786f;
+  --pg-action-teal-soft:#e2faf6;
+}
+
+/* Primary action: search, apply, submit, register and main calls to action */
+.btn.primary,
+.primary,
+.button,
+.submit,
+.pg-live-apply,
+.pg-live-refresh,
+.pg-cta-actions .btn.primary{
+  color:#fff!important;
+  border:1px solid transparent!important;
+  background:linear-gradient(135deg,#3867f3 0%,#245be9 58%,#1746c5 100%)!important;
+  box-shadow:0 8px 20px rgba(36,91,233,.22);
+}
+.btn.primary:hover,
+.primary:hover,
+.button:hover,
+.submit:hover,
+.pg-live-apply:hover,
+.pg-live-refresh:hover,
+.pg-cta-actions .btn.primary:hover{
+  color:#fff!important;
+  background:linear-gradient(135deg,#4d7cff 0%,#245be9 58%,#123da9 100%)!important;
+  box-shadow:0 12px 26px rgba(36,91,233,.3);
+  transform:translateY(-2px);
+}
+.btn.primary:active,
+.primary:active,
+.button:active,
+.submit:active,
+.pg-live-apply:active,
+.pg-live-refresh:active{
+  transform:translateY(0) scale(.985);
+  box-shadow:0 4px 10px rgba(36,91,233,.2);
+}
+
+/* Secondary action: teal */
+.btn.secondary,
+.secondary,
+.pg-account-btn{
+  color:#075e59!important;
+  border:1px solid #8be5d9!important;
+  background:linear-gradient(135deg,#e7fbf7,#c9f5ee)!important;
+  box-shadow:0 5px 14px rgba(11,157,145,.09);
+}
+.btn.secondary:hover,
+.secondary:hover,
+.pg-account-btn:hover{
+  color:#064c49!important;
+  border-color:#42cabb!important;
+  background:linear-gradient(135deg,#d3f8f1,#a9eee3)!important;
+  box-shadow:0 9px 20px rgba(11,157,145,.17);
+  transform:translateY(-1px);
+}
+.btn.secondary:active,.secondary:active{transform:scale(.985)}
+
+/* The hero keeps a contrasting glass-outline secondary button. */
+.hero .btn.secondary,
+.hero .btn.secondary:hover{
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  background:rgba(255,255,255,.09)!important;
+  box-shadow:none;
+}
+
+/* Text links: blue by default, teal when hovered or focused. */
+a[href]:not(.btn):not(.button):not(.pg-live-apply){
+  cursor:pointer;
+}
+.more,.pg-live-footer a,.footer a,main .info a{
+  color:var(--pg-action)!important;
+  font-weight:800;
+  text-decoration:none;
+  text-underline-offset:4px;
+}
+.more:hover,.more:focus-visible,
+.pg-live-footer a:hover,.footer a:hover,main .info a:hover{
+  color:var(--pg-action-teal-dark)!important;
+  text-decoration:underline;
+}
+.more:active{opacity:.75}
+
+/* Make full-card links look like interactive surfaces. */
+a.card[href]{
+  position:relative;
+  cursor:pointer;
+  border:1px solid #d9e5f7;
+}
+a.card[href]:after{
+  content:"↗";
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  color:var(--pg-action);
+  background:var(--pg-action-soft);
+  border-radius:9px;
+  font-size:16px;
+  font-weight:900;
+  transition:transform .18s ease,background .18s ease,color .18s ease;
+}
+a.card[href]:hover{
+  border-color:#8daeff;
+  box-shadow:0 16px 34px rgba(36,91,233,.14);
+  transform:translateY(-4px);
+}
+a.card[href]:hover:after{
+  color:#fff;
+  background:var(--pg-action);
+  transform:translate(2px,-2px);
+}
+a.card[href] .more{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.job-card a.more,.start-card a.more{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 12px;
+  margin-top:auto;
+  border:1px solid #cbd9ff;
+  border-radius:10px;
+  color:var(--pg-action)!important;
+  background:#f3f6ff;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.job-card a.more:hover,.start-card a.more:hover{
+  color:#fff!important;
+  border-color:var(--pg-action);
+  background:var(--pg-action);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+
+/* Saved jobs, tabs, account, close and menu controls */
+.tab{
+  cursor:pointer;
+  transition:color .18s ease,background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.tab:not(.active):hover{
+  color:var(--pg-action)!important;
+  border-color:#9db7fa;
+  background:var(--pg-action-soft);
+}
+.tab.active{
+  color:#fff!important;
+  border-color:var(--pg-action)!important;
+  background:linear-gradient(135deg,#3867f3,#1746c5)!important;
+}
+.logout{
+  color:#b42335!important;
+  border:1px solid #f5b8bf!important;
+  background:#fff2f3!important;
+}
+.logout:hover{
+  color:#fff!important;
+  border-color:#c93648!important;
+  background:#c93648!important;
+}
+.menu{
+  cursor:pointer;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease;
+}
+.menu:hover{
+  border-color:#73dfd2!important;
+  background:rgba(56,214,195,.18)!important;
+}
+.pg-profile-close{
+  color:#23416f!important;
+  border:1px solid #d9e4f4!important;
+  background:#f0f5ff!important;
+  transition:background .18s ease,transform .18s ease;
+}
+.pg-profile-close:hover{
+  color:#fff!important;
+  background:var(--pg-action)!important;
+  transform:rotate(4deg);
+}
+
+/* Top navigation has a distinct hover cue instead of looking like plain text. */
+header .links a:hover,
+header .links a:focus-visible{
+  color:#fff!important;
+  border-radius:10px;
+  background:rgba(56,103,243,.28)!important;
+  text-decoration:none;
+}
+header .links a:active{background:rgba(56,103,243,.45)!important}
+.pg-account-menu a:hover,.pg-account-menu button:hover{
+  color:var(--pg-action)!important;
+  background:var(--pg-action-soft)!important;
+}
+
+/* Forms and focus rings make the next interaction obvious. */
+input[type="checkbox"],input[type="radio"],select,button{accent-color:var(--pg-action)}
+input:focus-visible,select:focus-visible,textarea:focus-visible{
+  border-color:var(--pg-action)!important;
+  outline:3px solid rgba(36,91,233,.18)!important;
+  outline-offset:1px;
+}
+a:focus-visible,button:focus-visible{
+  outline:3px solid #1e59e8!important;
+  outline-offset:3px;
+}
+button:disabled,.btn[aria-disabled="true"]{
+  cursor:not-allowed!important;
+  opacity:.58;
+  filter:saturate(.6);
+}
+
+/* Small visual legend that is only shown where a page has an action toolbar. */
+.pg-action-key{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  color:#5e6d85;font-size:12px;font-weight:700
+}
+.pg-action-key span{display:inline-flex;align-items:center;gap:6px}
+.pg-action-dot{width:9px;height:9px;display:inline-block;border-radius:50%}
+.pg-action-dot.blue{background:#245be9}
+.pg-action-dot.teal{background:#0b9d91}
+.pg-action-dot.outline{background:#fff;border:2px solid #8ca2c7}
+
+@media(prefers-reduced-motion:reduce){
+  .btn,.button,.submit,.more,.card[href],.job-card a.more,.start-card a.more{transition:none!important}
+}
