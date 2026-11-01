@@ -576,3 +576,120 @@ button:disabled{cursor:not-allowed;opacity:.62}
   html{scroll-behavior:auto}
   *,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
+
+/* PRIME GLOBAL BRAND MARK */
+.logo{
+  width:54px!important;
+  height:54px!important;
+  flex:0 0 54px!important;
+  padding:3px!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.pg-logo-art{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(56,103,243,.24));
+}
+.pg-footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.pg-footer-brand .pg-logo-art{width:54px;height:54px}
+.pg-footer-brand strong{display:block;color:#fff;font-family:Manrope,sans-serif;font-size:17px;letter-spacing:.04em}
+.pg-footer-brand span{display:block;color:#b7c7e4;font-size:10px;font-weight:700;letter-spacing:.13em}
+
+/* LIVE DATABASE OPPORTUNITIES */
+.pg-live-section{position:relative;overflow:hidden}
+.pg-live-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:10px;padding:6px 11px;border-radius:999px;
+  color:#087d73;background:#e0faf5;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase
+}
+.pg-live-kicker:before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#10b981;
+  box-shadow:0 0 0 4px rgba(16,185,129,.12);animation:pg-live-pulse 1.8s infinite
+}
+@keyframes pg-live-pulse{0%,100%{box-shadow:0 0 0 4px rgba(16,185,129,.12)}50%{box-shadow:0 0 0 8px rgba(16,185,129,.04)}}
+.pg-live-topline{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 14px}
+.pg-live-count{color:var(--navy);font-family:Manrope,sans-serif;font-weight:800;font-size:18px}
+.pg-live-updated{color:var(--muted);font-size:12px}
+.pg-live-filters{
+  display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(150px,1fr)) auto;
+  gap:10px;align-items:center;margin:18px 0 22px
+}
+.pg-live-filters input,.pg-live-filters select{width:100%;min-width:0;min-height:45px;border:1px solid #d8e2f0;border-radius:11px;background:#fff;padding:10px 12px}
+.pg-live-refresh{
+  min-height:45px;padding:10px 15px;border:0;border-radius:11px;
+  color:#fff;background:linear-gradient(120deg,var(--blue),var(--blue-deep));font-weight:800;cursor:pointer
+}
+.pg-live-refresh:disabled{opacity:.65;cursor:wait}
+.pg-live-status{margin:0 0 14px;color:var(--muted);font-size:13px}
+.pg-live-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pg-live-card{
+  display:flex;flex-direction:column;gap:10px;min-width:0;
+  padding:22px;border:1px solid var(--border);border-radius:18px;background:#fff;
+  box-shadow:var(--shadow-sm);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease
+}
+.pg-live-card:hover{transform:translateY(-4px);border-color:#b8ccf5;box-shadow:var(--shadow-md)}
+.pg-live-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pg-live-company{color:var(--blue-deep);font-size:12px;font-weight:800}
+.pg-live-date{color:#8491a5;font-size:11px}
+.pg-live-title{margin:0;color:var(--navy);font-family:Manrope,sans-serif;font-size:19px;line-height:1.3;letter-spacing:-.03em}
+.pg-live-tags{display:flex;gap:6px;flex-wrap:wrap}
+.pg-live-tag{padding:5px 9px;border-radius:999px;color:#31538f;background:#eff4ff;font-size:10px;font-weight:800;text-transform:capitalize}
+.pg-live-description{margin:0;color:#5d6b80;font-size:13px;line-height:1.65}
+.pg-live-eligibility{margin:0;color:#08786f;font-size:12px;font-weight:700}
+.pg-live-actions{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:4px}
+.pg-live-apply{
+  display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 13px;
+  color:#fff!important;background:linear-gradient(120deg,var(--blue),var(--blue-deep));
+  border-radius:10px;font-size:12px;font-weight:800;text-decoration:none
+}
+.pg-live-apply:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(56,103,243,.2)}
+.pg-live-no-link{color:var(--muted);font-size:12px}
+.pg-live-empty{
+  grid-column:1/-1;padding:28px;border:1px dashed #cbd8e9;border-radius:16px;
+  color:var(--muted);background:rgba(255,255,255,.75);text-align:center
+}
+.pg-live-more{grid-column:1/-1;color:var(--muted);text-align:center;font-size:13px}
+.pg-live-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.pg-live-footer p{margin:0;color:var(--muted);font-size:12px}
+
+/* REAL INTERACTION DETAILS */
+.pg-scroll-progress{
+  position:fixed;z-index:2000;top:0;left:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--teal));pointer-events:none
+}
+.pg-scroll-top{
+  position:fixed;z-index:1500;right:22px;bottom:22px;width:46px;height:46px;
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,.6);border-radius:15px;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--navy2));
+  box-shadow:0 12px 28px rgba(11,23,51,.24);font-size:22px;font-weight:800;
+  opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+  cursor:pointer
+}
+.pg-scroll-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+.pg-reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.pg-reveal.pg-revealed{opacity:1;transform:translateY(0)}
+.pg-live-card:nth-child(2){transition-delay:.04s}
+.pg-live-card:nth-child(3){transition-delay:.08s}
+
+/* RESPONSIVE LIVE BOARD */
+@media(max-width:1050px){
+  .pg-live-filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pg-live-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+  .logo{width:45px!important;height:45px!important;flex-basis:45px!important}
+  .pg-live-filters,.pg-live-list{grid-template-columns:1fr}
+  .pg-live-card{padding:18px}
+  .pg-scroll-top{right:14px;bottom:14px;width:43px;height:43px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pg-live-kicker:before{animation:none}
+  .pg-reveal{opacity:1;transform:none;transition:none}
+  .pg-live-card,.pg-live-apply,.pg-scroll-top{transition:none}
+}
