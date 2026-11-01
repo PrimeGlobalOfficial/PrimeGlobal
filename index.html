@@ -5,9 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="/PrimeGlobal/prime-global-favicon.png">
 
-<meta name="description" content="Prime Global Jobs helps people explore worldwide online work guides, remote job categories, AI training, data annotation, transcription, translation, and data entry. Verify eligibility and payment terms with each platform.">
+<meta name="description" content="Discover worldwide remote-work opportunities, AI training, data annotation, transcription, translation and practical application guides. Check eligibility and pay with each employer.">
 
-<meta name="theme-color" content="#071a3d">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://primeglobalofficial.github.io/PrimeGlobal/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prime Global | Online Work Opportunities Worldwide">
+<meta property="og:description" content="Explore worldwide digital-work opportunities and practical guides. Verify eligibility and payment terms before applying.">
+<meta property="og:url" content="https://primeglobalofficial.github.io/PrimeGlobal/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prime Global | Online Work Opportunities Worldwide">
+<meta name="twitter:description" content="Explore worldwide digital-work opportunities and practical guides.">
+<meta name="theme-color" content="#101c3a">
 
 <title>Prime Global Jobs | Official Online Work Opportunities</title>
 
@@ -977,6 +986,8 @@ footer{
 #authArea.pg-auth-hidden{display:none !important}
 #dashboard.pg-dashboard-visible{display:block !important}
 .pg-login-hidden-note{display:none}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #246bfd;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
 
@@ -1002,7 +1013,9 @@ PRIME GLOBAL
 <button
 class="menu"
 id="menuBtn"
-aria-label="Open menu">
+aria-label="Open menu"
+aria-controls="navLinks"
+aria-expanded="false">
 ☰
 </button>
 
@@ -1012,10 +1025,9 @@ aria-label="Open menu">
 
 <a href="#start-working">Start Working</a>
 
-<a href="#jobs">Jobs Board</a>
+<a href="#jobs">Work Routes</a>
 
-<a href="jobs.html">Worldwide Jobs</a>
-<a href="live-jobs.html">Live Jobs Board</a>
+<a href="jobs.html">Live Jobs Board</a>
 <a href="employer-portal.html">For Employers</a>
 
 <a href="online-jobs-kenya.html">Online Jobs in Kenya</a>
@@ -1066,14 +1078,14 @@ Prime Global is building a worldwide network that connects companies with global
 
 <a
 class="btn primary"
-href="#opportunities">
-Explore Opportunities
+href="jobs.html">
+Browse Live Jobs
 </a>
 
 <a
 class="btn secondary"
-href="#member">
-Member Account
+href="#opportunities">
+Explore Work Types
 </a>
 
 </div>
@@ -1396,13 +1408,13 @@ View Guide →
 <!-- JOBS BOARD -->
 <section id="jobs">
   <div class="section-head">
-    <h2>Jobs Board</h2>
-    <p>Explore selected opportunities from external employers. Prime Global links you to the official application page; each employer controls eligibility, hiring decisions, and availability.</p>
+    <h2>Featured Work Routes</h2>
+    <p>Explore selected employer and platform routes by work type. These links are useful starting points, not confirmation that a specific vacancy is still open. Check country eligibility, equipment requirements, deadlines, and payment terms directly with the employer or platform.</p>
   </div>
 
   <div class="jobs-intro">
-    <strong>Start here: remote and language-based work</strong>
-    <p style="margin:6px 0 0;color:#44536c">Some roles are remote, while others may require a specific location, device, assessment, or work schedule. Read the full requirements before applying.</p>
+    <strong>Useful starting points for remote and language-based work</strong>
+    <p style="margin:6px 0 0;color:#44536c">Availability changes. Treat each card as a route to check, then confirm the role, accepted countries, equipment, work schedule, and payment terms on the destination page.</p>
   </div>
 
   <div class="jobs-grid">
@@ -1427,7 +1439,7 @@ View Guide →
       <h3>AI Data Labeling Specialist — Swahili</h3>
       <p><strong>Employer:</strong> TaskUs</p>
       <p>Create and review natural Swahili-language content for AI training. Confirm that the vacancy is still accepting applications and check the assessment requirements.</p>
-      <a class="more" href="https://ke.linkedin.com/jobs/view/ai-data-labeling-specialist-swahili-kenya-at-taskus-4478629077" target="_blank" rel="noopener noreferrer">View job on LinkedIn →</a>
+      <a class="more" href="https://ke.linkedin.com/jobs/view/ai-data-labeling-specialist-swahili-kenya-at-taskus-4478629077" target="_blank" rel="noopener noreferrer">Check external listing →</a>
     </article>
 
     <article class="job-card">
@@ -2475,32 +2487,23 @@ let currentMemberId = null;
 
 
 /* MOBILE MENU */
-
-$("menuBtn").addEventListener(
-"click",
-() => {
-
-$("navLinks").classList.toggle("open");
-
+const menuBtn = $("menuBtn");
+const navLinks = $("navLinks");
+function setMenuOpen(open){
+  navLinks.classList.toggle("open", open);
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  menuBtn.textContent = open ? "×" : "☰";
 }
-);
-
-
-document
-.querySelectorAll("#navLinks a")
-.forEach(link => {
-
-link.addEventListener(
-"click",
-() => {
-
-$("navLinks").classList.remove("open");
-
-}
-);
-
+menuBtn.addEventListener("click", () => {
+  setMenuOpen(!navLinks.classList.contains("open"));
 });
-
+document.querySelectorAll("#navLinks a").forEach(link => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape") setMenuOpen(false);
+});
 
 /* MESSAGE */
 
