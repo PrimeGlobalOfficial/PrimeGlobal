@@ -7,6 +7,10 @@
   <meta name="description" content="Search published remote and online job listings on Prime Global. Check job eligibility, employer details, and application instructions before applying.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://primeglobalofficial.github.io/PrimeGlobal/jobs.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Live Online Job Listings | Prime Global">
+  <meta property="og:description" content="Search published online and remote jobs. Filter by category, work type and eligible country.">
+  <meta property="og:url" content="https://primeglobalofficial.github.io/PrimeGlobal/jobs.html">
   <link rel="icon" type="image/png" href="./prime-global-favicon.png">
   <meta name="theme-color" content="#071a3d">
   <style>
@@ -25,7 +29,8 @@
     .button{display:inline-block;background:var(--teal);color:#071a3d;font-weight:700;padding:10px 15px;border-radius:8px;text-decoration:none;border:0;cursor:pointer}
     a{color:var(--blue)}
     .board{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;margin-top:24px}
-    .filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:16px 0}
+    .filters{display:grid;grid-template-columns:2fr repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+     .job-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}.job-toolbar span{color:var(--muted);font-size:.9rem}
     input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:inherit;background:#fff}
     .job-list{display:grid;gap:14px}
     .job{border:1px solid var(--border);border-radius:12px;padding:18px;display:grid;gap:8px}
@@ -39,7 +44,8 @@
     .item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
     .item h3{margin-top:0;color:var(--navy)}
     footer{padding:22px 20px;color:var(--muted);font-size:.95rem}
-    @media(max-width:680px){.filters{grid-template-columns:1fr}.job-actions>*{width:100%;text-align:center}}
+    @media(max-width:850px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+     @media(max-width:680px){.filters{grid-template-columns:1fr}.job-actions>*{width:100%;text-align:center}}
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebPage","name":"Live Online Job Listings","url":"https://primeglobalofficial.github.io/PrimeGlobal/jobs.html","description":"Search published online and remote job listings on Prime Global.","isPartOf":{"@type":"WebSite","name":"Prime Global","url":"https://primeglobalofficial.github.io/PrimeGlobal/"}}
@@ -68,7 +74,9 @@
         <select id="jobType" aria-label="Filter by job type">
           <option value="">All job types</option><option value="full-time">Full-time</option><option value="part-time">Part-time</option><option value="contract">Contract</option><option value="freelance">Freelance</option><option value="internship">Internship</option>
         </select>
+        <select id="jobCountry" aria-label="Filter by eligible country"><option value="">All countries</option></select>
       </div>
+      <div class="job-toolbar"><button type="button" class="secondary" id="refreshJobs">Refresh listings</button><span>Refresh to check the latest published entries. Employers may change vacancy status at any time.</span></div>
       <p id="jobStatus" class="status" role="status" aria-live="polite">Connecting to job listings…</p>
       <div id="jobList" class="job-list"></div>
     </section>
@@ -100,6 +108,8 @@
       const search = document.getElementById("jobSearch");
       const category = document.getElementById("jobCategory");
       const type = document.getElementById("jobType");
+      const country = document.getElementById("jobCountry");
+      const refreshButton = document.getElementById("refreshJobs");
       let jobs = [];
       let client = null;
 
@@ -119,11 +129,19 @@
         const term = search.value.trim().toLowerCase();
         const chosenCategory = category.value;
         const chosenType = type.value;
+        const chosenCountry = country.value.toLowerCase();
         const visible = jobs.filter(job => {
-          const haystack = [job.title, job.company_name, job.description, job.category, job.location].join(" ").toLowerCase();
+          const eligible = Array.isArray(job.country_eligibility) ? job.country_eligibility.map(value => String(value)) : [];
+          const haystack = [job.title, job.company_name, job.description, job.category, job.location, ...eligible].join(" ").toLowerCase();
+          const universal = ["worldwide", "global", "all countries", "anywhere", "international"];
+          const countryMatch = !chosenCountry || eligible.some(value => {
+            const normalized = value.toLowerCase().trim();
+            return normalized === chosenCountry || universal.includes(normalized);
+          });
           return (!term || haystack.includes(term))
             && (!chosenCategory || job.category === chosenCategory)
-            && (!chosenType || job.job_type === chosenType);
+            && (!chosenType || job.job_type === chosenType)
+            && countryMatch;
         });
         list.replaceChildren();
         if (!visible.length) {
@@ -134,10 +152,16 @@
           const card = el("article", "job");
           card.appendChild(el("h3", "", job.title));
           card.appendChild(el("strong", "", job.company_name));
-          card.appendChild(el("p", "meta", [job.category, (job.job_type || "contract").replace("-", " "), job.location || "Remote"].join(" · ")));
+          const workType = job.job_type ? job.job_type.replace(/-/g, " ") : "Type not specified";
+          card.appendChild(el("p", "meta", [job.category || "Category not specified", workType, job.location || "Location not specified"].join(" · ")));
           card.appendChild(el("p", "", job.description));
-          if (Array.isArray(job.country_eligibility) && job.country_eligibility.length) {
-            card.appendChild(el("p", "meta", "Eligible locations: " + job.country_eligibility.join(", ")));
+          const eligible = Array.isArray(job.country_eligibility) ? job.country_eligibility : [];
+          card.appendChild(el("p", "meta", eligible.length ? "Eligible countries: " + eligible.join(", ") : "Country eligibility: confirm with the employer."));
+          if (job.published_at) {
+            const published = new Date(job.published_at);
+            if (!Number.isNaN(published.getTime())) {
+              card.appendChild(el("p", "meta", "Published: " + published.toLocaleDateString(undefined, {year:"numeric",month:"short",day:"numeric"})));
+            }
           }
           const actions = el("div", "job-actions");
           const applicationUrl = cleanUrl(job.application_url || "");
@@ -187,14 +211,16 @@
       search.addEventListener("input", render);
       category.addEventListener("change", render);
       type.addEventListener("change", render);
+      country.addEventListener("change", render);
 
-      async function init() {
-        if (!window.supabase || !window.supabase.createClient) {
-          status.textContent = "The job service did not load. Check your connection and refresh.";
-          return;
-        }
-        client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      async function loadJobs() {
+        refreshButton.disabled = true;
+        refreshButton.textContent = "Refreshing…";
         try {
+          if (!window.supabase || !window.supabase.createClient) {
+            throw new Error("The job service did not load. Check your connection and refresh.");
+          }
+          if (!client) client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
           const { data, error } = await client
             .from("jobs")
             .select("id,title,company_name,description,category,job_type,location,country_eligibility,application_url,application_email,published_at")
@@ -203,22 +229,38 @@
             .limit(100);
           if (error) throw error;
           jobs = data || [];
+          category.replaceChildren(el("option", "", "All categories"));
+          country.replaceChildren(el("option", "", "All countries"));
           [...new Set(jobs.map(job => job.category).filter(Boolean))].sort().forEach(value => {
             const option = document.createElement("option");
             option.value = value;
             option.textContent = value;
             category.appendChild(option);
           });
+          [...new Set(jobs.flatMap(job => Array.isArray(job.country_eligibility) ? job.country_eligibility : []))].filter(Boolean).sort().forEach(value => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+            country.appendChild(option);
+          });
           status.textContent = jobs.length
-            ? jobs.length + " published listing(s) loaded. Check each employer's terms before applying."
+            ? jobs.length + " published listing(s) loaded. Last checked " + new Date().toLocaleString() + ". Confirm every vacancy with the employer."
             : "The live job database is connected, but there are no published listings yet.";
           render();
         } catch (error) {
+          jobs = [];
+          list.replaceChildren(el("p", "meta", "Listings are temporarily unavailable. Please try refreshing again later."));
+          status.textContent = error && error.message
+            ? error.message
+            : "We could not load live listings. Please try again later.";
           console.error("Load jobs error:", error);
-          status.textContent = "We could not load live listings. The database may need API permissions or configuration. Please try again later.";
+        } finally {
+          refreshButton.disabled = false;
+          refreshButton.textContent = "Refresh listings";
         }
       }
-      init();
+      refreshButton.addEventListener("click", loadJobs);
+      loadJobs();
     })();
   </script>
 </body>
