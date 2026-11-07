@@ -90,7 +90,7 @@ jobs:
           print('Homepage Pass 1 applied successfully.')
           PY
 
-          - name: Commit homepage update
+      - name: Commit homepage update
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
