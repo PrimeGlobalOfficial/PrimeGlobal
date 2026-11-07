@@ -1,2 +1,2 @@
 run homepage pass 1b
-triggered after workflow indentation repair
+trigger after restoring commit workflow step
