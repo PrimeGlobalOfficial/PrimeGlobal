@@ -1011,3 +1011,381 @@ footer{border-top:4px solid #f5c542;background:linear-gradient(125deg,#071a3d,#1
 .footer a:hover,footer a:hover{color:#f5c542}
 @media(max-width:800px){.pg-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pg-directory-routes{padding:52px 22px}}
 @media(max-width:600px){.pg-directory-grid{grid-template-columns:1fr}.pg-directory-routes{padding:44px 18px}}
+
+
+
+/* =========================================================
+   PRIME GLOBAL — TECHNOLOGY EDITION / FULL-SITE REDESIGN
+   Structural visual system: editorial hierarchy, spacious
+   layouts, layered surfaces, responsive navigation and forms.
+   ========================================================= */
+:root{
+  --pg-ink:#101b33;
+  --pg-midnight:#07142c;
+  --pg-deep:#0b1d3c;
+  --pg-blue:#2458e8;
+  --pg-electric:#4d7cff;
+  --pg-cyan:#46d7e8;
+  --pg-paper:#f5f8fd;
+  --pg-line:#e1e8f2;
+  --pg-muted:#64748b;
+  --pg-shadow:0 18px 54px rgba(16,35,72,.09);
+  --pg-shadow-hover:0 26px 64px rgba(16,35,72,.15);
+}
+html{scroll-padding-top:104px}
+body{
+  color:var(--pg-ink)!important;
+  background:
+    radial-gradient(ellipse at 92% 4%,rgba(77,124,255,.07),transparent 30rem),
+    linear-gradient(180deg,#f8faff 0%,#f2f6fc 100%)!important;
+  font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  letter-spacing:-.006em;
+}
+h1,h2,h3,h4{
+  color:var(--pg-ink);
+  font-family:Manrope,"DM Sans",sans-serif!important;
+  letter-spacing:-.045em!important;
+  line-height:1.16!important;
+}
+p{line-height:1.78}
+a,button{ -webkit-tap-highlight-color:transparent }
+:focus-visible{outline:3px solid rgba(77,124,255,.55)!important;outline-offset:3px!important}
+
+/* A consistent glass-dark masthead, with clean compact links. */
+header{
+  background:rgba(7,20,44,.94)!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
+  box-shadow:0 10px 34px rgba(5,16,39,.18)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+header .nav{
+  width:min(1360px,100%);
+  min-height:78px;
+  margin-inline:auto;
+  padding:12px clamp(18px,3vw,38px)!important;
+}
+.brand{gap:12px!important;font-size:18px!important;letter-spacing:.01em}
+.brand small{color:#9fb3d4!important;letter-spacing:.13em!important}
+.brand .pg-logo-art,.pg-footer-brand .pg-logo-art{
+  filter:drop-shadow(0 8px 18px rgba(77,124,255,.28));
+}
+.links{gap:5px!important}
+.links a{
+  padding:10px 12px!important;
+  border:1px solid transparent;
+  border-radius:10px!important;
+  color:#dce7fa!important;
+  font-size:13px!important;
+  font-weight:700!important;
+}
+.links a:hover,.links a:focus-visible{
+  color:#fff!important;
+  border-color:rgba(130,164,255,.22)!important;
+  background:rgba(77,124,255,.16)!important;
+}
+.menu{
+  border:1px solid rgba(255,255,255,.22)!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.08)!important;
+}
+
+/* Hero is a composed visual panel, not a flat colour block. */
+.hero{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 34%,rgba(70,215,232,.18),transparent 22rem),
+    radial-gradient(circle at 12% 100%,rgba(77,124,255,.22),transparent 28rem),
+    linear-gradient(122deg,#07142c 0%,#0b1d3c 54%,#102b58 100%)!important;
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:min(52vw,650px);
+  aspect-ratio:1;
+  right:-12%;
+  top:-40%;
+  border:1px solid rgba(178,207,255,.16);
+  border-radius:50%;
+  box-shadow:0 0 0 42px rgba(178,207,255,.035),0 0 0 88px rgba(178,207,255,.025),0 0 0 136px rgba(178,207,255,.018);
+  pointer-events:none;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:42%;
+  height:1px;
+  right:0;
+  bottom:18%;
+  background:linear-gradient(90deg,transparent,rgba(70,215,232,.5),transparent);
+  transform:rotate(-26deg);
+  pointer-events:none;
+}
+.hero-inner{
+  width:min(1320px,100%)!important;
+  padding:clamp(66px,8vw,112px) clamp(20px,4vw,48px)!important;
+  gap:clamp(30px,5vw,72px)!important;
+}
+.hero h1{
+  max-width:850px;
+  margin:16px 0 22px!important;
+  font-size:clamp(2.7rem,6vw,5.6rem)!important;
+  font-weight:800!important;
+  letter-spacing:-.075em!important;
+  line-height:1.01!important;
+}
+.hero p{
+  max-width:720px;
+  color:#d2def1!important;
+  font-size:clamp(1rem,1.35vw,1.16rem)!important;
+}
+.eyebrow{
+  color:#8eeaf2!important;
+  border:1px solid rgba(70,215,232,.34)!important;
+  background:rgba(70,215,232,.09)!important;
+  letter-spacing:.16em!important;
+}
+.hero-card{
+  border:1px solid rgba(196,216,255,.2)!important;
+  border-radius:24px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.045))!important;
+  box-shadow:0 28px 80px rgba(0,8,26,.32)!important;
+  backdrop-filter:blur(16px);
+}
+.hero-card strong{color:#73e5f0!important}
+.hero .btn.primary,.hero .primary,.hero .button{
+  color:#fff!important;
+  border:1px solid rgba(120,160,255,.45)!important;
+  background:linear-gradient(135deg,#4d7cff,#2458e8)!important;
+  box-shadow:0 12px 30px rgba(36,88,232,.3)!important;
+}
+.hero .btn.secondary,.hero .secondary{
+  color:#eef4ff!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  background:rgba(255,255,255,.075)!important;
+}
+
+/* Premium page rhythm and editorial section headings. */
+main section{
+  scroll-margin-top:100px;
+}
+main>section:not(.hero){
+  padding-top:clamp(48px,6vw,82px);
+  padding-bottom:clamp(48px,6vw,82px);
+}
+.section-head{
+  max-width:790px!important;
+  margin-bottom:32px!important;
+}
+.section-head h2,main h2{
+  color:#10264b!important;
+  font-size:clamp(1.75rem,3.1vw,2.55rem)!important;
+  font-weight:800!important;
+  letter-spacing:-.055em!important;
+}
+.section-head p{color:#65748b!important;font-size:15px}
+.section-head h2:after{
+  width:54px!important;height:3px!important;
+  border-radius:4px;
+  background:linear-gradient(90deg,#2458e8,#46d7e8)!important;
+}
+
+/* Cards become tactile, quieter, and consistent across page types. */
+.card,.step,.info,.auth,.dashboard,.job-card,.start-card,.item,.board,.panel,.pg-directory-card{
+  border:1px solid #e0e8f3!important;
+  border-radius:19px!important;
+  background:rgba(255,255,255,.96)!important;
+  box-shadow:0 8px 28px rgba(15,38,76,.055)!important;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease!important;
+}
+.card,.step,.info,.auth,.dashboard,.job-card,.start-card,.item,.panel{padding:clamp(20px,2.3vw,28px)!important}
+.card:hover,.job-card:hover,.start-card:hover,.pg-directory-card:hover{
+  transform:translateY(-5px)!important;
+  border-color:#b8caf4!important;
+  box-shadow:var(--pg-shadow-hover)!important;
+}
+.card h3,.step h3,.info h3,.job-card h3,.start-card h3,.item h3{
+  color:#132b53!important;
+  font-weight:800!important;
+}
+.card p,.job-card p,.start-card p,.item p{color:#66758b!important}
+.icon,.start-step,.num{
+  color:#2458e8!important;
+  background:#edf3ff!important;
+}
+.job-card{border-top:3px solid #4d7cff!important}
+.job-card:nth-child(3n+2),.job-card:nth-child(3n){border-top-color:#46bcd9!important}
+.job-tag,.pg-live-tag{
+  color:#294c91!important;
+  border:1px solid #e0e9fb;
+  background:#f0f5ff!important;
+  font-size:11px!important;
+  font-weight:800!important;
+}
+.jobs-intro,.start-hub,.note,.notice,.job-safety{
+  border:1px solid #dce7f8!important;
+  border-left:4px solid #4d7cff!important;
+  border-radius:15px!important;
+  background:linear-gradient(120deg,#f0f5ff,#f7fbff)!important;
+  color:#334968!important;
+}
+
+/* Buttons and links: strong hierarchy, restrained motion. */
+.btn,.button,.submit,.primary,.pg-live-apply,.pg-live-refresh{
+  min-height:44px;
+  border-radius:12px!important;
+  font-weight:800!important;
+}
+.btn.primary,.primary,.button,.submit,.pg-live-apply,.pg-live-refresh,.job .button{
+  color:#fff!important;
+  border:1px solid #2458e8!important;
+  background:linear-gradient(135deg,#4d7cff,#2458e8)!important;
+  box-shadow:0 9px 22px rgba(36,88,232,.18)!important;
+}
+.btn.primary:hover,.primary:hover,.button:hover,.submit:hover,.pg-live-apply:hover,.pg-live-refresh:hover{
+  color:#fff!important;
+  background:linear-gradient(135deg,#628cff,#1748d2)!important;
+  box-shadow:0 14px 28px rgba(36,88,232,.26)!important;
+  transform:translateY(-2px);
+}
+.btn.secondary,.secondary{
+  color:#24436f!important;
+  border:1px solid #d4dfef!important;
+  background:#fff!important;
+}
+.btn.secondary:hover,.secondary:hover{
+  color:#1748c9!important;
+  border-color:#9bb5ed!important;
+  background:#f4f7ff!important;
+}
+
+/* Live opportunity board: stronger cards and calm information hierarchy. */
+.pg-live-section{padding-top:clamp(48px,6vw,82px)!important}
+.pg-live-kicker{
+  color:#176b83!important;
+  border:1px solid #c9eef3;
+  background:#effcff!important;
+}
+.pg-live-kicker:before{background:#20b8cf!important}
+.pg-live-list{gap:18px!important}
+.pg-live-card{
+  padding:24px!important;
+  border:1px solid #e0e8f3!important;
+  border-radius:19px!important;
+  background:#fff!important;
+  box-shadow:0 8px 28px rgba(15,38,76,.055)!important;
+}
+.pg-live-card:hover{border-color:#b8caf4!important;box-shadow:var(--pg-shadow-hover)!important}
+.pg-live-company{color:#3159a5!important}
+.pg-live-title{color:#132b53!important;font-size:20px!important}
+.pg-live-description{color:#66758b!important}
+.pg-live-eligibility{color:#147c88!important}
+.pg-live-filters input,.pg-live-filters select,input,select,textarea{
+  border:1px solid #d8e2f0!important;
+  border-radius:11px!important;
+  background:#fff!important;
+}
+.pg-live-filters input:focus,.pg-live-filters select:focus,input:focus,select:focus,textarea:focus{
+  border-color:#4d7cff!important;
+  box-shadow:0 0 0 4px rgba(77,124,255,.12)!important;
+  outline:0!important;
+}
+
+/* Member and employer forms retain their existing IDs and handlers. */
+.auth-wrap{gap:24px!important}
+.auth,.dashboard,.panel{box-shadow:var(--pg-shadow)!important}
+.tabs{gap:8px!important}
+.tab{
+  border:1px solid #dce5f2!important;
+  border-radius:11px!important;
+  color:#53657f!important;
+  background:#fff!important;
+}
+.tab.active{
+  color:#fff!important;
+  border-color:#2458e8!important;
+  background:linear-gradient(135deg,#4d7cff,#2458e8)!important;
+}
+label{color:#263a59}
+input[type="text"],input[type="email"],input[type="password"],input[type="date"],input[type="url"],input[type="search"],select,textarea{
+  min-height:44px;
+  padding:12px 14px!important;
+  color:#142744!important;
+  border:1px solid #d8e2f0!important;
+  border-radius:11px!important;
+  background:#fff!important;
+}
+.submit{width:100%}
+.msg,.status{border-radius:11px!important}
+
+/* Footer: corporate close with clear columns and consistent links. */
+footer{
+  border-top:1px solid rgba(255,255,255,.1)!important;
+  background:
+    radial-gradient(ellipse at 85% 0%,rgba(77,124,255,.16),transparent 28rem),
+    linear-gradient(120deg,#07142c,#0b1d3c 65%,#102b58)!important;
+}
+.footer{
+  width:min(1320px,100%)!important;
+  padding:48px clamp(20px,4vw,48px)!important;
+}
+.footer a,footer a{color:#d7e4fa!important}
+.footer a:hover,footer a:hover{color:#70e1ee!important}
+
+/* Jobs directory and subpage headers. */
+main>.hero{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px!important;
+  box-shadow:0 22px 58px rgba(7,20,44,.16);
+}
+main>.hero h1{max-width:850px}
+main>.hero .lead{color:#d5e2f5!important}
+.pg-directory-grid{gap:18px!important}
+.pg-directory-card{
+  border:1px solid #e0e8f3!important;
+  background:#fff!important;
+}
+.pg-directory-card h3{color:#132b53!important}
+.pg-directory-card a{
+  color:#fff!important;
+  border:1px solid #2458e8!important;
+  background:#2458e8!important;
+}
+.pg-directory-card a:hover{background:#1748d2!important}
+
+/* Mobile: make navigation, grids and controls comfortable on phones. */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr!important}
+  .grid,.steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .pg-live-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  header .nav{min-height:68px!important;padding:10px 16px!important}
+  .links{
+    top:68px!important;
+    left:12px!important;right:12px!important;
+    padding:12px!important;
+    border:1px solid rgba(255,255,255,.12)!important;
+    border-radius:16px!important;
+    background:#0a1b38!important;
+    box-shadow:0 18px 44px rgba(0,0,0,.24)!important;
+  }
+  .links a{padding:12px 14px!important}
+  .hero-inner{padding:58px 20px 72px!important}
+  .hero h1{font-size:clamp(2.45rem,12vw,3.7rem)!important}
+  .hero-card{padding:22px!important}
+  main section{padding-left:18px!important;padding-right:18px!important}
+  .grid,.steps,.pg-live-list,.start-grid,.pg-directory-grid{grid-template-columns:1fr!important}
+  .card,.step,.info,.auth,.dashboard,.job-card,.start-card,.item,.panel{padding:20px!important}
+  .footer{padding:38px 20px!important}
+  .pg-live-filters{grid-template-columns:1fr!important}
+  .buttons .btn{width:100%;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+  .card:hover,.job-card:hover,.start-card:hover{transform:none!important}
+}
