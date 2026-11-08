@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Live Online Job Listings | Prime Global</title>
-  <meta name="description" content="Search published remote and online job listings on Prime Global. Check job eligibility, employer details, and application instructions before applying.">
+  <title>Global Opportunities Directory | Prime Global</title>
+  <meta name="description" content="Explore employer-published jobs and official contributor-platform routes worldwide. Check country eligibility, employer details and application terms before applying.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://primeglobalofficial.github.io/PrimeGlobal/jobs.html">
   <meta property="og:type" content="website">
@@ -61,14 +61,14 @@
   </header>
   <main>
     <section class="hero">
-      <h1>Online Jobs & Remote Opportunities</h1>
-      <p class="lead">Search live listings published by employers on Prime Global. Always confirm eligibility, company identity, job requirements, and payment terms before applying.</p>
+      <h1>Global Opportunities Directory</h1>
+      <p class="lead">Discover employer-published opportunities and official application routes for digital work worldwide. Check eligibility, requirements and payment terms directly with each provider.</p>
       <a class="button" href="#live-jobs">Browse job listings</a>
     </section>
 
     <section class="board" id="live-jobs" aria-labelledby="job-heading">
       <h2 id="job-heading" style="margin-top:0">Published job listings</h2>
-      <p>Listings are loaded from the Prime Global database. Only jobs marked as published appear here.</p>
+      <p>Employer-submitted listings appear here only after Prime Global review and publication. The directory below also links to selected providers’ official career and contributor pages.</p>
       <div class="filters">
         <input id="jobSearch" type="search" placeholder="Search title, company, or keywords" aria-label="Search jobs">
         <select id="jobCategory" aria-label="Filter by category"><option value="">All categories</option></select>
@@ -91,6 +91,35 @@
       <section class="item"><h3>Customer Support and Virtual Assistance</h3><p>Support customers, manage inboxes, schedule appointments, maintain records, or assist teams remotely.</p></section>
       <section class="item"><h3>Freelance Digital Services</h3><p>Offer writing, design, editing, web support, or other skills to clients online. Build a clear profile and portfolio.</p></section>
     </div>
+
+    <section class="pg-directory-routes" aria-labelledby="pgDirectoryRoutesHeading">
+      <div class="section-head">
+        <span class="pg-live-kicker">Official platform directory</span>
+        <h2 id="pgDirectoryRoutesHeading">Start with established application routes.</h2>
+        <p>These links take you to the providers' own career or contributor pages. They are platform routes, not guarantees of a current task, vacancy, acceptance or income.</p>
+      </div>
+      <div class="pg-directory-grid">
+        <article class="pg-directory-card">
+          <span class="pg-directory-label">Swahili · Remote</span>
+          <h3>Welo Global — AI Trainers Network</h3>
+          <p>Welo Global lists a Swahili AI Trainers Network route with Nairobi, Kenya and remote locations shown on its application page. Applicants should confirm the location option and current project requirements.</p>
+          <a href="https://jobs.lever.co/weloglobal/7caba656-ae7d-45d0-9d6f-25a041d869bb" target="_blank" rel="noopener noreferrer">Open official application page ↗</a>
+        </article>
+        <article class="pg-directory-card">
+          <span class="pg-directory-label">Kenya · Remote / Contract</span>
+          <h3>Corpshore AI — Swahili Annotation</h3>
+          <p>The provider describes a Swahili AI Annotation Specialist role involving text, speech and multimodal data. Review the role page for assessment, qualifications and current availability.</p>
+          <a href="https://corpshore.ai/careers/roles/swahili-annotation-specialist" target="_blank" rel="noopener noreferrer">View official role details ↗</a>
+        </article>
+        <article class="pg-directory-card">
+          <span class="pg-directory-label">Remote contributor platform</span>
+          <h3>Jwuma — AI Data Projects</h3>
+          <p>Explore the contributor platform for transcription, translation, annotation, collection and review projects. Joining is described as free; available projects and pay are shown by the provider.</p>
+          <a href="https://jwuma.com/" target="_blank" rel="noopener noreferrer">Visit official contributor platform ↗</a>
+        </article>
+      </div>
+      <p class="pg-directory-reviewed">Source pages checked: 8 November 2026. Prime Global does not control third-party recruitment or payment decisions.</p>
+    </section>
 
     <h2>Safety before applying</h2>
     <div class="note"><strong>Protect yourself:</strong> Never pay an upfront fee to secure a job or release supposed earnings. Check the official employer website and confirm country eligibility and payment options. Prime Global does not guarantee selection, task availability, or income. If a listing looks suspicious, do not share passwords, one-time codes, or sensitive identity documents.</div>
@@ -146,7 +175,7 @@
         });
         list.replaceChildren();
         if (!visible.length) {
-          list.appendChild(el("p", "meta", jobs.length ? "No listings match those filters. Try a different search." : "No published listings are available yet. Please check again later."));
+          list.appendChild(el("p", "meta", jobs.length ? "No listings match those filters. Try a different search." : "There are no employer-published listings yet. Explore the official platform directory below while we review and publish employer submissions."));
           return;
         }
         visible.forEach(job => {
