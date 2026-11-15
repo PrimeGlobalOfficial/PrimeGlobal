@@ -61,6 +61,17 @@ input{
   font:inherit;
 }
 
+/* SCHEDULED MAINTENANCE HEADER NOTICE */
+.pg-maintenance-banner{
+  width:100%;padding:10px 16px;text-align:center;
+  display:flex;flex-direction:column;gap:2px;
+  background:#f5c542;color:#071a3d;font-size:13px;line-height:1.4;
+  border-bottom:1px solid #d6a91d;
+}
+.pg-maintenance-banner strong{font-size:14px;letter-spacing:.35px}
+.pg-maintenance-note{font-weight:700}
+@media(max-width:700px){.pg-maintenance-banner{font-size:12px;padding:9px 12px}.pg-maintenance-banner strong{font-size:13px}}
+ 
 /* HEADER */
 
 header{
@@ -997,7 +1008,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 <!-- HEADER -->
 
 <header>
-
+<div class="pg-maintenance-banner" role="status" aria-live="polite">
+  <strong>🔧 PRIME GLOBAL IS UNDER MAINTENANCE</strong>
+  <span>Scheduled until Sunday, 15 November 2026 at 22:00 East Africa Time (EAT, UTC+3).</span>
+  <span class="pg-maintenance-note">Website improvements are in progress. Referrals remain OPEN — members can continue sharing referral links and qualifying referrals will still be tracked.</span>
+</div>
 <nav class="nav">
 
 <a class="brand" href="./">
@@ -2382,14 +2397,14 @@ class="small">
       <input id="payoutAccount" type="text" minlength="3" maxlength="250" placeholder="PayPal email or relevant account identifier" required>
       <p class="small">Enter only the account identifier needed for payment. Never enter your password, PIN or verification code.</p>
     </div>
-    <button type="submit" class="submit">Submit withdrawal request</button>
+    <button type="submit" class="submit">Submit withdraw request</button>
     <div id="withdrawalMsg" class="msg" role="status" aria-live="polite"></div>
   </form>
 </div>
 
 <div class="info history-panel" style="margin-top:18px;">
   <h3 style="margin-top:0;color:#071a3d;">Withdrawal History</h3>
-  <div id="withdrawalHistory" class="small">No withdrawal requests yet.</div>
+  <div id="withdrawalHistory" class="small">No withdraw requests yet.</div>
 </div>
 
 </div>
@@ -3352,7 +3367,7 @@ async function loadReferralDashboard(user){
   history.replaceChildren();
   const withdrawalRows = withdrawalsResult.data || [];
   if(!withdrawalRows.length){
-    history.textContent = "No withdrawal requests yet.";
+    history.textContent = "No withdraw requests yet.";
   }else{
     withdrawalRows.forEach(item => {
       const row = document.createElement("div");
@@ -3604,7 +3619,7 @@ $("copyReferralLink").addEventListener("click", async () => {
   }
 });
 
-/* Submit withdrawal request */
+/* Submit withdraw request */
 $("withdrawalForm").addEventListener("submit", async event => {
   event.preventDefault();
   if(!currentMemberId){
@@ -3628,14 +3643,14 @@ $("withdrawalForm").addEventListener("submit", async event => {
     });
     if(error) throw error;
 
-    showMessage($("withdrawalMsg"), "Withdrawal request submitted for review.", true);
+    showMessage($("withdrawalMsg"), "Withdraw request submitted for review.", true);
     $("withdrawalForm").reset();
     await loadReferralDashboard({id:currentMemberId});
   }catch(error){
-    showMessage($("withdrawalMsg"), error.message || "Could not submit the withdrawal request.");
+    showMessage($("withdrawalMsg"), error.message || "Could not submit the withdraw request.");
   }finally{
     submitButton.disabled = false;
-    submitButton.textContent = "Submit withdrawal request";
+    submitButton.textContent = "Submit withdraw request";
   }
 });
 
